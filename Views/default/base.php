@@ -49,7 +49,7 @@
 <body>
   <div>
   <?php
-    phpinfo();
+
   ?>
   </div>
 </body>
