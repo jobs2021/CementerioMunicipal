@@ -3,11 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title><?php echo $titulo; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="./static/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="./static/css/bootstrap.min.css" /
-    
+    <link rel="stylesheet" type="text/css" media="screen" href="http://localhost/Views/static/css/bootstrap.min.css" />  
 </head>
 <header>
 <nav style="background-color: #C16F4E !important;" class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -30,9 +28,9 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#">Titulos vigentes</a>
-          <a class="dropdown-item" href="#">Historial Titulos</a>
+          <a class="dropdown-item" href="http://localhost/historialtitulos">Historial Titulos</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Crear Titulos</a>
+          <a class="dropdown-item" href="http://localhost/creartitulo">Crear Titulos</a>
         </div>
       </li>
       <li class="nav-item">
@@ -47,15 +45,3 @@
 </nav>
 </header>
 <body>
-  <div>
-  <?php
-
-  ?>
-  </div>
-</body>
-<script src="./static/js/jquery/jquery-3.3.1.min.js"></script>
-<script src="./static/js/bootstrap.js"></script>
-<script src="./static/js/bootstrap.min.js"></script>
-<script src="./static/js/bootstrap.bundle.js"></script>
-<script src="./static/js/bootstrap.bundler.min.js"></script>
-</html>
