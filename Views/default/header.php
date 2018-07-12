@@ -17,7 +17,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="?action=inicio">Inicio <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="inicio">Inicio <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Cementerios</a>
@@ -30,7 +30,7 @@
           <a class="dropdown-item" href="#">Titulos vigentes</a>
           <a class="dropdown-item" href="#">Historial Titulos</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="?action=creartitulo">Crear Titulos</a>
+          <a class="dropdown-item" href="creartitulo">Crear Titulos</a>
         </div>
       </li>
       <li class="nav-item">
