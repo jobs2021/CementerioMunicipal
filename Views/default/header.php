@@ -6,6 +6,22 @@
     <title><?php echo $titulo; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="./Views/static/css/bootstrap.min.css" />  
+    <!--evento hover de la etiqueta desconectar-->
+    <style type="text/css">
+        a{
+          color: #A2A2A2  ;
+        }
+        a:Desconectar{
+          text-decoration: none;
+          color: #C14412;
+        }
+        a:hover{
+        text-decoration: none;
+        color: #FFFFFF  ;
+       
+        }
+        
+    </style>
 </head>
 <header>
 <nav style="background-color: #C16F4E !important;" class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -24,23 +40,24 @@
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Titulares
+          Titulos
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Titulos vigentes</a>
-          <a class="dropdown-item" href="#">Historial Titulos</a>
+          <a class="dropdown-item" href="titulos">Titulos</a>
+
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="creartitulo">Crear Titulos</a>
         </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Desconectar</a>
-      </li>
+     
     </ul>
-    <form class="form-inline my-2 my-lg-0">
+
+        <a class="btn" href="#">Desconectar</a>
+ 
+    <!--form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-    </form>
+    </form-->
   </div>
 </nav>
 </header>
