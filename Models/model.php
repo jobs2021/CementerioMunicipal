@@ -2,7 +2,7 @@
 
 class enlacesPaginas{
 
-    public $links = array('inicio','registrar','titulos','creartitulo');
+    public $links = array('inicio','registrar','titulos','creartitulo','repotrastitulo', 'vertitulo', 'eyetitulo');
 
     public function enlacesPaginasModel($enlacesModel){
 
@@ -12,8 +12,16 @@ class enlacesPaginas{
         }elseif ($this->links[3]==$enlacesModel) {
             $module = "Views/templates/titulos/".$enlacesModel.".php";
     
-        }
-         elseif (in_array($enlacesModel,$this->links)) {
+        }elseif ($this->links[4]==$enlacesModel) {
+            $module = "Views/templates/titulos/".$enlacesModel.".php";
+
+        }elseif ($this->links[5]==$enlacesModel) {
+            $module = "Views/templates/titulos/".$enlacesModel.".php";
+
+        }elseif ($this->links[6]==$enlacesModel) {
+            $module = "Views/templates/titulos/".$enlacesModel.".php";
+
+        }else {
             $module = "Views/templates/inicio.php";
         }
 
