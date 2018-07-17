@@ -44,6 +44,7 @@ require_once('Views/default/header.php');
         </div>
         <div class="card card-register col-md-12 mx-auto mt-4">
         <div class="card-body">
+          <div class="table-responsive">
           <table class="table">
             <tr>
               <th>N°</th>
@@ -86,6 +87,7 @@ require_once('Views/default/header.php');
               </td>
             </tr>
           </table>
+          </div>
         </div>
     </div>
 </div>
