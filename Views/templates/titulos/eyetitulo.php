@@ -69,6 +69,7 @@ require_once('Views/default/header.php');
       <div class="card card-register col-xs-4 mx-auto mt-4">
         <div class="card-header"><h5 style="color:#D16C2A; position: relative;">Añadir Beneficiarios <button class="btn" style="background-color: #C16F4E ; color:white" data-toggle="modal" data-target="#bnfModal">Agregar</button></h5></div>
         <div class="card-body">
+          <div class="table-responsive">
           <table class="table">
             <tr>
               <th>N°</th>
@@ -89,6 +90,7 @@ require_once('Views/default/header.php');
               <td>05706516-9</td>
             </tr>
           </table>
+        </div>
         </div>
 
         <!-- Modal -->

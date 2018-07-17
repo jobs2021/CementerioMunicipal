@@ -25,6 +25,7 @@ require_once('Views/default/header.php');
 					<div class="card card-register col-xs-4 mx-auto mt-1">
 						<div class="card-header "><h5 style="color:#D16C2A; position: relative;">Añadir Parcela al Titulo<button data-toggle="modal" data-target="#parcela" class="btn btn-warning mx-2">Selecionar</button></h5></div>
 						<div class="card-body">
+							<div class="table-responsive">
 							<table class="table">
 								<tr>
 									<th>N° Parcela</th>
@@ -39,6 +40,7 @@ require_once('Views/default/header.php');
 									<td>P013</td>							
 								</tr>
 							</table>
+							</div>
 						</div>
 					</div>
 				</div>
