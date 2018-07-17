@@ -10,7 +10,7 @@ require_once('Views/default/header.php');
 <!--BREADCUMB-->
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="inicio">Inicio</a></li>
+    <li class="breadcrumb-item"><a href="<?php echo $server;?>/inicio">Inicio</a></li>
     <li class="breadcrumb-item active" aria-current="page">Titulos</li>
 </ol>
 </nav>
@@ -25,7 +25,7 @@ require_once('Views/default/header.php');
     <div class="container-fluid">
         <div class="card col-12 mx-auto mt-2">
             <div class="card-header mx-2">
-                <h4 class="card-title ">Busqueda De Titulos<a id="crear" title="Crear" class="btn btn-fill mx-2" style="background-color: #C16F4E ; color:white" href="creartitulo">Crear Titulo</a>  </h4>
+                <h4 class="card-title ">Busqueda De Titulos<a id="crear" title="Crear" class="btn btn-fill mx-2" style="background-color: #C16F4E ; color:white" href="<?php echo $server;?>/creartitulo">Crear Titulo</a>  </h4>
             </div>
             <div class="card-body">
                 <form class="form-inline" method="GET">
@@ -66,7 +66,7 @@ require_once('Views/default/header.php');
               <td>Central</td>
               <td style="color: #BD54F5">True</td>
               <td>
-                  <a style="color: FORESTGREEN" title="Ver Titulo" href="eyetitulo" class="fas fa-eye"></a>   
+                  <a style="color: FORESTGREEN" title="Ver Titulo" href="<?php echo $server;?>/eyetitulo" class="fas fa-eye"></a>   
                   
                   
               </td>
@@ -81,7 +81,7 @@ require_once('Views/default/header.php');
               <td>Reubicacion</td>
               <td style="color: #BD54F5">False</td>
               <td>
-                  <a style="color: FORESTGREEN" title="Ver Titulo" href="eyetitulo" class="fas fa-eye"></a>                 
+                  <a style="color: FORESTGREEN" title="Ver Titulo" href="<?php echo $server;?>/eyetitulo" class="fas fa-eye"></a>                 
                   
               </td>
             </tr>

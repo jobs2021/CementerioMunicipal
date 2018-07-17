@@ -9,8 +9,8 @@ require_once('Views/default/header.php');
 <!--BREADCUMB-->
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="inicio">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="titulos">Titulos</a></li>
+    <li class="breadcrumb-item"><a href="<?php echo $server;?>/inicio">Inicio</a></li>
+    <li class="breadcrumb-item"><a href="<?php echo $server;?>/titulos">Titulos</a></li>
     <li class="breadcrumb-item active" aria-current="page">Operacones</li>
 </ol>
 </nav>
@@ -22,7 +22,7 @@ require_once('Views/default/header.php');
     <div class="container-fluid">
         <div class="card col-12 mx-auto mt-4">
             <div class="card-header">
-                <h4 class="card-title ">Reposicion, Traspaso o Cancelacion De Titulos<a id="crear" title="Crear" class="btn btn-success" style="color: white" href="inicio">Inicio</a>  </h4>
+                <h4 class="card-title ">Reposicion, Traspaso o Cancelacion De Titulos<a id="crear" title="Crear" class="btn btn-success" style="color: white" href="<?php echo $server;?>/inicio">Inicio</a>  </h4>
             </div>
             <div class="card-body">
                 <form class="form-inline" method="GET">
@@ -62,8 +62,8 @@ require_once('Views/default/header.php');
               <td>P055</td>
               <td>Central</td>
               <td>
-                  <a style="color: FORESTGREEN" title="Ver Titulo" href="eyetitulo" class="fas fa-eye"></a>   
-                  <a style="color: DODGERBLUE" href="creartitulo" title="Traspasar Titulo" class="fas fa-edit"></a>
+                  <a style="color: FORESTGREEN" title="Ver Titulo" href="<?php echo $server;?>/eyetitulo" class="fas fa-eye"></a>   
+                  <a style="color: DODGERBLUE" href="<?php echo $server;?>/creartitulo" title="Traspasar Titulo" class="fas fa-edit"></a>
                   <a style="color: #FF4500" title="Cancelar Titulo" class="fas fa-trash" data-toggle="modal" data-target="#exampleModal"></a>
                   
               </td>
@@ -78,8 +78,8 @@ require_once('Views/default/header.php');
               <td>Reubicacion</td>
               
               <td>
-                  <a style="color: FORESTGREEN" title="Ver Titulo" href="eyetitulo" class="fas fa-eye"></a>   
-                  <a style="color: DODGERBLUE" href="creartitulo" title="Traspasar Titulo" class="fas fa-edit"></a>
+                  <a style="color: FORESTGREEN" title="Ver Titulo" href="<?php echo $server;?>/eyetitulo" class="fas fa-eye"></a>   
+                  <a style="color: DODGERBLUE" href="<?php echo $server;?>/creartitulo" title="Traspasar Titulo" class="fas fa-edit"></a>
                   <a style="color: #FF4500" title="Cancelar Titulo" class="fas fa-trash" data-toggle="modal" data-target="#exampleModal"></a>
                   
               </td>

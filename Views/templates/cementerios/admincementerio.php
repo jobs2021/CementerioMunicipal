@@ -4,7 +4,7 @@
 ?>
 <div class="container-fluid">
     <ul class="breadcrumb rounded-0 margin-l-r-15">
-        <li class="breadcrumb-item"><a href="./cementerios">Cementerios</a></li>
+        <li class="breadcrumb-item"><a href="<?php echo $server;?>/cementerios">Cementerios</a></li>
         <li class="breadcrumb-item active">Monte Piedad</li>
     </ul>
     <div class="container">
@@ -31,7 +31,7 @@
                     <li class="list-group-item">
                         <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalAgregarParcela" data-slide-to="0">Agregar Parcela</button>
                         <!--button type="button" class="btn btn-outline-primary" >Editar Parcela</button -->
-                        <a href="./parcelas">
+                        <a href="<?php echo $server;?>/parcelas">
                             <button type="button" class="btn btn-outline-primary">Ver Parcelas</button>
                         </a>
                     </li>
@@ -51,7 +51,7 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="./admincementerio" method="POST">
+                <form action="<?php echo $server;?>/admincementerio" method="POST">
                     <div class="form-group">
                         <label for="nombre">Nombre:</label>
                         <input type="text" class="form-control" id="nombre">
@@ -104,7 +104,7 @@
                         <div class="carousel-item active">
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="./admincementerio" method="POST">
+                                    <form action="<?php echo $server;?>/admincementerio" method="POST">
                                         <div class="form-group">
                                             <label for="nombre">Número:</label>
                                             <input type="text" class="form-control" id="nombre">

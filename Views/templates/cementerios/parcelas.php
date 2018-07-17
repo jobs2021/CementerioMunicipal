@@ -5,9 +5,9 @@
 <!-- aca ira todo el codigo html de la vista-->
 <div class="container-fluid">
     <ul class="breadcrumb rounded-0 margin-l-r-15">
-        <li class="breadcrumb-item"><a href="./cementerios">Cementerios</a></li>
+        <li class="breadcrumb-item"><a href="<?php echo $server;?>/cementerios">Cementerios</a></li>
         <li class="breadcrumb-item active">
-            <a href="./admincementerio">Monte Piedad</a>
+            <a href="<?php echo $server;?>/admincementerio">Monte Piedad</a>
         </li>
         <li class="breadcrumb-item active">Parcelas</li>
     </ul>
@@ -42,7 +42,7 @@
                             <td>4</td>
                             <td class="text-right">
                                 <div class="row-btn">
-                                	<a href="./verparcela"><i class="fas fa-eye icon" title="Ver Parcela"></i></a>
+                                	<a href="<?php echo $server;?>/verparcela"><i class="fas fa-eye icon" title="Ver Parcela"></i></a>
                                     <a href="#" data-toggle="modal" data-target="#modalAgregarParcela" data-slide-to="0"><i class="fa fa-edit icon" title="Editar"></i></a>
                                     <a href="#" data-toggle="modal" data-target="#modalEliminar" class="text-danger"><i class="fas fa-trash icon" title="Eliminar"></i></a>
                                 </div>
@@ -55,7 +55,7 @@
                             <td>2</td>
                             <td class="text-right">
                                 <div class="row-btn">
-                                	<a href="./verparcela"><i class="fas fa-eye icon" title="Ver Parcela"></i></a>
+                                	<a href="<?php echo $server;?>/verparcela"><i class="fas fa-eye icon" title="Ver Parcela"></i></a>
                                     <a href="#" data-toggle="modal" data-target="#modalAgregarParcela" data-slide-to="0"><i class="fa fa-edit icon" title="Editar"></i></a>
                                     <a href="#" data-toggle="modal" data-target="#modalEliminar" class="text-danger"><i class="fas fa-trash icon" title="Eliminar"></i></a>
                                 </div>
@@ -68,7 +68,7 @@
                             <td>1</td>
                             <td class="text-right">
                                 <div class="row-btn">
-                                	<a href="./verparcela"><i class="fas fa-eye icon" title="Ver Parcela"></i></a>
+                                	<a href="<?php echo $server;?>/verparcela"><i class="fas fa-eye icon" title="Ver Parcela"></i></a>
                                     <a href="#" data-toggle="modal" data-target="#modalAgregarParcela" data-slide-to="0"><i class="fa fa-edit icon" title="Editar"></i></a>
                                     <a href="#" data-toggle="modal" data-target="#modalEliminar" class="text-danger"><i class="fas fa-trash icon" title="Eliminar"></i></a>
                                 </div>
@@ -98,7 +98,7 @@
                         <div class="carousel-item active">
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="./admincementerio" method="POST">
+                                    <form action="<?php echo $server;?>/admincementerio" method="POST">
                                         <div class="form-group">
                                             <label for="nombre">Número:</label>
                                             <input type="text" class="form-control" id="nombre">

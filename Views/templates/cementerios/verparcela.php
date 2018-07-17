@@ -4,11 +4,11 @@
 ?>
 <div class="container-fluid">
     <ul class="breadcrumb rounded-0 margin-l-r-15">
-        <li class="breadcrumb-item"><a href="./cementerios">Cementerios</a></li>
+        <li class="breadcrumb-item"><a href="<?php echo $server;?>/cementerios">Cementerios</a></li>
         <li class="breadcrumb-item">
-            <a href="./admincementerio">Monte Piedad</a>
+            <a href="<?php echo $server;?>/admincementerio">Monte Piedad</a>
         </li>
-        <li class="breadcrumb-item"><a href="./parcelas">Parcelas</a></li>
+        <li class="breadcrumb-item"><a href="<?php echo $server;?>/parcelas">Parcelas</a></li>
         <li class="breadcrumb-item active">Parcela 001</li>
     </ul>
     <div class="container">
@@ -165,7 +165,7 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="./admincementerio" method="POST">
+                <form action="<?php echo $server;?>/admincementerio" method="POST">
                     <div class="form-group">
                         <label for="nombre">Nombre:</label>
                         <input type="text" class="form-control" id="nombre">

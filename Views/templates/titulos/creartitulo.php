@@ -8,8 +8,8 @@ require_once('Views/default/header.php');
 <!--BREADCUMB-->
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="inicio">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="titulos">Titulos</a></li>
+    <li class="breadcrumb-item"><a href="<?php echo $server;?>/inicio">Inicio</a></li>
+    <li class="breadcrumb-item"><a href="<?php echo $server;?>/titulos">Titulos</a></li>
     <li class="breadcrumb-item active" aria-current="page">Crear Titulo</li>
   </ol>
 </nav>
@@ -54,8 +54,8 @@ require_once('Views/default/header.php');
                 <input class="form-control" id="datepicker" type="date">
               </div >
             </div>      
-            <a href="vertitulo" class="btn btn-primary">Guardar</a>
-            <a href="repotrastitulo" class="btn btn-danger">Cancelar</a>
+            <a href="<?php echo $server;?>/vertitulo" class="btn btn-primary">Guardar</a>
+            <a href="<?php echo $server;?>/repotrastitulo" class="btn btn-danger">Cancelar</a>
           </form>
         </div>
       </div>  

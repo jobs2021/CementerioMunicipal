@@ -8,8 +8,8 @@ require_once('Views/default/header.php');
 <!--BREADCUMB-->
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="inicio">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="titulos">Titulos</a></li>
+    <li class="breadcrumb-item"><a href="<?php echo $server;?>/inicio">Inicio</a></li>
+    <li class="breadcrumb-item"><a href="<?php echo $server;?>/titulos">Titulos</a></li>
     <li class="breadcrumb-item active" aria-current="page">Ver Titulo</li>
   </ol>
 </nav>
@@ -55,7 +55,7 @@ require_once('Views/default/header.php');
               </div >
             </div>      
             
-            <a href="titulos" class="btn btn-danger">Regresar</a>
+            <a href="<?php echo $server;?>/titulos" class="btn btn-danger">Regresar</a>
           </form>
         </div>
       </div>  
