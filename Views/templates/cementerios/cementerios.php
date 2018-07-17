@@ -12,8 +12,6 @@
 
                     <a href="<?php echo $server;?>/admincementerio" class="card-link text-dark">
 
-                    <a href="./admincementerio" class="card-link text-dark">
-
                         <div class="card text-center">
                             <div class="card-header bg-primary text-light"><strong>Cementerio #2</strong></div>
                             <div class="card-body">
@@ -29,8 +27,6 @@
 
                     <a href="<?php echo $server;?>/admincementerio" class="card-link text-dark">
 
-                    <a href="./admincementerio" class="card-link text-dark">
-
                         <div class="card text-center">
                             <div class="card-header bg-primary text-light"><strong>Cementerio Monte Piedad</strong></div>
                             <div class="card-body">
@@ -42,9 +38,9 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-sm-6 col-md-4 col-lg-3 padding-top-15" style="min-height: 125px;">
+                <div class="col-sm-6 col-md-4 col-lg-3 padding-top-15 " style="min-height: 125px;">
                     <!-- Button to Open the Modal -->
-                    <button type="button" class="btn btn-outline-primary w-100 h-100 btn-nuevo-cementerio" data-toggle="modal" data-target="#myModal">Nuevo Cementerio</button>
+                    <button type="button" class="btn btn-outline-primary w-100 h-100 btn-nuevo-cementerio " data-toggle="modal" data-target="#myModal">Nuevo Cementerio</button>
                 </div>
             </div>
         </div>
