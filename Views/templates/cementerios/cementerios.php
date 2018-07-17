@@ -9,7 +9,7 @@
             <p class="margin-top-15">Seleccione un Cementerio para continuar...</p>
             <div class="row padding-bottom-15">
                 <div class="col-sm-6 col-md-4 col-lg-3 padding-top-15">
-                    <a href="/admincementerio" class="card-link text-dark">
+                    <a href="./admincementerio" class="card-link text-dark">
                         <div class="card text-center">
                             <div class="card-header bg-primary text-light"><strong>Cementerio #2</strong></div>
                             <div class="card-body">
@@ -22,7 +22,7 @@
                     </a>
                 </div>
                 <div class="col-sm-6 col-md-4 col-lg-3 padding-top-15">
-                    <a href="/admincementerio" class="card-link text-dark">
+                    <a href="./admincementerio" class="card-link text-dark">
                         <div class="card text-center">
                             <div class="card-header bg-primary text-light"><strong>Cementerio Monte Piedad</strong></div>
                             <div class="card-body">
