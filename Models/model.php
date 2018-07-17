@@ -1,21 +1,34 @@
 <?php
+// enlaces
 
 class enlacesPaginas{
 
-    public $links = array('inicio','registrar','creartitulo');
+    public $links = array('inicio',array('cementerios','admincementerio','parcelas','verparcela'),array('titulos','creartitulo','repotrastitulo', 'vertitulo', 'eyetitulo'),'desconectar');
 
     public function enlacesPaginasModel($enlacesModel){
 
-        if (in_array($enlacesModel,$this->links)) {
+        if (in_array($enlacesModel,$this->links[1]) and isset($enlacesModel)) {
+            $module = "Views/templates/cementerios/".$enlacesModel.".php";
+
+        }elseif (in_array($enlacesModel,$this->links[2]) and isset($enlacesModel)) {
+            $module = "Views/templates/titulos/".$enlacesModel.".php";
+
+        }elseif (in_array($enlacesModel,$this->links) and isset($enlacesModel)) {
             $module = "Views/templates/".$enlacesModel.".php";
+
+            if (!file($module)) {
+            $module = "Views/templates/404.php";
+            }
     
         } else {
-            $module = "Views/templates/inicio.php";
+            $module = "Views/templates/404.php";
         }
 
         return $module;
     }
 }
+
+
 
 
 ?>
