@@ -16,25 +16,21 @@ require_once('Views/default/header.php');
 </nav>
 
 <!-- Body -->
-<div class="content-wrapper">
-	<div class="container-fluid">
-		<div class="card card-register col-md-12 mx-auto mt-4">
-			<div class="card-header"> <h4>Terminar Registro del Titulo</h4></div>
-			<div class="card-body">
-				<div class="form-group">
-					<div class="card card-register col-xs-4 mx-auto mt-1">
-						<div class="card-header "><h5 style="color:#D16C2A; position: relative;">Añadir Parcela al Titulo<button data-toggle="modal" data-target="#parcela" class="btn btn-warning mx-2">Selecionar</button></h5></div>
-						<div class="card-body">
+
+	<div class="container-fluid">		
+			<div class="card-header "><h4>Terminar Registro del Titulo</h4></div>				
+						<h5 style="color:#D16C2A; position: relative;" class="mt-4">Añadir Parcela al Titulo<button data-toggle="modal" data-target="#parcela" class="btn btn-warning mx-2">Selecionar</button></h5>
+						<div class="class="col-12 col-sm-12 col-md-10 col-lg-10 padding-0">
 							<div class="table-responsive">
-							<table class="table">
+							<table class="table table-hover margin-top-15 ">
 								<tr>
-									<th>N° Parcela</th>
-									<th>Cementerio</th>
-									<th>Tipo</th>
-									<th>Poligono</th>
+									<th scope="col">N° Parcela</th>
+									<th scope="col">Cementerio</th>
+									<th scope="col">Tipo</th>
+									<th scope="col">Poligono</th>
 								</tr>
-								<tr>
-									<td>148723</td>
+								<tr class="row-hover">
+									<td scope="row">148723</td>
 									<td>Sn. José</td>
 									<td>Perpetuidad</td>
 									<td>P013</td>							
@@ -42,8 +38,9 @@ require_once('Views/default/header.php');
 							</table>
 							</div>
 						</div>
-					</div>
-				</div>
+				
+
+						
 				<div class="card card-register col-md-12 mx-auto mt-4">
 					<div class="card-header">
 						<div class="card-title">Informacion Titular</div>
@@ -99,7 +96,7 @@ require_once('Views/default/header.php');
 					</div>
 				</div>
 			</div>
-		</div>
+		
 
 
 		<!-- Modal Parcela-->

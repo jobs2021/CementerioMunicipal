@@ -34,7 +34,7 @@ require_once('Views/default/header.php');
                             <p align="center">
                                 Para realizar busquedas, ingrese un Nombre o Numero del Titulo a buscar.
                             </p>
-                            <input class="form-control col-lg-8 mr-sm-1" type="search" name="titulo" placeholder="Nombre o Codigo del Titulo" aria-label="Search">
+                            <input class="form-control col-lg-9 mr-sm-1" type="search" name="titulo" placeholder="Nombre o Codigo del Titulo" aria-label="Search">
                             <button class="btn btn-dark my-2 my-sm-0" type="submit">Buscar</button>
                         </div>
                     </div>               
@@ -42,10 +42,10 @@ require_once('Views/default/header.php');
             </div>
 
         </div>
-        <div class="card card-register col-md-12 mx-auto mt-4">
-        <div class="card-body">
+        <div class="col-12 col-sm-12 col-md-10 col-lg-10 padding-0 mx-auto">
+
           <div class="table-responsive">
-          <table class="table">
+          <table class="table table table-hover margin-top-15">
             <tr>
               <th>N°</th>
               <th>Titulo</th>
@@ -55,9 +55,9 @@ require_once('Views/default/header.php');
               <th>Parcela</th>
               <th>Cementerio</th>
               <th>Estado</th>
-              <th>Acciones</th>
+              <th></th>
             </tr>
-            <tr>
+            <tr class="row-hover">
               <td>1</td>
               <td style="color: green">120937</td>
               <td>Perpetuidad</td>
@@ -67,12 +67,14 @@ require_once('Views/default/header.php');
               <td>Central</td>
               <td style="color: #BD54F5">True</td>
               <td>
+                <div class="row-btn">
                   <a style="color: FORESTGREEN" title="Ver Titulo" href="<?php echo $server;?>/eyetitulo" class="fas fa-eye"></a>   
+                </div>
                   
                   
               </td>
             </tr>
-            <tr>
+            <tr class="row-hover">
               <td>2</td>
               <td style="color: green">145968</td>
               <td>Arrendamiento</td>
@@ -82,12 +84,14 @@ require_once('Views/default/header.php');
               <td>Reubicacion</td>
               <td style="color: #BD54F5">False</td>
               <td>
-                  <a style="color: FORESTGREEN" title="Ver Titulo" href="<?php echo $server;?>/eyetitulo" class="fas fa-eye"></a>                 
+                <div class="row-btn">
+                  <a style="color: FORESTGREEN" title="Ver Titulo" href="<?php echo $server;?>/eyetitulo" class="fas fa-eye"></a>
+                  <div class="row-btn">                 
                   
               </td>
             </tr>
           </table>
-          </div>
+          
         </div>
     </div>
 </div>

@@ -2,7 +2,8 @@
 
 class MvcController{
 
-    public $serverUrl='http://localhost';
+    #public $serverUrl='http://localhost';
+    public $serverUrl='http://localhost/CementerioMunicipal';
 
     public function enlacesPaginasController(){
 

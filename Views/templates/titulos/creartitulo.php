@@ -54,7 +54,7 @@ require_once('Views/default/header.php');
                 <input class="form-control" id="datepicker" type="date">
               </div >
             </div>      
-            <a href="<?php echo $server;?>/vertitulo" class="btn btn-primary">Guardar</a>
+            <a href="<?php echo $server;?>/finalizartitulo" class="btn btn-primary">Guardar</a>
             <a href="<?php echo $server;?>/repotrastitulo" class="btn btn-danger">Cancelar</a>
           </form>
         </div>
@@ -66,11 +66,11 @@ require_once('Views/default/header.php');
 
 
 
-      <div class="card card-register col-xs-4 mx-auto mt-4">
+      <div class="class="col-12 col-sm-12 col-md-10 col-lg-10 padding-0 mx-auto>
         <div class="card-header"><h5 style="color:#D16C2A; position: relative;">Añadir Beneficiarios <button class="btn" style="background-color: #C16F4E ; color:white" data-toggle="modal" data-target="#bnfModal">Agregar</button></h5></div>
         <div class="card-body">
           <div class="table-responsive">
-          <table class="table">
+          <table class="table margin-top-15">
             <tr>
               <th>N°</th>
               <th>Nombre</th>
