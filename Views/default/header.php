@@ -171,7 +171,7 @@ end estilos personalizados*/
                 
                 
             </ul>
-            <a class="nav-link padding-left-0" href="#">Desconectar</a>
+            <a class="nav-link padding-left-0" href="#"><i class="fas fa-sign-out-alt icon margin-right-5"></i>Desconectar</a>
             
             <!--form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar">
