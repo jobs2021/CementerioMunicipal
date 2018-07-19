@@ -13,7 +13,7 @@
                     <a href="<?php echo $server;?>/admincementerio" class="card-link text-dark">
 
                         <div class="card text-center">
-                            <div class="card-header bg-primary text-light"><strong>Cementerio #2</strong></div>
+                            <div class="card-header bg-principal text-light"><strong>Cementerio #2</strong></div>
                             <div class="card-body">
                                 <p>Tipo: Publico</p>
                                 <p>Parcelas: 120</p>
@@ -28,7 +28,7 @@
                     <a href="<?php echo $server;?>/admincementerio" class="card-link text-dark">
 
                         <div class="card text-center">
-                            <div class="card-header bg-primary text-light"><strong>Cementerio Monte Piedad</strong></div>
+                            <div class="card-header bg-principal text-light"><strong>Cementerio Monte Piedad</strong></div>
                             <div class="card-body">
                                 <p>Tipo: Privado</p>
                                 <p>Parcelas: 120</p>

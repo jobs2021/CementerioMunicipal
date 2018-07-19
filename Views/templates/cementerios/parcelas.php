@@ -13,11 +13,11 @@
     </ul>
     <div class="row justify-content-center">
         <div class="col-12 padding-top-15 padding-bottom-15">
-            <form class="form-inline justify-content-center" action="/action_page.php">
+            <form class="form-inline justify-content-center" method="GET">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Numero o Poligono">
+                    <input type="text" class="form-control" name="busqueda" placeholder="Numero o Poligono">
                     <div class="input-group-prepend rounded">
-                        <button type="submit" class="btn btn-primary rounded-right">Buscar</button>
+                        <button type="submit" class="btn btn-dark rounded-right">Buscar</button>
                     </div>
                 </div>
             </form>

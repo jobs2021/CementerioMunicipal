@@ -82,6 +82,9 @@
         font-size: 1.2rem;
         margin-left: 5px;
     }
+    .margin-right-5{
+        margin-right: 5px;
+    }
     /* mostar acciones de row */
 
     .row-btn {
@@ -97,6 +100,16 @@
   .nav-link:hover{
         color: rgba(255,255,255,.75);
     }
+    .bg-principal{
+    background-color: #373737 !important; /*373737*/
+    }
+    .dropdown-item:active{
+    background-color: #373737!important;
+    }
+    .breadcrumb{
+        background-color: rgba(210, 213, 216, .3)!important;
+    }
+
     /* estilos personalizados solamente de prueba para los nichos
 
 .btn-hover0 {
@@ -120,7 +133,7 @@ end estilos personalizados*/
      <link rel="stylesheet" href="<?php echo $server;?>/Views/static/css/table-style.css">
 </head>
 <header>
-    <nav style="background-color: #C16F4E !important;" class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-principal">
         <a class="navbar-brand" href="<?php echo $server;?>/">Municipalidad</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -128,21 +141,22 @@ end estilos personalizados*/
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="<?php echo $server;?>/">Inicio <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="<?php echo $server;?>/"><i class="fas fa-home icon margin-right-5"></i>Inicio <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo $server;?>/cementerios">Cementerios</a>
+                    <a class="nav-link" href="<?php echo $server;?>/cementerios"><i class="fas fa-church icon margin-right-5"></i>Cementerios</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Inhumaciones</a>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-skull icon margin-right-5"></i>Inhumaciones</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="<?php echo $server;?>/historialinhumaciones">Historial Inhumaciones</a>
+                        <a class="dropdown-item" href="<?php echo $server;?>/inhumacion">Inhumacion</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="<?php echo $server;?>/registrarinhumacion">Registrar Inhumación</a>
+                        <a class="dropdown-item" href="<?php echo $server;?>/exhumacion">Exhumacion</a>
+                         <a class="dropdown-item" href="<?php echo $server;?>/traslado">Traslado</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Titulos</a>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-file-alt icon margin-right-5"></i>Titulos</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
                         <a class="dropdown-item" href="<?php echo $server;?>/titulos">Titulos</a>
                         <a class="dropdown-item" href="<?php echo $server;?>/repotrastitulo">Operaciones a Titulo</a>
