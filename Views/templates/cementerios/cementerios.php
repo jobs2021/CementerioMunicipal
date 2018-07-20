@@ -6,12 +6,29 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col">
+
+
+
+             <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+           
+            <form class="form-inline justify-content-center padding-top-15 padding-bottom-15" method="GET" action="<?php echo $server;?>/parcelas">
+                <div class="input-group col-12 col-sm-8 col-md-6 col-lg-4">
+                    <input type="text" class="form-control" name="busqueda" placeholder="Buscar Parcela Numero o Poligono">
+                    <div class="input-group-prepend rounded">
+                        <button type="submit" class="btn btn-dark rounded-right">Buscar</button>
+                    </div>
+                </div>
+            </form>
+        </li></ul>
+
             <p class="margin-top-15">Seleccione un Cementerio para continuar...</p>
+
+
+
             <div class="row padding-bottom-15">
                 <div class="col-sm-6 col-md-4 col-lg-3 padding-top-15">
-
                     <a href="<?php echo $server;?>/admincementerio" class="card-link text-dark">
-
                         <div class="card text-center">
                             <div class="card-header bg-principal text-light"><strong>Cementerio #2</strong></div>
                             <div class="card-body">
@@ -24,9 +41,7 @@
                     </a>
                 </div>
                 <div class="col-sm-6 col-md-4 col-lg-3 padding-top-15">
-
                     <a href="<?php echo $server;?>/admincementerio" class="card-link text-dark">
-
                         <div class="card text-center">
                             <div class="card-header bg-principal text-light"><strong>Cementerio Monte Piedad</strong></div>
                             <div class="card-body">
@@ -40,7 +55,7 @@
                 </div>
                 <div class="col-sm-6 col-md-4 col-lg-3 padding-top-15 " style="min-height: 125px;">
                     <!-- Button to Open the Modal -->
-                    <button type="button" class="btn btn-outline-primary w-100 h-100 btn-nuevo-cementerio " data-toggle="modal" data-target="#myModal">Nuevo Cementerio</button>
+                    <button type="button" class="btn btn-outline-dark w-100 h-100 btn-nuevo-cementerio " data-toggle="modal" data-target="#myModal"><i class="fas fa-plus icon margin-right-5"></i>Nuevo Cementerio</button>
                 </div>
             </div>
         </div>
@@ -73,13 +88,18 @@
                             <option>Tipo 2</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="edad">Area:</label>
-                        <input type="text" class="form-control" id="edad">
-                    </div>
-                    <div class="form-group">
-                        <label for="edad">Legalidad:</label>
-                        <input type="text" class="form-control" id="edad">
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="edad">Area:</label>
+                            <input type="text" class="form-control" id="edad">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="sel2" :>Legalidad:</label>
+                            <select class="form-control" id="sel2">
+                                <option>Si</option>
+                                <option>No</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="edad">Panteonero:</label>
@@ -94,5 +114,3 @@
     </div>
 </div>
 <?php require_once('Views/default/footer.php'); ?>
-
-

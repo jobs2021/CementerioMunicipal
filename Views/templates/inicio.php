@@ -4,8 +4,8 @@
 ?>
 <!-- aca ira todo el codigo html de la vista-->
 
-  <div>
-  	<h1>Inicio</h1>
+  <div class="container">
+  	<h1>Sistema Administrativo de Cementerios Municipales</h1>
   </div>
 
 <!---hasta aca -->

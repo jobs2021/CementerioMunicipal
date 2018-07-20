@@ -15,7 +15,7 @@
                         <div class="row">
                             <div class="clearfix w-100">
                                 <h3 class="float-left margin-bottom-0">Monte Piedad</h3>
-                                <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#modalEditar">Editar</button>
+                                <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#modalEditar"><i class="fas fa-edit icon margin-right-5 margin-left-0"></i>Editar</button>
                             </div>
                         </div>
                     </li>
@@ -67,13 +67,18 @@
                             <option>Tipo 2</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="edad">Area:</label>
-                        <input type="text" class="form-control" id="edad">
-                    </div>
-                    <div class="form-group">
-                        <label for="edad">Legalidad:</label>
-                        <input type="text" class="form-control" id="edad">
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="edad">Area:</label>
+                            <input type="text" class="form-control" id="edad">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="sel2" :>Legalidad:</label>
+                            <select class="form-control" id="sel2">
+                                <option>Si</option>
+                                <option>No</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="edad">Panteonero:</label>

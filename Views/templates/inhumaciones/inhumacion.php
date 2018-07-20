@@ -1,11 +1,10 @@
 <?php 
-	$titulo='Inhumacion';
-	require_once('Views/default/header.php'); 
+    $titulo='Inhumacion';
+    require_once('Views/default/header.php'); 
 ?>
 <!-- aca ira todo el codigo html de la vista-->
 <div class="container">
-    <h1>inhumacion</h1>
-
+    <h1>Inhumacion</h1>
     <div class="row">
         <div class="col">
             <form action="<?php echo $server;?>/admincementerio" method="POST">
@@ -37,6 +36,9 @@
                 <div class="form-group">
                     <label for="edad">observaciones:</label>
                     <textarea class="form-control" id="edad" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Guardar</button>
                 </div>
             </form>
         </div>
