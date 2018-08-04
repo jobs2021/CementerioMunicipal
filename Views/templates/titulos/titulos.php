@@ -23,9 +23,8 @@ require_once('Views/default/header.php');
 <!-- Body -->
 <div class="content-wrapper">
     <div class="container-fluid">
-        <div class="card col-12 mx-auto mt-2">
             <div class="card-header mx-2">
-                <h4 class="card-title ">Busqueda De Titulos<a id="crear" title="Crear" class="btn btn-fill mx-2" style="background-color: #C16F4E ; color:white" href="<?php echo $server;?>/creartitulo">Crear Titulo</a>  </h4>
+                <h4 class="card-title ">Busqueda De Titulos<a id="crear" title="Crear" class="btn btn-secondary mx-2" href="<?php echo $server;?>/creartitulo">Crear Titulo</a>  </h4>
             </div>
             <div class="card-body">
                 <form class="form-inline" method="GET">
@@ -39,13 +38,14 @@ require_once('Views/default/header.php');
                         </div>
                     </div>               
                 </form>
-            </div>
-
+            
+        
         </div>
-        <div class="col-12 col-sm-12 col-md-10 col-lg-10 padding-0 mx-auto">
+    </div>
+    <div class="col-md-12 mx-0 padding-0 mt-2">
 
           <div class="table-responsive">
-          <table class="table table table-hover margin-top-15">
+          <table class="table table table-hover">
             <tr>
               <th>N°</th>
               <th>Titulo</th>
@@ -91,9 +91,9 @@ require_once('Views/default/header.php');
               </td>
             </tr>
           </table>
-          
+       
+
         </div>
-    </div>
 </div>
 </div>
 

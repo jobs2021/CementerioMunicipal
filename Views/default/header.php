@@ -162,19 +162,34 @@ end estilos personalizados*/
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-file-alt icon margin-right-5"></i>Titulos</a>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-file-alt icon margin-right-5"></i>Titulos & Arrendamientos</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
                         <a class="dropdown-item" href="<?php echo $server;?>/titulos">Titulos</a>
                         <a class="dropdown-item" href="<?php echo $server;?>/repotrastitulo">Operaciones a Titulo</a>
-
+                        <a class="dropdown-item" href="<?php echo $server;?>/arrendamientos">Arrendamientos</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="<?php echo $server;?>/creartitulo">Crear Titulo</a>
+                        <a class="dropdown-item" href="<?php echo $server;?>/creartitulo">Nuevo Titulo</a>
+                        
                     </div>
                 </li>
                 
                 
             </ul>
-            <a class="nav-link padding-left-0" href="#"><i class="fas fa-sign-out-alt icon margin-right-5"></i>Desconectar</a>
+            <ul class="navbar-nav padding-left-0 mr-sm-4">
+            <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-users-cog margin-right-5"></i>Configurar</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                        <a class="dropdown-item" href="<?php echo $server;?>/configurar">Configuraciones</a>
+                       
+                       
+
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" style="color:#FF4500" href="<?php echo $server;?>/desconectar">Desconectar</a>
+                    </div>
+                </li>
+            </ul>
+            
+
             
             <!--form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar">
