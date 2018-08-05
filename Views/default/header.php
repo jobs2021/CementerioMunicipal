@@ -81,7 +81,7 @@
     }
 
     .text-right {
-        text-align: right;
+        text-align: right!important;
     }
 
     .icon {
@@ -109,8 +109,11 @@
     .bg-principal{
     background-color: #373737 !important; /*373737*/
     }
-    .dropdown-item:active{
+    nav .dropdown-item:active{
     background-color: #373737!important;
+    }
+    .dropdown-item:active{
+    color: #fff!important;
     }
     .breadcrumb{
         background-color: rgba(210, 213, 216, .3)!important;

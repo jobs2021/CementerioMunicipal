@@ -37,7 +37,7 @@
                     </thead>
                     <tbody>
                         <tr class="row-hover">
-                            <td scope="row">1</th>
+                            <td scope="row">1</td>
                             <td>001</td>
                             <td>004</td>
                             <td>4</td>
@@ -50,7 +50,7 @@
                             </td>
                         </tr>
                         <tr class="row-hover">
-                            <td scope="row">2</th>
+                            <td scope="row">2</td>
                             <td>002</td>
                             <td>008</td>
                             <td>2</td>
@@ -63,7 +63,7 @@
                             </td>
                         </tr>
                         <tr class="row-hover">
-                            <td scope="row">3</th>
+                            <td scope="row">3</td>
                             <td>007</td>
                             <td>002</td>
                             <td>1</td>
@@ -196,7 +196,6 @@
 <!-- The Modal -->
 
 <div class="modal fade" id="modalEliminar">
-    - 115 -
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <!-- Modal Header -->

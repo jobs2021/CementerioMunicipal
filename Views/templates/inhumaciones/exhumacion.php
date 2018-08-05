@@ -3,10 +3,16 @@
 	require_once('Views/default/header.php'); 
 ?>
 <!-- aca ira todo el codigo html de la vista-->
+
 <div class="container">
-    <h1>Exhumacion</h1>
-    <div class="row">
-        <div class="col">
+    <div class="row justify-content-center">
+        <div class="col col-lg-8 margin-top-15">
+            <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+            <h1>Nueva Exhumacion</h1>
+        </li>
+        <li class="list-group-item">
+
             <form action="<?php echo $server;?>/admincementerio" method="POST">
                 <div class="form-group">
                     <label for="nombre">Fallecido</label>
@@ -15,7 +21,7 @@
                 <div class="form-row">
                     <div class="form-group col-6">
                         <label for="edad">Fecha:</label>
-                        <input type="text" class="form-control" id="edad">
+                        <input type="text" class="form-control" id="edad" value="<?php echo date('d/m/Y'); ?>">
                     </div>
                     <div class="form-group col-6">
                         <label for="sel2" :>Via Judicial:</label>
@@ -26,13 +32,17 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="edad">observaciones:</label>
+                    <label for="edad">Observaciones:</label>
                     <textarea class="form-control" id="edad" rows="2"></textarea>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                <div class="form-row">
+                    <div class="form-group col-lg-3">
+                        <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                    </div>
                 </div>
             </form>
+        </li>
+    </ul>
         </div>
     </div>
 </div>
