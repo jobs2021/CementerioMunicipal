@@ -62,15 +62,11 @@ require_once('Views/default/header.php');
 
 
 
-
-
-
-
-      <div class="class="col-12 col-sm-12 col-md-10 col-lg-10 padding-0 mx-auto>
-        <div class="card-header"><h5 style="color:#D16C2A; position: relative;">Añadir Beneficiarios <button class="btn" style="background-color: #C16F4E ; color:white" data-toggle="modal" data-target="#bnfModal">Agregar</button></h5></div>
+      <div >
+        <div class="card-header"><h5 style="text-align: center;">Añadir Beneficiarios <button class="btn btn-dark" data-toggle="modal" data-target="#bnfModal">Agregar</button></h5></div>
         <div class="card-body">
           <div class="table-responsive">
-          <table class="table margin-top-15">
+          <table style="margin-right: 150px;" class="table table-hover">
             <tr>
               <th>N°</th>
               <th>Nombre</th>
@@ -91,7 +87,7 @@ require_once('Views/default/header.php');
             </tr>
           </table>
         </div>
-        </div>
+      
 
         <!-- Modal -->
         <div class="modal fade" id="bnfModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
