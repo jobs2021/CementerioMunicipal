@@ -4,24 +4,16 @@
 ?>
 <!-- aca ira todo el codigo html de la vista-->
 <div class="container-fluid">
-
     <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <div class="row justify-content-center">
-                            
-                            <div class="col col-lg-8">
-                                
-                                <h2>Traslados</h2>
-                            </div>
-                                <button type="button" class="btn btn-outline-dark float-right" data-toggle="modal" data-target="#myModal">Nuevo Traslado</button>
-                        </div>
-
-                    </li>
+        <li class="list-group-item">
+            <div class="row justify-content-center">
+                <div class="col col-lg-8">
+                    <h2>Traslados</h2>
+                </div>
+                <button type="button" class="btn btn-outline-dark float-right" data-toggle="modal" data-target="#myModal">Nuevo Traslado</button>
+            </div>
+        </li>
     </ul>
-
-
-
-
     <div class="row justify-content-center clear-fix">
         <div class="col-12 padding-top-15 padding-bottom-15">
             <form class="form-inline justify-content-center" method="GET">
@@ -33,13 +25,13 @@
                 </div>
             </form>
         </div>
-        
         <div class="col-12 col-sm-12 col-md-10 col-lg-10 padding-0">
             <div class="table-responsive">
                 <table class="table table-hover margin-top-15">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
+                            <th scope="col">N° Titulo</th>
                             <th scope="col">Fallecido</th>
                             <th scope="col">Interesado</th>
                             <th scope="col">Parentesco</th>
@@ -52,51 +44,54 @@
                     <tbody>
                         <tr class="row-hover">
                             <td scope="row">1</td>
-                                <td>001</td>
-                                <td>004</td>
-                                <td>4</td>
-                                <td>4</td>
-                                <td>4</td>
-                                <td>4</td>
-                                <td class="text-right">
-                                    <div class="row-btn">
-                                        <a href="<?php echo $server;?>/verparcela"><i class="fas fa-eye icon" title="Ver Parcela"></i></a>
-                                        <a href="#" data-toggle="modal" data-target="#modalAgregarParcela" data-slide-to="0"><i class="fa fa-edit icon" title="Editar"></i></a>
-                                        <a href="#" data-toggle="modal" data-target="#modalEliminar" class="text-danger"><i class="fas fa-trash icon" title="Eliminar"></i></a>
-                                    </div>
-                                </td>
+                            <td>005344</td>
+                            <td>001</td>
+                            <td>004</td>
+                            <td>4</td>
+                            <td>4</td>
+                            <td>4</td>
+                            <td>4</td>
+                            <td class="text-right">
+                                <div class="row-btn">
+                                    <a href="<?php echo $server;?>/verparcela"><i class="fas fa-eye icon" title="Ver Parcela"></i></a>
+                                    <a href="#" data-toggle="modal" data-target="#modalAgregarParcela" data-slide-to="0"><i class="fa fa-edit icon" title="Editar"></i></a>
+                                    <a href="#" data-toggle="modal" data-target="#modalEliminar" class="text-danger"><i class="fas fa-trash icon" title="Eliminar"></i></a>
+                                </div>
+                            </td>
                         </tr>
                         <tr class="row-hover">
                             <td scope="row">2</td>
-                                <td>002</td>
-                                <td>008</td>
-                                <td>2</td>
-                                <td>2</td>
-                                <td>2</td>
-                                <td>2</td>
-                                <td class="text-right">
-                                    <div class="row-btn">
-                                        <a href="<?php echo $server;?>/verparcela"><i class="fas fa-eye icon" title="Ver Parcela"></i></a>
-                                        <a href="#" data-toggle="modal" data-target="#modalAgregarParcela" data-slide-to="0"><i class="fa fa-edit icon" title="Editar"></i></a>
-                                        <a href="#" data-toggle="modal" data-target="#modalEliminar" class="text-danger"><i class="fas fa-trash icon" title="Eliminar"></i></a>
-                                    </div>
-                                </td>
+                            <td>00535654</td>
+                            <td>002</td>
+                            <td>008</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td class="text-right">
+                                <div class="row-btn">
+                                    <a href="<?php echo $server;?>/verparcela"><i class="fas fa-eye icon" title="Ver Parcela"></i></a>
+                                    <a href="#" data-toggle="modal" data-target="#modalAgregarParcela" data-slide-to="0"><i class="fa fa-edit icon" title="Editar"></i></a>
+                                    <a href="#" data-toggle="modal" data-target="#modalEliminar" class="text-danger"><i class="fas fa-trash icon" title="Eliminar"></i></a>
+                                </div>
+                            </td>
                         </tr>
                         <tr class="row-hover">
                             <td scope="row">3</td>
-                                <td>007</td>
-                                <td>002</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td class="text-right">
-                                    <div class="row-btn">
-                                        <a href="<?php echo $server;?>/verparcela"><i class="fas fa-eye icon" title="Ver Parcela"></i></a>
-                                        <a href="#" data-toggle="modal" data-target="#modalAgregarParcela" data-slide-to="0"><i class="fa fa-edit icon" title="Editar"></i></a>
-                                        <a href="#" data-toggle="modal" data-target="#modalEliminar" class="text-danger"><i class="fas fa-trash icon" title="Eliminar"></i></a>
-                                    </div>
-                                </td>
+                            <td>00564</td>
+                            <td>007</td>
+                            <td>002</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td class="text-right">
+                                <div class="row-btn">
+                                    <a href="<?php echo $server;?>/verparcela"><i class="fas fa-eye icon" title="Ver Parcela"></i></a>
+                                    <a href="#" data-toggle="modal" data-target="#modalAgregarParcela" data-slide-to="0"><i class="fa fa-edit icon" title="Editar"></i></a>
+                                    <a href="#" data-toggle="modal" data-target="#modalEliminar" class="text-danger"><i class="fas fa-trash icon" title="Eliminar"></i></a>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -104,13 +99,10 @@
         </div>
     </div>
 </div>
-
-
 <!---hasta aca -->
 <?php require_once('Views/default/footer.php'); ?>
 <!-- modla -->
 <!-- Button to Open the Modal -->
-
 <!-- The Modal -->
 <div class="modal fade" id="myModal">
     <div class="modal-dialog">
