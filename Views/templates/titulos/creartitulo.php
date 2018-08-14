@@ -72,18 +72,29 @@ require_once('Views/default/header.php');
               <th>Nombre</th>
               <th>Apellidos</th>
               <th>DUI</th>
+              <th></th>
             </tr>
-            <tr>
+            <tr class="row-hover">
               <td>1</td>
               <td>Kevin</td>
               <td>Rivas</td>
               <td>05505416-9</td>
+              <td>
+                <div class="row-btn">
+                  <a style="color: #FF4500" title="Cancelar Titulo" class="fas fa-trash" data-toggle="modal" data-target="#exampleModal"></a>
+                  <div class="row-btn">   
+              </td>
             </tr>
-            <tr>
+            <tr class="row-hover">
               <td>2</td>
               <td>Samuel</td>
               <td>Cartagena</td>
               <td>05706516-9</td>
+              <td>
+                <div class="row-btn">
+                  <a style="color: #FF4500" title="Cancelar Titulo" class="fas fa-trash" data-toggle="modal" data-target="#exampleModal"></a>
+                  <div class="row-btn">   
+              </td>
             </tr>
           </table>
         </div>
