@@ -31,6 +31,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Numero</th>
                             <th scope="col">Poligono</th>
+                            <th scope="col">Titular</th>
                             <th scope="col">Nichos</th>
                             <th scope="col" style="width: 125px;"><a class="hidden">Acciones___</a></th>
                         </tr>
@@ -40,6 +41,7 @@
                             <td scope="row">1</td>
                             <td>001</td>
                             <td>004</td>
+                            <td>Juanito Firulais</td>
                             <td>4</td>
                             <td class="text-right">
                                 <div class="row-btn">
@@ -53,6 +55,7 @@
                             <td scope="row">2</td>
                             <td>002</td>
                             <td>008</td>
+                            <td>Pedro Firulais</td>
                             <td>2</td>
                             <td class="text-right">
                                 <div class="row-btn">
@@ -66,6 +69,7 @@
                             <td scope="row">3</td>
                             <td>007</td>
                             <td>002</td>
+                            <td>Josesito Firulais</td>
                             <td>1</td>
                             <td class="text-right">
                                 <div class="row-btn">
