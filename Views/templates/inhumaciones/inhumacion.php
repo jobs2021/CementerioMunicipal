@@ -10,7 +10,7 @@
                 <div class="col col-lg-8">
                     <h2>Inhumaciones</h2>
                 </div>
-                <button type="button" class="btn btn-outline-dark float-right" data-toggle="modal" data-target="#myModal">Nueva Inhumacion</button>
+                <button type="button" class="btn btn-outline-dark float-right" data-toggle="modal" data-target="#modalNueva">Nueva Inhumacion</button>
             </div>
         </li>
     </ul>
@@ -51,9 +51,9 @@
                             <td>4</td>
                             <td class="text-right">
                                 <div class="row-btn">
-                                    <a href="<?php echo $server;?>/verparcela"><i class="fas fa-eye icon" title="Ver Parcela"></i></a>
+                                    <a href="<?php echo $server;?>/inhumacion"><i class="fas fa-eye icon" title="Ver Inhumacion"></i></a>
                                     <a href="#" data-toggle="modal" data-target="#modalAgregarParcela" data-slide-to="0"><i class="fa fa-edit icon" title="Editar"></i></a>
-                                    <a href="#" data-toggle="modal" data-target="#modalEliminar" class="text-danger"><i class="fas fa-trash icon" title="Eliminar"></i></a>
+                                    <a href="#" data-toggle="modal" data-target="#modalEliminar" class="text-danger"><i class="fas fa-minus-circle icon" title="Exhumar"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -67,9 +67,9 @@
                             <td>2</td>
                             <td class="text-right">
                                 <div class="row-btn">
-                                    <a href="<?php echo $server;?>/verparcela"><i class="fas fa-eye icon" title="Ver Parcela"></i></a>
+                                    <a href="<?php echo $server;?>/inhumacion"><i class="fas fa-eye icon" title="Ver Inhumacion"></i></a>
                                     <a href="#" data-toggle="modal" data-target="#modalAgregarParcela" data-slide-to="0"><i class="fa fa-edit icon" title="Editar"></i></a>
-                                    <a href="#" data-toggle="modal" data-target="#modalEliminar" class="text-danger"><i class="fas fa-trash icon" title="Eliminar"></i></a>
+                                    <a href="#" data-toggle="modal" data-target="#modalEliminar" class="text-danger"><i class="fas fa-minus-circle icon" title="Exhumar"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -83,9 +83,9 @@
                             <td>1</td>
                             <td class="text-right">
                                 <div class="row-btn">
-                                    <a href="<?php echo $server;?>/verparcela"><i class="fas fa-eye icon" title="Ver Parcela"></i></a>
+                                    <a href="<?php echo $server;?>/inhumacion"><i class="fas fa-eye icon" title="Ver Inhumacion"></i></a>
                                     <a href="#" data-toggle="modal" data-target="#modalAgregarParcela" data-slide-to="0"><i class="fa fa-edit icon" title="Editar"></i></a>
-                                    <a href="#" data-toggle="modal" data-target="#modalEliminar" class="text-danger"><i class="fas fa-trash icon" title="Eliminar"></i></a>
+                                    <a href="#" data-toggle="modal" data-target="#modalEliminar" class="text-danger"><i class="fas fa-minus-circle icon" title="Exhumar"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -97,13 +97,26 @@
 </div>
 
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col col-lg-8 margin-top-15">
+
+<!-- The Modal -->
+<div class="modal fade" id="modalNueva">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Nueva Inhumacion</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+
+                
+
+
+
+   
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                    <h1>Nueva Inhumacion</h1>
-                </li>
+               
                 <li class="list-group-item">
                     <form action="<?php echo $server;?>/admincementerio" method="POST">
                         <div class="form-row">
@@ -136,7 +149,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="edad">FUNO ISAM:</label>
+                            <label for="edad">F1SAM:</label>
                             <input type="text" class="form-control" id="edad">
                         </div>
                         <div class="form-group">
@@ -151,8 +164,20 @@
                     </form>
                 </li>
             </ul>
+ 
+   
+
+
+
+
+
+
+
+            </div>
         </div>
     </div>
 </div>
+
+
 <!---hasta aca -->
 <?php require_once('Views/default/footer.php'); ?>
