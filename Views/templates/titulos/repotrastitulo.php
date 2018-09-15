@@ -65,7 +65,8 @@ require_once('Views/default/header.php');
           <div class="row-btn">
             <a style="color: FORESTGREEN" title="Ver Titulo" href="<?php echo $server;?>/eyetitulo" class="fas fa-eye"></a>   
             <a style="color: DODGERBLUE" href="<?php echo $server;?>/creartitulo" title="Traspasar Titulo" class="fas fa-edit"></a>
-            <a style="color: #FF4500" title="Cancelar Titulo" class="fas fa-trash" data-toggle="modal" data-target="#exampleModal"></a>
+            <a style="color: #2F2F2F" href="<?php echo $server;?>/repotitulo" title="Reponer Titulo" class="fas fa-copy"></a>
+            <a style="color: #FF4500" title="Cancelar Titulo" class="fas fa-times-circle" data-toggle="modal" data-target="#exampleModal"></a>
           </div>
         </td>
       </tr>
@@ -82,7 +83,8 @@ require_once('Views/default/header.php');
           <div class="row-btn">
             <a style="color: FORESTGREEN" title="Ver Titulo" href="<?php echo $server;?>/eyetitulo" class="fas fa-eye"></a>   
             <a style="color: DODGERBLUE" href="<?php echo $server;?>/creartitulo" title="Traspasar Titulo" class="fas fa-edit"></a>
-            <a style="color: #FF4500" title="Cancelar Titulo" class="fas fa-trash" data-toggle="modal" data-target="#exampleModal"></a>
+            <a style="color: #2F2F2F" href="<?php echo $server;?>/repotitulo" title="Reponer Titulo" class="fas fa-copy"></a>
+            <a style="color: #FF4500" title="Cancelar Titulo" class="fas fa-times-circle" data-toggle="modal" data-target="#exampleModal"></a>
           </div>
         </td>
       </tr>

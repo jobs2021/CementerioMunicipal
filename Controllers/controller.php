@@ -5,6 +5,10 @@ class MvcController{
     public $serverUrl='http://192.168.43.39';
     //public $serverUrl='http://localhost';
     //public $serverUrl='http://localhost/CementerioMunicipal';
+
+    //public $serverUrl='http://localhost/CementerioMunicipal';
+    //public $serverUrl='http://192.168.1.18/CementerioMunicipal';
+
     //public $serverUrl='http://cementerio.eshost.com.ar';
 
     public function enlacesPaginasController(){

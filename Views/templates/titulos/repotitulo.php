@@ -159,6 +159,7 @@ require_once('Views/default/header.php');
           </div>
           
           <div class="col col-md-12 mt-4">
+            <button type="submit" class="btn btn-primary">Reponer</button>
             <a  class="btn btn-danger" href="<?php echo $server;?>/repotrastitulo">Regresar</a>
             <!--a href="<?php echo $server;?>/repotrastitulo" class="btn btn-dark">Cancelar</a -->
           </div>

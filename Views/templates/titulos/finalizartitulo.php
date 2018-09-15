@@ -18,8 +18,8 @@ require_once('Views/default/header.php');
 <!-- Body -->
 
 <div class="container-fluid">		
-	<div class="card-header "><h4>Terminar Registro del Titulo</h4></div>				
-	<h5 style="color:#D16C2A; position: relative;" class="mt-4">Añadir Parcela al Titulo<button data-toggle="modal" data-target="#parcela" class="btn btn-warning mx-2">Selecionar</button></h5>
+	<div class="card-header"><h4>Terminar Registro del Titulo</h4></div>				
+	<h5 style="color: #474747; position: relative;" class="mx-4 mt-4">Añadir Parcela al Titulo<button data-toggle="modal" data-target="#parcela" style="background-color: #4A4A4B; color: white" class="btn mx-2">Selecionar</button></h5>
 	<div class="class="col-12 col-sm-12 col-md-10 col-lg-10 padding-0">
 		<div class="table-responsive">
 			<table class="table table-hover margin-top-15 ">
@@ -84,11 +84,7 @@ require_once('Views/default/header.php');
 						<label for="">Observaciones</label>
 						<textarea class="form-control" type="" name=""></textarea> 
 					</div>
-					<div class="input-group col-md-6" >
-						<div class="custom-file">
-							<input type="file" class="custom-file-input" id="TitleImg" aria-describedby="inputGroupFileAddon">
-							<label class="custom-file-label" for="inputGroupFile">Seleccionar Archibo...</label>
-						</div>
+					
 					</div>
 					<div class="col col-md-12 mt-4">
 						<button class="btn btn-primary" type="submit">Guardar</button>
