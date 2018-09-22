@@ -45,7 +45,7 @@
                         <tr class="row-hover">
                             <td scope="row">1</td>
                             <td>005344</td>
-                            <td>001</td>
+                            <td>Jose Perez</td>
                             <td>004</td>
                             <td>4</td>
                             <td>4</td>
@@ -62,7 +62,7 @@
                         <tr class="row-hover">
                             <td scope="row">2</td>
                             <td>00535654</td>
-                            <td>002</td>
+                            <td>Luis Chavez</td>
                             <td>008</td>
                             <td>2</td>
                             <td>2</td>
@@ -79,7 +79,7 @@
                         <tr class="row-hover">
                             <td scope="row">3</td>
                             <td>00564</td>
-                            <td>007</td>
+                            <td>Miguel Araujo</td>
                             <td>002</td>
                             <td>1</td>
                             <td>1</td>
