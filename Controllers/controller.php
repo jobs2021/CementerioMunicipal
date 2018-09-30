@@ -1,7 +1,6 @@
 <?php
 
 class MvcController{
-    
 // HEAD
     #public $serverUrl='http://10.42.0.1';
     #public $serverUrl='http://localhost/CementerioMunicipal';
