@@ -3,7 +3,7 @@
 class MvcController{
     
 // HEAD
-    #public $serverUrl='http://10.42.0.1';
+    public $serverUrl='http://192.168.43.39';
     #public $serverUrl='http://localhost/CementerioMunicipal';
     #public $serverUrl='http://192.168.0.90/CementerioMunicipal';
 //=======

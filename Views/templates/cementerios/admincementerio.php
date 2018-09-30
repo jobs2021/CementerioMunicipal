@@ -1,11 +1,47 @@
 <?php 
     $titulo='Admin Cementerio';
+
+    /*echo $_POST['nombre'];
+    echo $_POST['direccion'];
+    echo $_POST['tipo'];
+    echo $_POST['area'];
+    echo $_POST['legalidad'];
+    echo $_POST['panteonero'];
+*/
+    // Crear cementerio
+    if (isset($_POST['nombre']) && isset($_POST['direccion']) && isset($_POST['tipo']) && isset($_POST['area']) && isset($_POST['legalidad']) && isset($_POST['panteonero'])) {
+        # code...
+    $insert = new ConexionDB();
+    $insert->Query("insert into Cementerios (Nombre,Direccion,Tipo,Area,Legalizado,Panteonero) values ('".$_POST['nombre']."','".$_POST['direccion']."','".$_POST['tipo']."',".$_POST['area'].",".$_POST['legalidad'].",'".$_POST['panteonero']."');
+        ");
+    $idNuevo=$insert->Query("select idCementerio from Cementerios order by idCementerio desc limit 1");
+            header("location:".$server.'/admincementerio/'.$idNuevo[0]['idCementerio']);
+            exit();
+
+
+    }else{
+        //aignar valores
+        $enlacesController = $_GET['action'];
+        $enlacesController=explode('/', $enlacesController);
+
+        $conexion = new ConexionDB();
+        $values = $conexion->Query("select * from Cementerios where idCementerio='".$enlacesController[1]."'");
+        if ($values==-1) {
+            header("location:".$server.'/cementerios');
+            exit();
+        }
+        $cementerio = new Cementerio($values[0]);
+        $tipoParcela = $conexion->Query("select * from TipoParcela");
+
+    }
+
+
     require_once('Views/default/header.php');
 ?>
 <div class="container-fluid">
     <ul class="breadcrumb rounded-0 margin-l-r-15">
         <li class="breadcrumb-item"><a href="<?php echo $server;?>/cementerios">Cementerios</a></li>
-        <li class="breadcrumb-item active">Monte Piedad</li>
+        <li class="breadcrumb-item active"><?php echo $cementerio->Nombre; ?></li>
     </ul>
     <div class="container">
         <div class="row justify-content-center">
@@ -14,19 +50,22 @@
                     <li class="list-group-item">
                         <div class="row">
                             <div class="clearfix w-100">
-                                <h3 class="float-left margin-bottom-0">Monte Piedad</h3>
+                                <h3 class="float-left margin-bottom-0"><?php echo $cementerio->Nombre; ?></h3>
                                 <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#modalEditar"><i class="fas fa-edit icon margin-right-5 margin-left-0"></i>Editar</button>
                             </div>
                         </div>
                     </li>
                     <li class="list-group-item">
-                        <p>Tipo: Privado</p>
-                        <p>Area: 120</p>
-                        <p>Parcelas: 80</p>
-                        <p>Nichos Disponibles: 50</p>
-                        <p>Legalicidad: si</p>
-                        <p>Panteonero: Jose Felipe Fuentes</p>
-                        <p>Direccion: Chalatenango, bo. El Chile</p>
+                        <?php
+                        echo '
+                        <p>Tipo: '.$cementerio->Tipo.'</p>
+                        <p>Area: '.$cementerio->Area.'</p>
+                        <p>Parcelas: 0</p>
+                        <p>Nichos Disponibles: 0</p>
+                        <p>Legalicidad: '.(($cementerio->Legalidad==1) ? "Si" : "No").'</p>
+                        <p>Panteonero: '.$cementerio->Panteonero.'</p>
+                        <p>Direccion: '.$cementerio->Direccion.'</p>';
+                        ?>
                     </li>
                     <li class="list-group-item">
                         <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalAgregarParcela" data-slide-to="0">Agregar Parcela</button>
@@ -46,7 +85,7 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Editar Monte Piedad</h4>
+                <h4 class="modal-title">Editar <?php echo $cementerio->Nombre ?></h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <!-- Modal body -->
@@ -54,35 +93,35 @@
                 <form action="<?php echo $server;?>/admincementerio" method="POST">
                     <div class="form-group">
                         <label for="nombre">Nombre:</label>
-                        <input type="text" class="form-control" id="nombre">
+                        <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $cementerio->Nombre ?>">
                     </div>
                     <div class="form-group">
-                        <label for="edad">Direccion:</label>
-                        <input type="text" class="form-control" id="edad">
+                        <label for="direccion">Direccion:</label>
+                        <input type="text" class="form-control" id="direccion" name="direccion" value="<?php echo $cementerio->Direccion ?>">
                     </div>
                     <div class="form-group">
-                        <label for="sel2" :>Tipo:</label>
-                        <select class="form-control" id="sel2">
-                            <option>Tipo 1</option>
-                            <option>Tipo 2</option>
+                        <label for="tipo" :>Tipo:</label>
+                        <select class="form-control" id="tipo" name="tipo">
+                            <option value="Publico">Publico</option>
+                            <option value="Privado">Privado</option>
                         </select>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-6">
-                            <label for="edad">Area:</label>
-                            <input type="text" class="form-control" id="edad">
+                            <label for="area">Area:</label>
+                            <input type="text" class="form-control" id="area" name="area" value="<?php echo $cementerio->Area ?>">
                         </div>
                         <div class="form-group col-6">
-                            <label for="sel2" :>Legalidad:</label>
-                            <select class="form-control" id="sel2">
-                                <option>Si</option>
-                                <option>No</option>
+                            <label for="legalidad" :>Legalidad:</label>
+                            <select class="form-control" id="legalidad" name="legalidad">
+                                <option value="1">Si</option>
+                                <option value="0">No</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="edad">Panteonero:</label>
-                        <input type="text" class="form-control" id="edad">
+                        <label for="panteonero">Panteonero:</label>
+                        <input type="text" class="form-control" id="panteonero" name="panteonero" value="<?php echo $cementerio->Panteonero ?>">
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-block">Guardar</button>
@@ -121,8 +160,11 @@
                                         <div class="form-group">
                                             <label for="sel2" :>Tipo:</label>
                                             <select class="form-control" id="sel2">
-                                                <option>Tipo 1</option>
-                                                <option>Tipo 2</option>
+                                                <?php
+                                                foreach ($tipoParcela as $value) {
+                                                    echo"<option value=\"{$value['idTipoParcela']}\">{$value['Descripcion']}</option>";
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                         <div class="form-row">
