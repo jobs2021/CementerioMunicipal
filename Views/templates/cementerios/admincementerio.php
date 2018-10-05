@@ -1,26 +1,8 @@
 <?php 
     $titulo='Admin Cementerio';
+    require_once('Views/default/header.php');
 
-    /*echo $_POST['nombre'];
-    echo $_POST['direccion'];
-    echo $_POST['tipo'];
-    echo $_POST['area'];
-    echo $_POST['legalidad'];
-    echo $_POST['panteonero'];
-*/
-    // Crear cementerio
-    if (isset($_POST['nombre']) && isset($_POST['direccion']) && isset($_POST['tipo']) && isset($_POST['area']) && isset($_POST['legalidad']) && isset($_POST['panteonero'])) {
-        # code...
-    $insert = new ConexionDB();
-    $insert->Query("insert into Cementerios (Nombre,Direccion,Tipo,Area,Legalizado,Panteonero) values ('".$_POST['nombre']."','".$_POST['direccion']."','".$_POST['tipo']."',".$_POST['area'].",".$_POST['legalidad'].",'".$_POST['panteonero']."');
-        ");
-    $idNuevo=$insert->Query("select idCementerio from Cementerios order by idCementerio desc limit 1");
-            header("location:".$server.'/admincementerio/'.$idNuevo[0]['idCementerio']);
-            exit();
-
-
-    }else{
-        //aignar valores
+    //aignar valores
         $enlacesController = $_GET['action'];
         $enlacesController=explode('/', $enlacesController);
 
@@ -32,11 +14,7 @@
         }
         $cementerio = new Cementerio($values[0]);
         $tipoParcela = $conexion->Query("select * from TipoParcela");
-
-    }
-
-
-    require_once('Views/default/header.php');
+        
 ?>
 <div class="container-fluid">
     <ul class="breadcrumb rounded-0 margin-l-r-15">

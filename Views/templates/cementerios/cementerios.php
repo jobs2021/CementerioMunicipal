@@ -68,7 +68,8 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="<?php echo $server;?>/admincementerio" method="POST">
+                <form action="<?php echo $server;?>/cementerioActions" method="POST">
+                    <input type="hidden" name="actionId" value="1">
                     <div class="form-group">
                         <label for="nombre">Nombre:</label>
                         <input name="nombre" type="text" class="form-control" id="nombre">
