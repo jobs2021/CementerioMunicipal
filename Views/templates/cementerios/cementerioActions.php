@@ -5,15 +5,11 @@ switch ($_POST['actionId']) {
         CrearCementerio($_POST['nombre'],$_POST['direccion'],$_POST['tipo'],$_POST['area'],$_POST['legalidad'],$_POST['panteonero']);
         break;
    case '2': // update
-        # code...
+        UpdateCementerio($_POST['idCementerio'],$_POST['nombre'],$_POST['direccion'],$_POST['tipo'],$_POST['area'],$_POST['legalidad'],$_POST['panteonero']);
         break;
    case '3': // delete
-        # code...
-        break;    
-    
-    default:
-        echo "nada";
-        break;
+        DeleteCementerio($_POST['idCementerio']);
+        break;   
 }
 
 
@@ -26,40 +22,27 @@ function CrearCementerio($nombre,$direccion,$tipo,$area,$legalidad,$panteonero){
 
             header("location:".$server.'/admincementerio/'.$idNuevo[0]['idCementerio']);
             exit();
-
-
     }
-
-
 }
 
-/*
-    // Crear cementerio
-    if (isset($_POST['nombre']) && isset($_POST['direccion']) && isset($_POST['tipo']) && isset($_POST['area']) && isset($_POST['legalidad']) && isset($_POST['panteonero'])) {
-        # code...
-    $insert = new ConexionDB();
-    $insert->Query("insert into Cementerios (Nombre,Direccion,Tipo,Area,Legalizado,Panteonero) values ('".$_POST['nombre']."','".$_POST['direccion']."','".$_POST['tipo']."',".$_POST['area'].",".$_POST['legalidad'].",'".$_POST['panteonero']."');
-        ");
-    $idNuevo=$insert->Query("select idCementerio from Cementerios order by idCementerio desc limit 1");
-            header("location:".$server.'/admincementerio/'.$idNuevo[0]['idCementerio']);
+function UpdateCementerio($id,$nombre,$direccion,$tipo,$area,$legalidad,$panteonero){
+    if (isset($id) && isset($nombre) && isset($direccion) && isset($tipo) && isset($area) && isset($legalidad) && isset($panteonero)) {
+            $update = new ConexionDB();
+            $update->Query("update Cementerios set Nombre='{$nombre}',Direccion='{$direccion}',Tipo='{$tipo}',Area='{$area}',Legalizado='{$legalidad}',Panteonero='{$panteonero}' where idCementerio='{$id}';");
+
+            header("location:{$server}/admincementerio/{$id}");
             exit();
-
-
-    }else{
-        //aignar valores
-        $enlacesController = $_GET['action'];
-        $enlacesController=explode('/', $enlacesController);
-
-        $conexion = new ConexionDB();
-        $values = $conexion->Query("select * from Cementerios where idCementerio='".$enlacesController[1]."'");
-        if ($values==-1) {
-            header("location:".$server.'/cementerios');
-            exit();
-        }
-        $cementerio = new Cementerio($values[0]);
-        $tipoParcela = $conexion->Query("select * from TipoParcela");
-
     }
+}
 
-*/
+function DeleteCementerio($id){
+    if (isset($id)) {
+            $update = new ConexionDB();
+            $update->Query("delete from Cementerios where idCementerio='{$id}';");
+
+            header("location:".$server.'/cementerios/');
+            exit();
+    }
+}
+
 ?>

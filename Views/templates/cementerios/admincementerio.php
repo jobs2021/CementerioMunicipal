@@ -1,20 +1,20 @@
-<?php 
-    $titulo='Admin Cementerio';
-    require_once('Views/default/header.php');
-
+<?php
     //aignar valores
-        $enlacesController = $_GET['action'];
-        $enlacesController=explode('/', $enlacesController);
+        $idCementerio=explode('/',$_GET['action']);
 
         $conexion = new ConexionDB();
-        $values = $conexion->Query("select * from Cementerios where idCementerio='".$enlacesController[1]."'");
+        $values = $conexion->Query("select * from Cementerios where idCementerio='{$idCementerio[1]}'");
+
         if ($values==-1) {
-            header("location:".$server.'/cementerios');
+            header("location:{$server}/cementerios/");
             exit();
         }
+
         $cementerio = new Cementerio($values[0]);
         $tipoParcela = $conexion->Query("select * from TipoParcela");
         
+    $titulo='Admin Cementerio';
+    require_once('Views/default/header.php');
 ?>
 <div class="container-fluid">
     <ul class="breadcrumb rounded-0 margin-l-r-15">
@@ -68,7 +68,9 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="<?php echo $server;?>/admincementerio" method="POST">
+                <form action="<?php echo $server;?>/cementerioActions" method="POST">
+                    <input type="hidden" name="actionId" value="2">
+                    <input type="hidden" name="idCementerio" value="<?php echo $idCementerio[1]; ?>">
                     <div class="form-group">
                         <label for="nombre">Nombre:</label>
                         <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $cementerio->Nombre ?>">
@@ -109,6 +111,7 @@
         </div>
     </div>
 </div>
+
 <!-- The Modal -->
 <div class="modal fade" id="modalAgregarParcela">
     <div class="modal-dialog modal-dialog-centered">
@@ -126,18 +129,20 @@
                         <div class="carousel-item active">
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="<?php echo $server;?>/admincementerio" method="POST">
+                                    <form action="<?php echo $server;?>/parcelaActions" method="POST">
+                                        <input type="hidden" name="actionId" value="1">
+                                        <input type="hidden" name="idCementerio" value="<?php echo $idCementerio[1]; ?>">
                                         <div class="form-group">
                                             <label for="nombre">Número:</label>
-                                            <input type="text" class="form-control" id="nombre">
+                                            <input type="text" class="form-control" id="numero" name="numero">
                                         </div>
                                         <div class="form-group">
                                             <label for="edad">Poligono:</label>
-                                            <input type="text" class="form-control" id="edad">
+                                            <input type="text" class="form-control" id="poligono" name="poligono">
                                         </div>
                                         <div class="form-group">
                                             <label for="sel2" :>Tipo:</label>
-                                            <select class="form-control" id="sel2">
+                                            <select class="form-control" id="tipo" name="tipo">
                                                 <?php
                                                 foreach ($tipoParcela as $value) {
                                                     echo"<option value=\"{$value['idTipoParcela']}\">{$value['Descripcion']}</option>";
@@ -147,12 +152,12 @@
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-6">
-                                                <label for="edad">Coordenadas X:</label>
-                                                <input type="text" class="form-control" id="edad">
+                                                <label for="coordenadaX">Coordenadas X:</label>
+                                                <input type="text" class="form-control" id="coordenadaX" name="coordenadaX">
                                             </div>
                                             <div class="form-group col-6">
-                                                <label for="edad">Coordenadas Y:</label>
-                                                <input type="text" class="form-control" id="edad">
+                                                <label for="coordenadaY">Coordenadas Y:</label>
+                                                <input type="text" class="form-control" id="coordenadaY" name="coordenadaY">
                                             </div>
                                         </div>
                                 </div>
@@ -208,7 +213,7 @@
                                             <button type="button" class="btn btn-primary btn-block" data-target="#carruselAgregarNicho" data-slide-to="0">Volver</button>
                                         </div>
                                         <div class="col-6">
-                                            <button id="btnSave" type="button" class="btn btn-primary btn-block">Guardar</button>
+                                            <button id="btnSave" type="submit" class="btn btn-primary btn-block">Guardar</button>
                                         </div>
                                         </form>
                                     </div>
@@ -280,7 +285,7 @@
 
                 }
             }
-            alert(resultado);
+            //alert(resultado);
         });
 
 
