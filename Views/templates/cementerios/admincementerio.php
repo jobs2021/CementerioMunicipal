@@ -1,9 +1,9 @@
 <?php
     //aignar valores
-        $idCementerio=explode('/',$_GET['action']);
+        $idCementerio=explode('/',$_GET['action'])[1];
 
         $conexion = new ConexionDB();
-        $values = $conexion->Query("select * from Cementerios where idCementerio='{$idCementerio[1]}'");
+        $values = $conexion->Query("select * from Cementerios where idCementerio='{$idCementerio}'");
 
         if ($values==-1) {
             header("location:{$server}/cementerios/");
@@ -35,10 +35,11 @@
                     </li>
                     <li class="list-group-item">
                         <?php
+                        @$numeroParcelas=$conexion->Query("select count(*) as numero from Parcelas where idCementerio={$idCementerio}")[0];
                         echo '
                         <p>Tipo: '.$cementerio->Tipo.'</p>
                         <p>Area: '.$cementerio->Area.'</p>
-                        <p>Parcelas: 0</p>
+                        <p>Parcelas: '.$numeroParcelas['numero'].'</p>
                         <p>Nichos Disponibles: 0</p>
                         <p>Legalicidad: '.(($cementerio->Legalidad==1) ? "Si" : "No").'</p>
                         <p>Panteonero: '.$cementerio->Panteonero.'</p>
@@ -48,7 +49,7 @@
                     <li class="list-group-item">
                         <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalAgregarParcela" data-slide-to="0">Agregar Parcela</button>
                         <!--button type="button" class="btn btn-outline-primary" >Editar Parcela</button -->
-                        <a href="<?php echo $server;?>/parcelas">
+                        <a href="<?php echo "{$server}/parcelas/{$idCementerio}";?>">
                             <button type="button" class="btn btn-outline-primary">Ver Parcelas</button>
                         </a>
                     </li>
@@ -70,7 +71,7 @@
             <div class="modal-body">
                 <form action="<?php echo $server;?>/cementerioActions" method="POST">
                     <input type="hidden" name="actionId" value="2">
-                    <input type="hidden" name="idCementerio" value="<?php echo $idCementerio[1]; ?>">
+                    <input type="hidden" name="idCementerio" value="<?php echo $idCementerio; ?>">
                     <div class="form-group">
                         <label for="nombre">Nombre:</label>
                         <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $cementerio->Nombre ?>">
@@ -82,8 +83,8 @@
                     <div class="form-group">
                         <label for="tipo" :>Tipo:</label>
                         <select class="form-control" id="tipo" name="tipo">
-                            <option value="Publico">Publico</option>
-                            <option value="Privado">Privado</option>
+                            <option value="Publico" <?php echo (($cementerio->Tipo=="Publico") ? "selected=true":"");  ?> >Publico</option>
+                            <option value="Privado" <?php echo (($cementerio->Tipo=="Privado") ? "selected=true":"");  ?> >Privado</option>
                         </select>
                     </div>
                     <div class="form-row">
@@ -94,8 +95,8 @@
                         <div class="form-group col-6">
                             <label for="legalidad" :>Legalidad:</label>
                             <select class="form-control" id="legalidad" name="legalidad">
-                                <option value="1">Si</option>
-                                <option value="0">No</option>
+                                <option value="1" <?php echo (($cementerio->Legalidad==1) ? "selected=true":"");  ?>>Si</option>
+                                <option value="0" <?php echo (($cementerio->Legalidad==0) ? "selected=true":"");  ?>>No</option>
                             </select>
                         </div>
                     </div>
@@ -131,7 +132,7 @@
                                 <div class="card-body">
                                     <form action="<?php echo $server;?>/parcelaActions" method="POST">
                                         <input type="hidden" name="actionId" value="1">
-                                        <input type="hidden" name="idCementerio" value="<?php echo $idCementerio[1]; ?>">
+                                        <input type="hidden" name="idCementerio" value="<?php echo $idCementerio; ?>">
                                         <div class="form-group">
                                             <label for="nombre">Número:</label>
                                             <input type="text" class="form-control" id="numero" name="numero">

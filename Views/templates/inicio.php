@@ -2,7 +2,7 @@
 	$titulo='Inicio';
 	require_once('Views/default/header.php'); 
   
-    $busqueda=$_GET['search'];
+    @$busqueda=$_GET['search'];
     if (isset($busqueda)) {
       require_once('Views/templates/inicio/search.php');
     }else{

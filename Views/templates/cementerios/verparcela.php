@@ -1,4 +1,17 @@
 <?php 
+
+    @$idParcela=explode('/',$_GET['action'])[1];
+
+    if (!isset($idParcela)) {
+        header("location:".$server.'/cementerios/');
+        exit();
+    }
+    
+    $consulta = new ConexionDB();
+    $parcela= $consulta->Query("select * from Parcelas where idParcela={$idParcela}")[0];
+    @$nombreCementerio=$consulta->Query("select Nombre from Cementerios where idCementerio={$parcela['idCementerio']}")[0];
+
+
     $titulo='Admin Cementerio';
     require_once('Views/default/header.php');
 ?>
@@ -6,9 +19,9 @@
     <ul class="breadcrumb rounded-0 margin-l-r-15">
         <li class="breadcrumb-item"><a href="<?php echo $server;?>/cementerios">Cementerios</a></li>
         <li class="breadcrumb-item">
-            <a href="<?php echo $server;?>/admincementerio">Monte Piedad</a>
+            <?php echo "<a href=\"{$server}/admincementerio/{$parcela['idCementerio']}\">{$nombreCementerio['Nombre']}</a>";?>
         </li>
-        <li class="breadcrumb-item"><a href="<?php echo $server;?>/parcelas">Parcelas</a></li>
+        <li class="breadcrumb-item"><?php echo "<a href=\"{$server}/parcelas/{$parcela['idCementerio']}\">Parcelas</a>";?></li>
         <li class="breadcrumb-item active">Parcela 001</li>
     </ul>
     <div class="container">
@@ -18,7 +31,7 @@
                     <li class="list-group-item">
                         <div class="row">
                             <div class="clearfix w-100">
-                                <h3 class="float-left margin-bottom-0">Parcela 005</h3>
+                                <h3 class="float-left margin-bottom-0"><?php echo $parcela['Poligono']; ?></h3>
                                 <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#modalEditar">Editar</button>
                             </div>
                         </div>

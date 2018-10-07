@@ -30,20 +30,21 @@
                     // listar cementerios
                 if ($variable!=-1) {
                     foreach ($variable as $value) {
-                        echo '
-                <div class="col-sm-6 col-md-4 col-lg-3 padding-top-15">
-                    <a href="'.$server.'/admincementerio/'.$value['idCementerio'].'" class="card-link text-dark">
-                        <div class="card text-center">
-                            <div class="card-header bg-principal text-light"><strong>'.$value['Nombre'].'</strong></div>
-                            <div class="card-body">
-                                <p>Tipo: '.$value['Tipo'].'</p>
-                                <p>Parcelas: 0</p>
+                        @$numeroParcelas=$consulta->Query("select count(*) as numero from Parcelas where idCementerio={$value['idCementerio']}")[0];
+                        echo "
+                <div class=\"col-sm-6 col-md-4 col-lg-3 padding-top-15\">
+                    <a href=\"{$server}/admincementerio/{$value['idCementerio']}\" class=\"card-link text-dark\">
+                        <div class=\"card text-center\">
+                            <div class=\"card-header bg-principal text-light\"><strong>{$value['Nombre']}</strong></div>
+                            <div class=\"card-body\">
+                                <p>Tipo: {$value['Tipo']}</p>
+                                <p>Parcelas: {$numeroParcelas['numero']}</p>
                                 <p>Nichos: 0</p>
                                 <p>Nichos Disponibles: 0</p>
                             </div>
                         </div>
                     </a>
-                </div>';
+                </div>";
 
                     }
                 }
