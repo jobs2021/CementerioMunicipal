@@ -133,6 +133,7 @@
                                     <form action="<?php echo $server;?>/parcelaActions" method="POST">
                                         <input type="hidden" name="actionId" value="1">
                                         <input type="hidden" name="idCementerio" value="<?php echo $idCementerio; ?>">
+                                        <input type="hidden" name="nichos" id="nichosSend">
                                         <div class="form-group">
                                             <label for="nombre">Número:</label>
                                             <input type="text" class="form-control" id="numero" name="numero">
@@ -207,10 +208,10 @@
                                 <div class="card-footer">
                                     <div class="row margin-top-15">
                                         <div class="col-6">
-                                            <input id="checkbox0" type="checkbox" name="nicho0" value="nicho0" hidden="true">
-                                            <input id="checkbox1" type="checkbox" name="nicho1" value="nicho1" hidden="true">
-                                            <input id="checkbox2" type="checkbox" name="nicho2" value="nicho2" hidden="true">
-                                            <input id="checkbox3" type="checkbox" name="nicho3" value="nicho3" hidden="true">
+                                            <input id="checkbox0" type="checkbox" name="nicho0" value="0" hidden="true">
+                                            <input id="checkbox1" type="checkbox" name="nicho1" value="1" hidden="true">
+                                            <input id="checkbox2" type="checkbox" name="nicho2" value="2" hidden="true">
+                                            <input id="checkbox3" type="checkbox" name="nicho3" value="3" hidden="true">
                                             <button type="button" class="btn btn-primary btn-block" data-target="#carruselAgregarNicho" data-slide-to="0">Volver</button>
                                         </div>
                                         <div class="col-6">
@@ -278,14 +279,15 @@
         crearEvent(nicho3);
 
         $('#btnSave').click(function() {
-            var resultado = '';
+            var resultado = [];
 
             for (var i = 0; i <= 3; i++) {
                 if (document.getElementById("checkbox" + i).checked == true) {
-                    resultado += document.getElementById("checkbox" + i).value + ' ';
+                    resultado.push(document.getElementById("checkbox" + i).value);
 
                 }
             }
+            $('#nichosSend').attr('value',resultado);
             //alert(resultado);
         });
 

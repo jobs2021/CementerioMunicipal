@@ -8,8 +8,18 @@
     }
     
     $consulta = new ConexionDB();
-    $parcela= $consulta->Query("select * from Parcelas where idParcela={$idParcela}")[0];
+
+    $parcela= $consulta->Query("select t1.idParcela, idCementerio, Numero, Poligono, count(idNicho) as Nichos,(select idTitulo from Titulos where idParcela=t1.idParcela) as Titular,(select Descripcion from TipoParcela tp where tp.idTipoParcela=t1.idTipoParcela) as TipoParcela from Parcelas t1 left join Nichos t2 on t1.idParcela=t2.idParcela where t1.idParcela='{$idParcela}' group by idParcela,Numero,Poligono,Titular,idCementerio,TipoParcela")[0];
+    if ($parcela==-1) {
+        header("location:".$server.'/cementerios/');
+        exit();
+    }
+
+
+
+    //$parcela= $consulta->Query("select * from Parcelas where idParcela={$idParcela}")[0];
     @$nombreCementerio=$consulta->Query("select Nombre from Cementerios where idCementerio={$parcela['idCementerio']}")[0];
+    $titular=($parcela['Titular']) ? $parcela['Titular']:' -----  -----';
 
 
     $titulo='Admin Cementerio';
@@ -22,7 +32,7 @@
             <?php echo "<a href=\"{$server}/admincementerio/{$parcela['idCementerio']}\">{$nombreCementerio['Nombre']}</a>";?>
         </li>
         <li class="breadcrumb-item"><?php echo "<a href=\"{$server}/parcelas/{$parcela['idCementerio']}\">Parcelas</a>";?></li>
-        <li class="breadcrumb-item active">Parcela 001</li>
+        <li class="breadcrumb-item active"><?php echo $parcela['Numero']; ?></li>
     </ul>
     <div class="container">
         <div class="row justify-content-center">
@@ -31,21 +41,54 @@
                     <li class="list-group-item">
                         <div class="row">
                             <div class="clearfix w-100">
-                                <h3 class="float-left margin-bottom-0"><?php echo $parcela['Poligono']; ?></h3>
+                                <h3 class="float-left margin-bottom-0"><?php echo $parcela['Numero']; ?></h3>
                                 <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#modalEditar">Editar</button>
                             </div>
                         </div>
                     </li>
                     <li class="list-group-item">
-                        <p>Titular: Jose Pedrito Avelar</p>
-                        <p>Poligono: 20</p>
-                        <p>Tipo: Arrendamiento</p>
-                        <p>Nichos: 3</p>
+                        <?php
+                        echo "
+                        <p>Titular: {$titular}</p>
+                        <p>Poligono: {$parcela['Poligono']}</p>
+                        <p>Tipo: {$parcela['TipoParcela']}</p>
+                        <p>Nichos: {$parcela['Nichos']}</p>
                         <p>Nichos Disponibles: 0</p>
+                        ";
+                        ?>
                     </li>
                     <li class="list-group-item">
                         <h4>Ubicacion</h4>
-                        <div class="bg-light" style="width: 100%;height: 300px;max-width: 500px;">
+                        <div id="map" class="bg-light" style="width: 100%;height: 300px;max-width: 500px;">
+
+
+                              <script>
+                                  function initMap() {
+                                    var myLatLng = {lat: 14.041644, lng: -88.938102};
+
+                                    // Create a map object and specify the DOM element
+                                    // for display.
+                                    var map = new google.maps.Map(document.getElementById('map'), {
+                                      center: myLatLng,
+                                      zoom: 16
+                                    });
+
+                                    // Create a marker and set its position.
+                                    var marker = new google.maps.Marker({
+                                      map: map,
+                                      position: myLatLng,
+                                      title: 'Hello World!'
+                                    });
+                                  }
+
+                                </script>
+                                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKO_WwA9ZbX1C-arxe8_52eZmJJhXHraw&callback=initMap"
+                                    async defer></script>
+
+
+
+
+
                         </div>
                     </li>
                     <li class="list-group-item padding-l-r-0 margin-l-r-15">
@@ -65,42 +108,28 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="row-hover">
-                                            <td scope="row">0</th>
-                                            <td>Petronila Fernandez</td>
-                                            <td>23/07/2001</td>
-                                            <td class="text-primary">Utilizado</td>
-                                            <td class="text-right">
-                                                <div class="row-btn">
-                                                    <a href="#" data-toggle="modal" data-target="#modalInfoNicho"><i class="fas fa-info-circle icon" title="Ver Resumen"></i></a>
-                                                    <a href="#" data-toggle="modal" data-target="#modalEliminar" class="text-danger"><i class="fas fa-trash icon" title="Eliminar"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="row-hover">
-                                            <td scope="row">1</th>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td class="text-success">Disponible</td>
-                                            <td class="text-right">
-                                                <div class="row-btn">
-                                                    <a href="#" data-toggle="modal" data-target="#modalInfoNicho"><i class="fas fa-info-circle icon" title="Ver Resumen"></i></a>
-                                                    <a href="#" data-toggle="modal" data-target="#modalEliminar" class="text-danger"><i class="fas fa-trash icon" title="Eliminar"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="row-hover">
-                                            <td scope="row">2</th>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td class="text-success">Disponible</td>
-                                            <td class="text-right">
-                                                <div class="row-btn">
-                                                    <a href="#" data-toggle="modal" data-target="#modalInfoNicho"><i class="fas fa-info-circle icon" title="Ver Resumen"></i></a>
-                                                    <a href="#" data-toggle="modal" data-target="#modalEliminar" class="text-danger"><i class="fas fa-trash icon" title="Eliminar"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        <?php
+                                        $query="select NumeroOrden,t1.idNicho,(select Descripcion from CtlEstadosNichos where idCtlEstadosNicho=t1.Estado) as Estado,(select FechaInicio from Enterramientos t2 where idNicho=t1.idNicho) as Fecha,(select concat(NombresFallecido,' ',ApellidosFallecido) from Enterramientos t2 where idNicho=t1.idNicho) as Difunto from Nichos t1 where t1.idParcela='{$idParcela}' order by NumeroOrden asc;";
+                                        $resultado=$consulta->Query($query);
+
+                                        foreach ($resultado as $row) {
+                                            $difunto=($row['Difunto']!='')? $row['Difunto']:' -----  -----';
+                                            echo "
+                                            <tr class=\"row-hover\">
+                                                <td scope=\"row\">{$row['NumeroOrden']}</th>
+                                                <td>{$difunto}</td>
+                                                <td>{$row['Fecha']}</td>
+                                                <td class=\"text-primary\">{$row['Estado']}</td>
+                                                <td class=\"text-right\">
+                                                    <div class=\"row-btn\">
+                                                        <a href=\"#\" data-toggle=\"modal\" data-target=\"#modalInfoNicho\"><i class=\"fas fa-info-circle icon\" title=\"Ver Resumen\"></i></a>
+                                                        <a href=\"#\" data-toggle=\"modal\" data-target=\"#modalEliminar\" class=\"text-danger\"><i class=\"fas fa-trash icon\" title=\"Eliminar\"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            ";
+                                        }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>

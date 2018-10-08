@@ -8,7 +8,9 @@
 
     $consulta = new ConexionDB();
     @$nombreCementerio=$consulta->Query("select Nombre from Cementerios where idCementerio={$idCementerio}")[0];
-    $parcelas= $consulta->Query("select * from Parcelas where idCementerio={$idCementerio}");
+
+    $parcelas= $consulta->Query("select t1.idParcela, Numero, Poligono, count(idNicho) as Nichos,(select idTitulo from Titulos where idParcela=t1.idParcela) as Titular from Parcelas t1 left join Nichos t2 on t1.idParcela=t2.idParcela where t1.idCementerio='{$idCementerio}' group by idParcela,Numero,Poligono,Titular");
+
     $tipoParcela = $consulta->Query("select * from TipoParcela");
 
 	$titulo='Parcelas';
@@ -54,18 +56,19 @@
                         if ($parcelas!=-1) {
                            
                             foreach ($parcelas as $parcela) {
+                                $titular=($parcela['Titular']) ? $parcela['Titular']:'-';
                                 echo 
                                 "<tr class=\"row-hover\">
                                 <td scope=\"row\">{$counter}</td>
-                                <td>001</td>
+                                <td>{$parcela['Numero']}</td>
                                 <td>{$parcela['Poligono']}</td>
-                                <td>Juanito Default</td>
-                                <td>4</td>
+                                <td>{$titular}</td>
+                                <td>{$parcela['Nichos']}</td>
                                 <td class=\"text-right\">
                                     <div class=\"row-btn\">
                                         <a href=\"{$server}/verparcela/{$parcela['idParcela']}\"><i class=\"fas fa-eye icon\" title=\"Ver Parcela\"></i></a>
                                         <a id=\"btnE{$parcela['idParcela']}\" class=\"btn-editar-parcela\" href=\"#\" data-toggle=\"modal\" data-target=\"#modalEditarParcela\" data-slide-to=\"0\"><i class=\"fa fa-edit icon\" title=\"Editar\"></i></a>
-                                        <a href=\"#\" data-toggle=\"modal\" data-target=\"#modalEliminar\" class=\"text-danger\"><i class=\"fas fa-trash icon\" title=\"Eliminar\"></i></a>
+                                        <a id=\"btnD{$parcela['idParcela']}\" class=\"btn-eliminar-parcela\" href=\"#\" data-toggle=\"modal\" data-target=\"#modalEliminar\" class=\"text-danger\"><i class=\"fas fa-trash icon\" title=\"Eliminar\"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -99,18 +102,20 @@
                         <div class="carousel-item active">
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="<?php echo $server;?>/admincementerio" method="POST">
+                                    <form id="formEditar" action="<?php echo $server;?>/parcelaActions" method="POST">
+                                        <input type="hidden" name="actionId" value="2">
+                                        <input type="hidden" name="idCementerio" value="<?php echo $idCementerio; ?>">
                                         <div class="form-group">
                                             <label for="numero">Número:</label>
-                                            <input type="text" class="form-control" id="numero">
+                                            <input type="text" class="form-control" id="numero" name="numero">
                                         </div>
                                         <div class="form-group">
                                             <label for="poligono">Poligono:</label>
-                                            <input type="text" class="form-control" id="poligono">
+                                            <input type="text" class="form-control" id="poligono" name="poligono">
                                         </div>
                                         <div class="form-group">
                                             <label for="tipo" :>Tipo:</label>
-                                            <select class="form-control" id="tipo">
+                                            <select class="form-control" id="tipo" name="tipo">
                                                 <?php
 
                                                 foreach ($tipoParcela as $value) {
@@ -122,11 +127,11 @@
                                         <div class="form-row">
                                             <div class="form-group col-6">
                                                 <label for="coordenadaX">Coordenadas X:</label>
-                                                <input type="text" class="form-control" id="coordenadaX">
+                                                <input type="text" class="form-control" id="coordenadaX" name="coordenadaX">
                                             </div>
                                             <div class="form-group col-6">
                                                 <label for="coordenadaY">Coordenadas Y:</label>
-                                                <input type="text" class="form-control" id="coordenadaY">
+                                                <input type="text" class="form-control" id="coordenadaY" name="coordenadaY">
                                             </div>
                                         </div>
                                 </div>
@@ -182,7 +187,7 @@
                                             <button type="button" class="btn btn-primary btn-block" data-target="#carruselAgregarNicho" data-slide-to="0">Volver</button>
                                         </div>
                                         <div class="col-6">
-                                            <button id="btnSave" type="button" class="btn btn-primary btn-block">Guardar</button>
+                                            <button id="btnSave" type="submit" class="btn btn-primary btn-block">Guardar</button>
                                         </div>
                                         </form>
                                     </div>
@@ -213,7 +218,12 @@
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
+                <form action="<?php echo "{$server}/parcelaActions"?>" method="POST">
+                    <input type="hidden" name="actionId" value="3">
+                    <input id="parcelaDelete" type="hidden" name="idParcela" value="0">
+                    <input type="hidden" name="idCementerio" value="<?php echo $idCementerio; ?>">
+                    <button type="submit" class="btn btn-danger">Eliminar</button> <!-- data-dismiss="modal" -->
+                </form>
             </div>
         </div>
     </div>
@@ -230,22 +240,23 @@
 
     $(document).ready(function() {
         //alert("funcionando");
-        var id='';
+        //var id='';
         $('.btn-editar-parcela').click(function(event) {
-            id=this.id.substring(4);
+            var id=this.id.substring(4);
 
             $.ajax({
-                url : 'http://192.168.43.39/parcelaActions/'+id,
-                //data : { id : 123 },
-                //type : 'GET',
-                //dataType : 'json',
+                url : '<?php echo "{$server}/parcelaActions/";?>'+id,
                 success : function(json) {
                     var datos=JSON.parse(json)[0];
                     //alert(datos['Poligono']);
+                    $('#formEditar').attr('action','<?php echo "{$server}/parcelaActions/";?>'+datos['idParcela']);
+                    $('#numero').attr('value',datos['Numero']);
                     $('#poligono').attr('value',datos['Poligono']);
                     $('#coordenadaX').attr('value',datos['CoordenadaX']);
                     $('#coordenadaY').attr('value',datos['CoordenadaY']);
                     $('#tipo'+datos['idTipoParcela']).attr('selected','true');
+
+
                 },
                 error : function(xhr, status) {
                     alert('Disculpe, existió un problema');
@@ -254,6 +265,16 @@
                     alert('Petición realizada');
                 }*/
             });
+
+
+        });
+
+
+        $('.btn-eliminar-parcela').click(function(event) {
+           var id=this.id.substring(4);
+           $('#parcelaDelete').attr('value',id);
+
+
 
 
         });
