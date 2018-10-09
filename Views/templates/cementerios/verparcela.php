@@ -260,7 +260,7 @@
                 <p>control estado: optimo</p>
                 <p>Fecha Contruccion: 08/02/1999</p>
                 <p>Estado: Disponible&emsp;<label class="bs-switch">.
-                      <input class="bs-switch" type="checkbox" checked="true">
+                      <input id="disponible" class="bs-switch" type="checkbox" checked="true">
                       <span class="slider round"></span>
                     </label></p>
                     
@@ -278,6 +278,14 @@
    $(document).ready(function() {
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
+        });
+        $('#disponible').click(function(event) {
+            if ($(this).val()=='on') {
+                $(this).val('off');
+            }else{
+                $(this).val('on');
+            }
+            alert($(this).val());
         });
 
     <?php
