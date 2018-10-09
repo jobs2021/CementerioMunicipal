@@ -285,7 +285,7 @@
             }else{
                 $(this).val('on');
             }
-            alert($(this).val());
+            //alert($(this).val());
         });
 
     <?php

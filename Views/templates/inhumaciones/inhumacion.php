@@ -145,7 +145,7 @@
                             </div>
                             <div class="form-group col-6">
                                 <label for="edad">Fecha Fin:</label>
-                                <input type="text" class="form-control" id="edad" value="<?php echo date('d/m/').(date(Y)+7); ?>">
+                                <input type="text" class="form-control" id="edad" value="<?php echo date('d/m/').(date('Y')+7); ?>">
                             </div>
                         </div>
                         <div class="form-group">
