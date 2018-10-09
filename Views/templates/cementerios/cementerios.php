@@ -30,7 +30,8 @@
                     // listar cementerios
                 if ($variable!=-1) {
                     foreach ($variable as $value) {
-                        @$numeroParcelas=$consulta->Query("select count(*) as numero from Parcelas where idCementerio={$value['idCementerio']}")[0];
+                        @$numeroParcelas=$consulta->Query("select count(*) as Nichos,(select count(*) from Parcelas t4 where t4.idCementerio='{$value['idCementerio']}') as Parcelas from Nichos t1 inner join Parcelas t2 on t1.idParcela=t2.idParcela inner join Cementerios t3 on t3.idCementerio=t2.idCementerio where t3.idCementerio='{$value['idCementerio']}'")[0];
+                        $nichosDisponibles=$consulta->Query("select (count(t1.idParcela) - count(t3.idEnterramiento)) as NichosDisponibles from Parcelas t1 inner join Nichos t2 on t1.idParcela=t2.idParcela left join Enterramientos t3 on t2.idNicho=t3.idNicho where t1.idCementerio='{$value['idCementerio']}'")[0]['NichosDisponibles'];
                         echo "
                 <div class=\"col-sm-6 col-md-4 col-lg-3 padding-top-15\">
                     <a href=\"{$server}/admincementerio/{$value['idCementerio']}\" class=\"card-link text-dark\">
@@ -38,9 +39,9 @@
                             <div class=\"card-header bg-principal text-light\"><strong>{$value['Nombre']}</strong></div>
                             <div class=\"card-body\">
                                 <p>Tipo: {$value['Tipo']}</p>
-                                <p>Parcelas: {$numeroParcelas['numero']}</p>
-                                <p>Nichos: 0</p>
-                                <p>Nichos Disponibles: 0</p>
+                                <p>Parcelas: {$numeroParcelas['Parcelas']}</p>
+                                <p>Nichos: {$numeroParcelas['Nichos']}</p>
+                                <p>Nichos Disponibles: {$nichosDisponibles}</p>
                             </div>
                         </div>
                     </a>

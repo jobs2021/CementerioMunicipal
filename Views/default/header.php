@@ -15,6 +15,54 @@
     <link href="<?php echo $server;?>/Views/static/vendor/font-awesome/css/all.css" rel="stylesheet" type="text/css">
     <!-- estilos css-->
     <style type="text/css">
+
+
+.bs-switch {
+  position: relative;
+  display: inline-block;
+  width: 45px;
+  height: 25.4px; }
+  .bs-switch input {
+    display: none; }
+    .bs-switch input:checked + .slider {
+      background-color: #2196F3; }
+      .bs-switch input:checked + .slider:before {
+        -webkit-transform: translateX(19.5px);
+        -ms-transform: translateX(19.5px);
+        transform: translateX(19.5px); }
+    .bs-switch input:focus + .slider {
+      -webkit-box-shadow: 0 0 1px #2196F3;
+      box-shadow: 0 0 1px #2196F3; }
+  .bs-switch .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    -o-transition: .4s;
+    transition: .4s; }
+    .bs-switch .slider:before {
+      position: absolute;
+      content: "";
+      height:19.5px;
+      width:19.5px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      -webkit-transition: .4s;
+      -o-transition: .4s;
+      transition: .4s; }
+    .bs-switch .slider.round {
+      -webkit-border-radius: 25.4px;
+      border-radius: 25.4px; }
+      .bs-switch .slider.round:before {
+        -webkit-border-radius: 50%;
+        border-radius: 50%; }
+
+
     /* Estilos del boton desconectar by Live
 
     a {

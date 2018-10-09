@@ -38,7 +38,7 @@
                         @$numeroParcelas=$conexion->Query("select count(*) as numero from Parcelas where idCementerio={$idCementerio}")[0];
                         echo '
                         <p>Tipo: '.$cementerio->Tipo.'</p>
-                        <p>Area: '.$cementerio->Area.'</p>
+                        <p>Area: '.$cementerio->Area.' m<sup>2</sup></p>
                         <p>Parcelas: '.$numeroParcelas['numero'].'</p>
                         <p>Nichos Disponibles: 0</p>
                         <p>Legalicidad: '.(($cementerio->Legalidad==1) ? "Si" : "No").'</p>

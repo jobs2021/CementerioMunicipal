@@ -9,7 +9,7 @@
     
     $consulta = new ConexionDB();
 
-    $parcela= $consulta->Query("select t1.idParcela, idCementerio, Numero, Poligono, count(idNicho) as Nichos,(select idTitulo from Titulos where idParcela=t1.idParcela) as Titular,(select Descripcion from TipoParcela tp where tp.idTipoParcela=t1.idTipoParcela) as TipoParcela from Parcelas t1 left join Nichos t2 on t1.idParcela=t2.idParcela where t1.idParcela='{$idParcela}' group by idParcela,Numero,Poligono,Titular,idCementerio,TipoParcela")[0];
+    $parcela= $consulta->Query("select (select (count(t1.idParcela) - count(t3.idEnterramiento)) from Parcelas t1 inner join Nichos t2 on t1.idParcela=t2.idParcela left join Enterramientos t3 on t2.idNicho=t3.idNicho where t1.idParcela='{$idParcela}') as NichosDisponibles, t1.idParcela, idCementerio, Numero, Poligono, count(idNicho) as Nichos,(select idTitulo from Titulos where idParcela=t1.idParcela) as Titular,(select Descripcion from TipoParcela tp where tp.idTipoParcela=t1.idTipoParcela) as TipoParcela from Parcelas t1 left join Nichos t2 on t1.idParcela=t2.idParcela where t1.idParcela='{$idParcela}' group by idParcela,Numero,Poligono,Titular,idCementerio,TipoParcela")[0];
     if ($parcela==-1) {
         header("location:".$server.'/cementerios/');
         exit();
@@ -19,7 +19,7 @@
 
     //$parcela= $consulta->Query("select * from Parcelas where idParcela={$idParcela}")[0];
     @$nombreCementerio=$consulta->Query("select Nombre from Cementerios where idCementerio={$parcela['idCementerio']}")[0];
-    $titular=($parcela['Titular']) ? $parcela['Titular']:' -----  -----';
+    $titular=($parcela['Titular']) ? $parcela['Titular']:'  - - -  - - - ';
 
 
     $titulo='Admin Cementerio';
@@ -53,7 +53,7 @@
                         <p>Poligono: {$parcela['Poligono']}</p>
                         <p>Tipo: {$parcela['TipoParcela']}</p>
                         <p>Nichos: {$parcela['Nichos']}</p>
-                        <p>Nichos Disponibles: 0</p>
+                        <p>Nichos Disponibles: {$parcela['NichosDisponibles']}</p>
                         ";
                         ?>
                     </li>
@@ -111,14 +111,19 @@
                                         <?php
                                         $query="select NumeroOrden,t1.idNicho,(select Descripcion from CtlEstadosNichos where idCtlEstadosNicho=t1.Estado) as Estado,(select FechaInicio from Enterramientos t2 where idNicho=t1.idNicho) as Fecha,(select concat(NombresFallecido,' ',ApellidosFallecido) from Enterramientos t2 where idNicho=t1.idNicho) as Difunto from Nichos t1 where t1.idParcela='{$idParcela}' order by NumeroOrden asc;";
                                         $resultado=$consulta->Query($query);
+                                        $nombres=[];
 
-                                        foreach ($resultado as $row) {
-                                            $difunto=($row['Difunto']!='')? $row['Difunto']:' -----  -----';
+                                        if ($resultado!=-1) {
+                                            foreach ($resultado as $row) {
+                                            $difunto=($row['Difunto']!='')? $row['Difunto']:' - - -  - - -';
+                                            $fecha=($row['Fecha']!='')? $row['Fecha']:' - - -';
+                                            //array_push($nombres, ($row['Difunto']!='')? $row['Difunto'] : 'Disponible');
+                                            $nombres[$row['NumeroOrden']]=($row['Difunto']!='')? $row['Difunto'] : 'Disponible';
                                             echo "
                                             <tr class=\"row-hover\">
                                                 <td scope=\"row\">{$row['NumeroOrden']}</th>
                                                 <td>{$difunto}</td>
-                                                <td>{$row['Fecha']}</td>
+                                                <td>{$fecha}</td>
                                                 <td class=\"text-primary\">{$row['Estado']}</td>
                                                 <td class=\"text-right\">
                                                     <div class=\"row-btn\">
@@ -128,7 +133,10 @@
                                                 </td>
                                             </tr>
                                             ";
+                                            }
                                         }
+
+                                        
                                         ?>
                                     </tbody>
                                 </table>
@@ -147,23 +155,23 @@
 
 
                             <svg version="1.1" id="nicho" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100%" height="300px" viewBox="0 0 300 300" enable-background="new 0 0 300 300" xml:space="preserve">
-    <g class="nicho3">
-        <rect class="btn-hover3" x="100.666" y="124.698" fill="rgba(0,0,0,0)" stroke="#007bff" stroke-width="1" stroke-miterlimit="10" width="99.776" height="32" />
-        <text class="text-hover3" transform="matrix(1 0 0 1 143.5537 145.0308)" fill="#007bff" font-family="'Arial'" font-size="15">3</text>
+    <g class="nicho3"<?php echo (isset($nombres[3]))? " data-toggle=\"tooltip\" title=\"{$nombres[3]}\" data-placement=\"right\"":""; ?>>
+        <rect class="btn-hover3" x="100.666" y="124.698" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" stroke-width="1" stroke-miterlimit="10" width="99.776" height="32" />
+        <text class="text-hover3" transform="matrix(1 0 0 1 143.5537 145.0308)" fill="rgba(0,0,0,0)" font-family="'Arial'" font-size="15">3</text>
     </g>
-    <g class="nicho2">
-        <rect class="btn-hover2" x="100.666" y="163.838" fill="rgba(0,0,0,0)" stroke="#007bff" stroke-width="1" stroke-miterlimit="10" width="99.776" height="32" />
-        <text class="text-hover2" transform="matrix(1 0 0 1 143.5537 183.0313)" fill="#007bff" font-family="'Arial'" font-size="15">2</text>
+    <g class="nicho2"<?php echo (isset($nombres[2]))? " data-toggle=\"tooltip\" title=\"{$nombres[2]}\" data-placement=\"right\"":""; ?>>
+        <rect class="btn-hover2" x="100.666" y="163.838" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" stroke-width="1" stroke-miterlimit="10" width="99.776" height="32" />
+        <text class="text-hover2" transform="matrix(1 0 0 1 143.5537 183.0313)" fill="rgba(0,0,0,0)" font-family="'Arial'" font-size="15">2</text>
     </g>
-    <g class="nicho1">
-        <rect class="btn-hover1" x="100.666" y="202.15" fill="rgba(0,0,0,0)" stroke="#007bff" stroke-width="1" stroke-miterlimit="10" width="99.776" height="32" />
-        <text class="text-hover1" transform="matrix(1 0 0 1 143.5537 221.6973)" fill="#007bff" font-family="'Arial'" font-size="15">1</text>
+    <g class="nicho1"<?php echo (isset($nombres[1]))? " data-toggle=\"tooltip\" title=\"{$nombres[1]}\" data-placement=\"right\"":""; ?>>
+        <rect class="btn-hover1" x="100.666" y="202.15" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" stroke-width="1" stroke-miterlimit="10" width="99.776" height="32" />
+        <text class="text-hover1" transform="matrix(1 0 0 1 143.5537 221.6973)" fill="rgba(0,0,0,0)" font-family="'Arial'" font-size="15">1</text>
     </g>
-    <g class="nicho0">
-        <rect class="btn-hover0" x="100.666" y="259.414" fill="rgba(0,0,0,0)" stroke="#007bff" stroke-width="1" stroke-miterlimit="10" width="99.776" height="32" />
-        <text class="text-hover0" transform="matrix(1 0 0 1 144.8867 280.0605)" fill="#007bff" font-family="'Arial'" font-size="15">0</text>
+    <g class="nicho0"<?php echo (isset($nombres[0]))? " data-toggle=\"tooltip\" title=\"{$nombres[0]}\" data-placement=\"right\"":""; ?>>
+        <rect class="btn-hover0" x="100.666" y="259.414" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" stroke-width="1" stroke-miterlimit="10" width="99.776" height="32" />
+        <text class="text-hover0" transform="matrix(1 0 0 1 144.8867 280.0605)" fill="rgba(0,0,0,0)" font-family="'Arial'" font-size="15">0</text>
     </g>
-    <path fill="#B1B1B1" d="M235.761,240.162V110.478c0.177-0.626,0.31-1.27,0.383-1.933h8.85c8.512,0,15.412-5.373,15.412-12v-6.435
+    <path fill="#494A47" d="M235.761,240.162V110.478c0.177-0.626,0.31-1.27,0.383-1.933h8.85c8.512,0,15.412-5.373,15.412-12v-6.435
                         c0-6.628-6.9-12-15.412-12h-21.735v-3.144c0-6.208-4.701-11.241-10.501-11.241h-11.769c-1.27-9.64-22.542-17.378-49.104-17.884
                         V20.328h11.712c0.961,0,1.738-1.217,1.738-2.718s-0.777-2.718-1.738-2.718h-11.712V2.717c0-1.5-1.217-2.717-2.717-2.717
                         c-1.501,0-2.718,1.217-2.718,2.717v12.175h-11.712c-0.96,0-1.738,1.217-1.738,2.718s0.778,2.718,1.738,2.718h11.712v25.511
@@ -251,7 +259,11 @@
                 <p>Tutular: Jose Pedrito del Rancho</p>
                 <p>control estado: optimo</p>
                 <p>Fecha Contruccion: 08/02/1999</p>
-                <p>Estado: Disponible <a href="#"><i class="fa fa-edit icon"></i></a></p>
+                <p>Estado: Disponible&emsp;<label class="bs-switch">.
+                      <input class="bs-switch" type="checkbox" checked="true">
+                      <span class="slider round"></span>
+                    </label></p>
+                    
             </div>
         </div>
     </div>
@@ -260,3 +272,33 @@
 
 
 <?php require_once('Views/default/footer.php'); ?>
+
+<script type="text/javascript">
+    // nicho vector
+   $(document).ready(function() {
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+
+    <?php
+
+    for ($i = 0; $i < 4; $i++) {
+       echo "
+        $('.btn-hover' + {$i}).css('fill', 'rgba(0,0,0,0)');
+        $('.text-hover' + {$i}).css('fill', 'rgba(0,0,0,0)');
+        ";
+    }
+    foreach ($resultado as $n) {
+       echo "
+        $('.btn-hover' + {$n['NumeroOrden']}).css('fill', '#007bff');
+        $('.text-hover' + {$n['NumeroOrden']}).css('fill', '#fff');
+        ";
+    }
+
+    ?> 
+            
+   });
+
+    // nocho vecto end
+
+</script>
