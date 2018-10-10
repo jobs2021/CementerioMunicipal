@@ -10,6 +10,9 @@ switch ($_POST['actionId']) {
    case '3': // delete
         DeleteCementerio($_POST['idCementerio']);
         break;   
+    case '4': // delete
+        RestoreCementerio($_POST['idCementerio']);
+        break;   
 }
 
 
@@ -38,11 +41,22 @@ function UpdateCementerio($id,$nombre,$direccion,$tipo,$area,$legalidad,$panteon
 function DeleteCementerio($id){
     if (isset($id)) {
             $update = new ConexionDB();
-            $update->Query("delete from Cementerios where idCementerio='{$id}';");
+            $update->Query("update Cementerios set Estado='0' where idCementerio='{$id}';");
 
             header("location:".$server.'/cementerios/');
             exit();
     }
 }
+
+function RestoreCementerio($id){
+    if (isset($id)) {
+            $update = new ConexionDB();
+            $update->Query("update Cementerios set Estado='1' where idCementerio='{$id}';");
+
+            header("location:".$server.'/cementerios/');
+            exit();
+    }
+}
+
 
 ?>

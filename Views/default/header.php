@@ -17,6 +17,56 @@
     <style type="text/css">
 
 
+.fixed-action-btn {
+    position: fixed;
+    z-index: 998;
+    right: 10px;
+    bottom: 10px;
+    margin-bottom: 0;
+}
+.btn-floating.btn-lg {
+    width: 61.1px;
+    height: 61.1px;
+    border-radius: 100%;
+    line-height: 50px;
+    text-align: center;
+}
+
+.btn-floating {
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    width: 47px;
+    height: 47px;
+    position: relative;
+    z-index: 1;
+    vertical-align: middle;
+    display: inline-block;
+    overflow: hidden;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    margin: 10px;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    padding: 0;
+    cursor: pointer;
+}
+
+.btn-group-lg>.btn, .btn-lg {
+    padding: .5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: .3rem;
+}
+    /* csss */
+
+
+
+
+
+
+
+
 .bs-switch {
   position: relative;
   display: inline-block;
