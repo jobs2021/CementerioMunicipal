@@ -17,6 +17,37 @@
     require_once('Views/default/header.php');
 ?>
 <div class="container-fluid">
+
+    <!-- trash code-->
+
+                <div class="fixed-action-btn" data-toggle="tooltip" title="Papelera" data-placement="left">
+                    <a class="btn-floating btn-lg bg-primary" data-toggle="modal" data-target="#ModalTrash">
+                        <i class="fas fa-trash" style="color:#FFF;font-size: 25px;"></i>
+                    </a>
+                </div>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="ModalTrash" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Papelera de Reciclaje</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        ...
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Guardar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- end trash code-->
+
+
     <ul class="breadcrumb rounded-0 margin-l-r-15">
         <li class="breadcrumb-item"><a href="<?php echo $server;?>/cementerios">Cementerios</a></li>
         <li class="breadcrumb-item active"><?php echo $cementerio->Nombre; ?></li>
@@ -29,7 +60,13 @@
                         <div class="row">
                             <div class="clearfix w-100">
                                 <h3 class="float-left margin-bottom-0"><?php echo $cementerio->Nombre; ?></h3>
-                                <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#modalEditar"><i class="fas fa-edit icon margin-right-5 margin-left-0"></i>Editar</button>
+                                <form action="<?php echo "{$server}/cementerioActions"; ?>" method="POST">
+                                    <input type="hidden" name="actionId" value="3">
+                                    <input type="hidden" name="idCementerio" value="<?php echo $idCementerio; ?>">
+                                    <button type="submit" class="btn btn-outline-danger float-right" data-toggle="modal" data-target="#modalEliminar"><i class="fas fa-trash icon margin-right-5 margin-left-0"></i></button>
+                                </form>
+
+                                <button type="button" class="btn btn-outline-primary float-right margin-right-5" data-toggle="modal" data-target="#modalEditar"><i class="fas fa-edit icon margin-right-5 margin-left-0"></i>Editar</button>
                             </div>
                         </div>
                     </li>
@@ -41,7 +78,7 @@
                         <p>Area: '.$cementerio->Area.' m<sup>2</sup></p>
                         <p>Parcelas: '.$numeroParcelas['numero'].'</p>
                         <p>Nichos Disponibles: 0</p>
-                        <p>Legalicidad: '.(($cementerio->Legalidad==1) ? "Si" : "No").'</p>
+                        <p>Legalidad: '.(($cementerio->Legalidad==1) ? "Si" : "No").'</p>
                         <p>Panteonero: '.$cementerio->Panteonero.'</p>
                         <p>Direccion: '.$cementerio->Direccion.'</p>';
                         ?>
@@ -227,6 +264,10 @@
             </div>
         </div>
     </div>
+
+
+
+
     <?php require_once('Views/default/footer.php'); ?>
     <script type="text/javascript">
     $(document).ready(function() {

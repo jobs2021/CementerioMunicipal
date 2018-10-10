@@ -26,6 +26,36 @@
     require_once('Views/default/header.php');
 ?>
 <div class="container-fluid">
+
+    <!-- trash code-->
+
+                <div class="fixed-action-btn" data-toggle="tooltip" title="Papelera" data-placement="left">
+                    <a class="btn-floating btn-lg bg-primary" data-toggle="modal" data-target="#ModalTrash">
+                        <i class="fas fa-trash" style="color:#FFF;font-size: 25px;"></i>
+                    </a>
+                </div>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="ModalTrash" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Papelera de Reciclaje</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        ...
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Guardar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- end trash code-->
+                
     <ul class="breadcrumb rounded-0 margin-l-r-15">
         <li class="breadcrumb-item"><a href="<?php echo $server;?>/cementerios">Cementerios</a></li>
         <li class="breadcrumb-item">

@@ -1,7 +1,6 @@
 <?php 
     $titulo='Cementerios';
     $consulta = new ConexionDB();
-    $variable= $consulta->Query("select * from Cementerios");
 
     require_once('Views/default/header.php'); 
 ?>
@@ -26,6 +25,17 @@
             <p class="margin-top-15">Seleccione un Cementerio para continuar...</p>
 
             <div class="row padding-bottom-15">
+
+
+
+
+
+
+
+
+
+
+
 
                 <?php
                     // listar cementerios
@@ -112,4 +122,65 @@
         </div>
     </div>
 </div>
+<<<<<<< HEAD
 <?php require_once('Views/default/footer.php'); ?>
+=======
+
+
+                <!-- trash code-->
+
+                <div class="fixed-action-btn" data-toggle="tooltip" title="Papelera" data-placement="left">
+                    <a class="btn-floating btn-lg bg-primary" data-toggle="modal" data-target="#ModalTrash">
+                        <i class="fas fa-trash" style="color:#FFF;font-size: 25px;"></i>
+                    </a>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="ModalTrash" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Papelera de Reciclaje</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <?php 
+                            $cementeriosTrash= $consulta->Query("select * from Cementerios where Estado='0'");
+                            $date=date('d/m/Y');
+                            if ($cementeriosTrash!="-1") {
+         
+                                foreach ($cementeriosTrash as $objetoTrash) {
+                                    echo "<form action=\"{$server}/cementerioActions\" method=\"POST\">
+                                    <p>{$date} - {$objetoTrash['Nombre']} 
+                                    
+                                        <input type=\"hidden\" name=\"actionId\" value=\"4\">
+                                        <input type=\"hidden\" name=\"idCementerio\" value=\"{$objetoTrash['idCementerio']}\">
+                                        <button type=\"submit\" class=\"btn btn-outline-danger\" data-toggle=\"modal\" data-target=\"#modalEliminar\" style=\"height:30px;\"><i class=\"fas fa-redo-alt icon margin-right-5\"></i></button>
+                                    </form>
+                                    </p>";
+                                }
+                            }else{
+                                echo "<center>Papelera Vacia</center>";
+                            }
+
+                        ?>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Guardar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- end trash code-->
+
+
+<?php require_once('Views/default/footer.php'); ?>
+<script type="text/javascript">
+    $(document).ready(function(event) {
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+    });
+</script>
+>>>>>>> 7010f3f9b3dd7a1ff6182ba55636db2aa8ca936d
