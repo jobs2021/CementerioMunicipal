@@ -155,7 +155,7 @@
                                     
                                         <input type=\"hidden\" name=\"actionId\" value=\"4\">
                                         <input type=\"hidden\" name=\"idCementerio\" value=\"{$objetoTrash['idCementerio']}\">
-                                        <button type=\"submit\" class=\"btn btn-outline-danger\" data-toggle=\"modal\" data-target=\"#modalEliminar\"><i class=\"fas fa-redo-alt icon margin-right-5\"></i></button>
+                                        <button type=\"submit\" class=\"btn btn-outline-danger\" data-toggle=\"modal\" data-target=\"#modalEliminar\" style=\"height:30px;\"><i class=\"fas fa-redo-alt icon margin-right-5\"></i></button>
                                     </form>
                                     </p>";
                                 }

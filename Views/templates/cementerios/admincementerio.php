@@ -61,9 +61,9 @@
                             <div class="clearfix w-100">
                                 <h3 class="float-left margin-bottom-0"><?php echo $cementerio->Nombre; ?></h3>
                                 <form action="<?php echo "{$server}/cementerioActions"; ?>" method="POST">
-                                <input type="hidden" name="actionId" value="3">
-                                <input type="hidden" name="idCementerio" value="<?php echo $idCementerio; ?>">
-                                <button type="submit" class="btn btn-outline-danger float-right" data-toggle="modal" data-target="#modalEliminar"><i class="fas fa-trash icon margin-right-5 margin-left-0"></i></button>
+                                    <input type="hidden" name="actionId" value="3">
+                                    <input type="hidden" name="idCementerio" value="<?php echo $idCementerio; ?>">
+                                    <button type="submit" class="btn btn-outline-danger float-right" data-toggle="modal" data-target="#modalEliminar"><i class="fas fa-trash icon margin-right-5 margin-left-0"></i></button>
                                 </form>
 
                                 <button type="button" class="btn btn-outline-primary float-right margin-right-5" data-toggle="modal" data-target="#modalEditar"><i class="fas fa-edit icon margin-right-5 margin-left-0"></i>Editar</button>
@@ -78,7 +78,7 @@
                         <p>Area: '.$cementerio->Area.' m<sup>2</sup></p>
                         <p>Parcelas: '.$numeroParcelas['numero'].'</p>
                         <p>Nichos Disponibles: 0</p>
-                        <p>Legalicidad: '.(($cementerio->Legalidad==1) ? "Si" : "No").'</p>
+                        <p>Legalidad: '.(($cementerio->Legalidad==1) ? "Si" : "No").'</p>
                         <p>Panteonero: '.$cementerio->Panteonero.'</p>
                         <p>Direccion: '.$cementerio->Direccion.'</p>';
                         ?>
