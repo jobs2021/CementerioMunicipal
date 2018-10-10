@@ -1,7 +1,7 @@
 <?php 
     $titulo='Cementerios';
     $consulta = new ConexionDB();
-
+    $variable= $consulta->Query("select * from Cementerios");
     require_once('Views/default/header.php'); 
 ?>
 <div class="container-fluid">
