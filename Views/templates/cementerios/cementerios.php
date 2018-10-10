@@ -9,18 +9,19 @@
     <div class="row">
         <div class="col">
 
-             <ul class="list-group list-group-flush">
-                    <li class="list-group-item padding-0">
-           
-            <form class="form-inline justify-content-center padding-top-15 padding-bottom-15" method="GET" action="<?php echo $server;?>/parcelas">
-                <div class="input-group col-12 col-sm-8 col-md-6 col-lg-4">
-                    <input type="text" class="form-control" name="busqueda" placeholder="Buscar Parcela Numero o Poligono">
-                    <div class="input-group-prepend rounded">
-                        <button type="submit" class="btn btn-dark rounded-right">Buscar</button>
-                    </div>
-                </div>
-            </form>
-        </li></ul>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item padding-0">
+
+                    <form class="form-inline justify-content-center padding-top-15 padding-bottom-15" method="GET" action="<?php echo $server;?>/parcelas">
+                        <div class="input-group col-12 col-sm-8 col-md-6 col-lg-4">
+                            <input type="text" class="form-control" name="busqueda" placeholder="Buscar Parcela Numero o Poligono">
+                            <div class="input-group-prepend rounded">
+                                <button type="submit" class="btn btn-dark rounded-right">Buscar</button>
+                            </div>
+                        </div>
+                    </form>
+                </li>
+            </ul>
 
             <p class="margin-top-15">Seleccione un Cementerio para continuar...</p>
 
@@ -49,8 +50,6 @@
 
                     }
                 }
-
-
                 ?>
                 <div class="col-sm-6 col-md-4 col-lg-3 padding-top-15 " style="min-height: 125px;">
                     <!-- Button to Open the Modal -->
