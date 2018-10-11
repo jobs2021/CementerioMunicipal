@@ -3,7 +3,7 @@
 
 class enlacesPaginas{
 
-    public $links = array('inicio',array('cementerios','admincementerio','parcelas','verparcela','cementerioActions','parcelaActions'),array('titulos','creartitulo','repotrastitulo', 'finalizartitulo', 'eyetitulo', 'arrendamientos', 'repotitulo'),array('inhumacion','exhumacion','traslado'), array('configurar'),'desconectar');
+    public $links = array('inicio',array('cementerios','admincementerio','parcelas','verparcela','cementerioActions','parcelaActions'),array('titulos','creartitulo','repotrastitulo', 'finalizartitulo', 'eyetitulo', 'arrendamientos', 'repotitulo','tituloActions'),array('inhumacion','exhumacion','traslado'), array('configurar'),'desconectar');
 
     public function enlacesPaginasModel($enlacesModel){
 
