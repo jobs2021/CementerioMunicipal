@@ -41,8 +41,8 @@
                     // listar cementerios
                 if ($variable!=-1) {
                     foreach ($variable as $value) {
-                        @$numeroParcelas=$consulta->Query("select count(*) as Nichos,(select count(*) from Parcelas t4 where t4.idCementerio='{$value['idCementerio']}') as Parcelas from Nichos t1 inner join Parcelas t2 on t1.idParcela=t2.idParcela inner join Cementerios t3 on t3.idCementerio=t2.idCementerio where t3.idCementerio='{$value['idCementerio']}'")[0];
-                        $nichosDisponibles=$consulta->Query("select (count(t1.idParcela) - count(t3.idEnterramiento)) as NichosDisponibles from Parcelas t1 inner join Nichos t2 on t1.idParcela=t2.idParcela left join Enterramientos t3 on t2.idNicho=t3.idNicho where t1.idCementerio='{$value['idCementerio']}'")[0]['NichosDisponibles'];
+                        @$numeroParcelas=$consulta->Query("select count(*) as Nichos,(select count(*) from Parcelas t4 where t4.idCementerio='{$value['idCementerio']}') as Parcelas from Nichos t1 inner join Parcelas t2 on t1.idParcela=t2.idParcela inner join Cementerios t3 on t3.idCementerio=t2.idCementerio where t3.idCementerio='{$value['idCementerio']}' and t1.Estado='1'")[0];
+                        $nichosDisponibles=$consulta->Query("select (count(t1.idParcela) - count(t3.idEnterramiento)) as NichosDisponibles from Parcelas t1 inner join Nichos t2 on t1.idParcela=t2.idParcela left join Enterramientos t3 on t2.idNicho=t3.idNicho where t1.idCementerio='{$value['idCementerio']}' and t2.Estado='1'")[0]['NichosDisponibles'];
                         echo "
                 <div class=\"col-sm-6 col-md-4 col-lg-3 padding-top-15\">
                     <a href=\"{$server}/admincementerio/{$value['idCementerio']}\" class=\"card-link text-dark\">

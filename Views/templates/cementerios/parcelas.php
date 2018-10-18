@@ -9,7 +9,7 @@
     $consulta = new ConexionDB();
     @$nombreCementerio=$consulta->Query("select Nombre from Cementerios where idCementerio={$idCementerio}")[0];
 
-    $parcelas= $consulta->Query("select t1.idParcela, Numero, Poligono, count(idNicho) as Nichos,(select idTitulo from Titulos where idParcela=t1.idParcela) as Titular from Parcelas t1 left join Nichos t2 on t1.idParcela=t2.idParcela where t1.idCementerio='{$idCementerio}' group by idParcela,Numero,Poligono,Titular");
+    $parcelas= $consulta->Query("select t1.idParcela, Numero, Poligono, count(idNicho) as Nichos,(select idTitulo from Titulos where idParcela=t1.idParcela) as Titular from Parcelas t1 left join Nichos t2 on t1.idParcela=t2.idParcela where t1.idCementerio='{$idCementerio}'  and t2.Estado='1' group by idParcela,Numero,Poligono,Titular");
 
     $tipoParcela = $consulta->Query("select * from TipoParcela");
 
@@ -135,6 +135,8 @@
                                     <form id="formEditar" action="<?php echo $server;?>/parcelaActions" method="POST">
                                         <input type="hidden" name="actionId" value="2">
                                         <input type="hidden" name="idCementerio" value="<?php echo $idCementerio; ?>">
+                                        <input type="hidden" name="nichosNew" id="nichosNew">
+                                        <input type="hidden" name="nichosDelete" id="nichosDelete">
                                         <div class="form-group">
                                             <label for="numero">Número:</label>
                                             <input type="text" class="form-control" id="numero" name="numero">
@@ -210,10 +212,10 @@
                                 <div class="card-footer">
                                     <div class="row margin-top-15">
                                         <div class="col-6">
-                                            <input id="checkbox0" type="checkbox" name="nicho0" value="nicho0" hidden="true">
-                                            <input id="checkbox1" type="checkbox" name="nicho1" value="nicho1" hidden="true">
-                                            <input id="checkbox2" type="checkbox" name="nicho2" value="nicho2" hidden="true">
-                                            <input id="checkbox3" type="checkbox" name="nicho3" value="nicho3" hidden="true">
+                                            <input id="checkbox0" type="checkbox" name="nicho0" value="0" hidden="true">
+                                            <input id="checkbox1" type="checkbox" name="nicho1" value="1" hidden="true">
+                                            <input id="checkbox2" type="checkbox" name="nicho2" value="2" hidden="true">
+                                            <input id="checkbox3" type="checkbox" name="nicho3" value="3" hidden="true">
                                             <button type="button" class="btn btn-primary btn-block" data-target="#carruselAgregarNicho" data-slide-to="0">Volver</button>
                                         </div>
                                         <div class="col-6">
@@ -266,11 +268,79 @@
 
 
 <?php require_once('Views/default/footer.php'); ?>
-<script type="text/javascript">
 
+ <script type="text/javascript">
+
+        // script for nichos
     $(document).ready(function() {
-        //alert("funcionando");
-        //var id='';
+
+        class nichoBtn {
+            constructor(n) {
+                this.activo = false;
+                this.clase = '.nicho' + n;
+                this.posicion = n;
+                //this.toggleActivador();
+            }
+
+            nichoHover(n) {
+                $(".btn-hover" + n).css("fill", "#007bff");
+                $(".text-hover" + n).css("fill", "#fff");
+            }
+
+            nichoLeave(n) {
+                if (this.activo == false) {
+                    $(".btn-hover" + n).css("fill", "#fff");
+                    $(".text-hover" + n).css("fill", "#007bff");
+                }
+            }
+
+            toggleActivador() {
+                if (this.activo == false) {
+                    this.activo = true;
+                    this.nichoHover(this.posicion);
+                    document.getElementById("checkbox" + this.posicion).checked = true;
+                } else {
+                    this.activo = false;
+                    this.nichoLeave(this.posicion);
+                    document.getElementById("checkbox" + this.posicion).checked = false;
+                }
+            }
+        }
+
+        function crearEvent(obj) {
+            $(obj.clase).mouseover(function() { obj.nichoHover(obj.posicion); });
+            $(obj.clase).mouseleave(function() { obj.nichoLeave(obj.posicion); });
+            $(obj.clase).click(function() { obj.toggleActivador(); });
+        }
+
+                        var nicho0 = new nichoBtn('0');
+                        var nicho1 = new nichoBtn('1');
+                        var nicho2 = new nichoBtn('2');
+                        var nicho3 = new nichoBtn('3');
+
+                        crearEvent(nicho0);
+                        crearEvent(nicho1);
+                        crearEvent(nicho2);
+                        crearEvent(nicho3);
+            var nichosArray =[nicho0,nicho1,nicho2,nicho3];
+        
+
+        $('#btnSave').click(function() {
+            var resultado = [];
+
+            for (var i = 0; i <= 3; i++) {
+                if (document.getElementById("checkbox" + i).checked == true) {
+                    resultado.push(document.getElementById("checkbox" + i).value);
+
+                }
+            }
+            $('#nichosSend').attr('value',resultado);
+            //alert(resultado);
+        });
+
+        // new script ajax
+        var nichosR=[];
+
         $('.btn-editar-parcela').click(function(event) {
             var id=this.id.substring(4);
 
@@ -285,6 +355,31 @@
                     $('#coordenadaX').attr('value',datos['CoordenadaX']);
                     $('#coordenadaY').attr('value',datos['CoordenadaY']);
                     $('#tipo'+datos['idTipoParcela']).attr('selected','true');
+
+                    //alert(datos['Nichos']);
+
+                    //reseteando los nichos
+                    nichosArray.forEach(function(objNicho){
+                                objNicho.activo=true;
+                                objNicho.toggleActivador();
+                    })
+
+                    $('.carousel').carousel(0);
+                    $('.carousel').carousel('pause');
+
+                    nichosR=datos['Nichos'];
+
+                    datos['Nichos'].forEach(function(element){
+                        nichosArray.forEach(function(objNicho){
+                            if(objNicho.clase=='.nicho' + element){
+                                objNicho.activo=false;
+                                objNicho.toggleActivador();
+                            }
+                        })
+                    })
+
+                   
+
 
 
                 },
@@ -303,11 +398,41 @@
         $('.btn-eliminar-parcela').click(function(event) {
            var id=this.id.substring(4);
            $('#parcelaDelete').attr('value',id);
-
-
-
-
         });
+
+        $('#btnSave').click(function(event) {
+                    var resultado=[];
+                    var nichosD=[];
+                    var nichosA=[];
+                     for (var i = 0; i <= 3; i++) {
+                        if (document.getElementById("checkbox" + i).checked == true) {
+                            resultado.push(document.getElementById("checkbox" + i).value);
+
+                        }
+                    }
+                    resultado.forEach(function(elementNew){
+                        nichosR.forEach(function(elementOld){
+
+                            if(resultado.indexOf(elementOld)==-1 && nichosD.indexOf(elementOld)==-1){
+                                    nichosD.push(elementOld);
+
+                            }else{
+                                     if(nichosA.indexOf(elementNew)==-1 && nichosR.indexOf(elementNew)==-1){
+                                        nichosA.push(elementNew);
+                                    }   
+                                }
+
+                        })
+                    })
+
+                    $('#nichosNew').attr('value',nichosA);
+                    $('#nichosDelete').attr('value',nichosD);
+
+                    alert(nichosR);
+                    alert(nichosD);
+                    alert(nichosA);
+        });
+
 
 
         
@@ -319,3 +444,4 @@
     
 
 </script>
+   
