@@ -1,45 +1,28 @@
 <?php 
-$titulo='Crear Titulo';
+$titulo='Arrendamientos';
 
 $consulta = new ConexionDB();
-$variable= $consulta->Query("select idTipoTitulo, Tipo from tipotitulos");
 $parcelas = $consulta->Query("select * from parcelas");
 
 require_once('Views/default/header.php'); 
 ?>
 
-
-
-<!--BREADCUMB-->
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="<?php echo $server;?>/inicio">Inicio</a></li>
-        <li class="breadcrumb-item"><a href="<?php echo $server;?>/titulos">Titulos</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Crear Titulo</li>
-    </ol>
-</nav>
-
-
-
-<!-- aca ira todo el codigo html de la vista-->
-
 <div class="content-wrapper">
     <div class="container-fluid">
-        <div class="row">
-            <div class="card card-register col-md-6 col-md-pull-9 mx-auto mt-4">
-                <div class="card-header">
-                    <h4>Informacion del Titular</h4>
-                </div>
-                <div class="card-body">
-                    <form action="<?php echo $server;?>/tituloActions" method="POST">
-                        <input type="hidden" name="actionId" value="1">
-                        <div class=" col-sm-12 col-md-12 col-lg-12 padding-0">
-                            <div class="row padding-bottom-15">
-                                <div class="col-sm-12 col-md-9 col-lg-9 padding-top-15 mx-auto">
-                                    <?php
+        <div class="card col-sm-12 col-md-8 col-lg-8 mx-auto">
+            <div class="card-header">
+                <h5 class="modal-title" id="exampleModalLabel">Crear Arrendamiento</h5>
+            </div>
+            <div class="card-body">
+                <form action="<?php echo $server;?>/tituloActions" method="POST">
+                    <input type="hidden" name="actionId" value="7">
+                    <div class=" col-sm-12 col-md-12 col-lg-12 padding-0">
+                        <div class="row padding-bottom-15">
+                            <div class="col-sm-12 col-md-6 col-lg-6 padding-top-15 mx-auto">
+                                <?php
                                         if (isset(explode('/',$_GET['action'])[1])){
                                             $idta=explode('/',$_GET['action'])[1];
-                                            $tablaParcela = $consulta->Query("SELECT t1.Numero, t1.Poligono, t2.Descripcion, t3.Nombre FROM parcelas t1  INNER JOIN tipoparcela t2 ON t1.idTipoParcela = t2.idTipoParcela INNER JOIN cementerios t3 ON t1.idCementerio = t3.idCementerio where t1.idParcela={$idta}");
+                                            $tablaParcela = $consulta->Query("SELECT t1.Numero, t1.Poligono, t3.Nombre FROM parcelas t1  INNER JOIN tipoparcela t2 ON t1.idTipoParcela = t2.idTipoParcela INNER JOIN cementerios t3 ON t1.idCementerio = t3.idCementerio where t1.idParcela={$idta}");
                                             if ($tablaParcela!=-1){
                                                 foreach ($tablaParcela as $value) {
                                                     echo "
@@ -47,10 +30,9 @@ require_once('Views/default/header.php');
                                                         <div class=\"card-header bg-principal text-light\">Cementerio: <strong>{$value['Nombre']}</strong></div>
                                                             <div class=\"card-body\">
                                                                 <p>Parcela: {$value['Numero']}</p>
-                                                                <p>Tipo: {$value['Descripcion']}</p>
                                                                 <p>Poligono: {$value['Poligono']}</p>
                                                             </div>
-                                                        <div class=\"col-sm-4 col-md-2 col-lg-2 padding-top-10 mx-auto\" style=\"min-height: 65px;\">
+                                                        <div class=\"col-sm-4 col-md-3 col-lg-3 padding-top-10 mx-auto\" style=\"min-height: 65px;\">
                                                             <button type=\"button\" class=\"btn btn-outline-dark w-100 h-100 btn-nuevo-cementerio\" data-toggle=\"modal\" data-target=\"#parcela\">
                                                             <i class=\"fas fa-edit icon mx-0\"></i>
                 
@@ -63,7 +45,7 @@ require_once('Views/default/header.php');
                                             }
                                             } else {
                                                     echo "
-                                                    <div class=\"col-sm-4 col-md-6 col-lg-6 mx-auto padding-top-15\" style=\"min-height: 80px;\">
+                                                    <div class=\"col-sm-4 col-md-8 col-lg-8 mx-auto padding-top-15\" style=\"min-height: 80px;\">
                                                         <button type=\"button\" class=\"btn btn-outline-dark w-100 h-100 btn-nuevo-cementerio\" data-toggle=\"modal\" data-target=\"#parcela\">
                                                         <i class=\"fas fa-plus icon mx-0\"></i>
                                                         <span class=\"mx-4\">Agregar Parcela</span></button>
@@ -72,76 +54,55 @@ require_once('Views/default/header.php');
                     
                                                 ?>
 
-                                </div>
                             </div>
                         </div>
-                        <div class="form-row mt-0">
-                            <div class="form-group col-md-6">
-                                <label for="Nombres">Nombres</label>
-                                <input name="nombre" type="text" class="form-control" id="Nombres" placeholder="Nombres">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="Apellidos">Apellidos</label>
-                                <input name="apellido" type="text" class="form-control" id="Apellidos" placeholder="Apellidos">
-                            </div>
-
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-6 col-md-4 col-lg-4">
+                            <label for="Nombre">Nombres:</label>
+                            <input type="text" class="form-control" id="Nombre" name="nombre" placeholder="Nombres">
                         </div>
-                        <div class="form-group">
-                            <label for="Direccion">Direccion</label>
-                            <input name="direccion" type="text" class="form-control" id="Direccion" placeholder="Direccion de domicilio">
+                        <div class="form-group col-6 col-md-4 col-lg-4">
+                            <label for="Apellido">Apellidos:</label>
+                            <input type="text" class="form-control" id="Apellido" name="apellido" placeholder="Apellidos">
                         </div>
-                        <div class="form-group">
-                            <label for="Dui">DUI</label>
-                            <input name="dui" type="text" class="form-control" id="Dui" placeholder="Numero Unico de Identidad">
+                        <div class="form-group col-12 col-md-4 col-lg-4">
+                            <label for="Direccion">Direccion:</label>
+                            <input type="text" class="form-control" name="direccion" id="Direccion" placeholder="Direccion">
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="Profesion">Profesion</label>
-                                <input name="profesion" type="text" class="form-control" id="Profesion" placeholder="Profesion u Ocupacion">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="Fecha_Nacimiento">Fecha de Nacimiento</label>
-                                <input name="fecha" class="form-control" id="Fecha_Nacimiento" type="text">
-                            </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-6 col-md-4 col-lg-4">
+                            <label for="Fecha" :>Fecha de Pago:</label>
+                            <input class="form-control" id="Fecha" type="text" name="fecha">
                         </div>
-
-                        
-                        <div class="col-sm-12 col-md-12 col-lg-12 padding-0 mx-auto">
-                            <div class="form-row">
-                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                    <label for="Numero_Titulo">Numero de Titulo</label>
-                                    <input class="form-control" type="text" name="numero" id="Numero_Titulo" placeholder="Numero del titulo (opcional)">
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                    <label for="select">Tipo de titulo</label>
-                                    <select class="custom-select" name="tipo" id="inputGroupSelect01">
-                                        <option selected>Seleccione el tipo de titulo</option>
-                                        <?php
-                                                    // listar cementerios
-                                                    if ($variable!=-1) {
-                                                        foreach ($variable as $value) {
-                                                            echo "
-                                                            <option value=\"{$value['idTipoTitulo']}\">{$value['Tipo']}</option>" ;
-                                                        }
-                                                    }
-                                                ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <input hidden type="number" name="idParcela" value="<?php if (isset(explode('/',$_GET['action'])[1])){
+                        <div class="form-group col-6 col-md-4 col-lg-4">
+                            <label for="F1SAM">F1SAM:</label>
+                            <input type="text" class="form-control" name="f1sam" id="F1SAM" placeholder="PDF3456">
+                        </div>
+                        <div class="form-group col-12 col-md-4 col-lg-4">
+                            <label for="anios">Años de Arrendamiento:</label>
+                            <input type="number" class="form-control" id="anios" name="anios" placeholder="Años">
+                        </div>
+                    </div>
+                    <input hidden type="number" name="idParcela" required value="<?php if (isset(explode('/',$_GET['action'])[1])){
                                                                             echo explode('/',$_GET['action'])[1];
                                                                             } else{
-                                                                            echo " 0"; } ?>">
+                                                                            echo "          
+                                                                                "; 
+                                                                            } 
+                                                                            ?>">
+                    <div class="form-row ">
+                        <div class="form-group col-12">
+                            <button type="submit" class="btn btn-primary float-right mx-2">Crear</button>
+                            <a href="<?php echo $server;?>/arrendamientos" class="btn btn-secondary float-right ">Cancelar</a>
                         </div>
-                    <button class="btn btn-primary mt-4 float-right" type="submit">Registrar</button>
-                    </form>
-
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
-
 
 
 <!-- Modal Parcela-->
@@ -203,7 +164,7 @@ require_once('Views/default/header.php');
                             </table>
                         </div>
                         <form method="post" action="<?php echo $server;?>/tituloActions">
-                            <input type="hidden" name="actionId" value="4">
+                            <input type="hidden" name="actionId" value="6">
                             <select class="custom-select" name="idParcela" id="inputGroupSelect01">
                                 <option selected>Seleccione el tipo de titulo</option>
                                 <?php
@@ -231,7 +192,5 @@ require_once('Views/default/header.php');
     </div>
 </div>
 
-
-<!---hasta aca -->
 
 <?php require_once('Views/default/footer.php'); ?>
