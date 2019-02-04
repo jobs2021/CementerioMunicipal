@@ -7,9 +7,9 @@
     }
 
     $consulta = new ConexionDB();
-    @$nombreCementerio=$consulta->Query("select Nombre from Cementerios where idCementerio={$idCementerio}")[0];
+    @$nombreCementerio=$consulta->Query("select Nombre from Cementerios where idCementerio={$idCementerio} and Estado='1'")[0];
 
-    $parcelas= $consulta->Query("select t1.idParcela, Numero, Poligono, count(idNicho) as Nichos,(select idTitulo from Titulos where idParcela=t1.idParcela) as Titular from Parcelas t1 left join Nichos t2 on t1.idParcela=t2.idParcela where t1.idCementerio='{$idCementerio}'  and t2.Estado='1' group by idParcela,Numero,Poligono,Titular");
+    $parcelas= $consulta->Query("select t1.idParcela, Numero, Poligono, count(idNicho) as Nichos,(select idTitulo from Titulos where idParcela=t1.idParcela) as Titular from Parcelas t1 left join Nichos t2 on t1.idParcela=t2.idParcela where t1.idCementerio='{$idCementerio}'  and t2.Estado='1' and t1.Estado='1' group by idParcela,Numero,Poligono,Titular");
 
     $tipoParcela = $consulta->Query("select * from TipoParcela");
 
@@ -38,7 +38,26 @@
                         </button>
                       </div>
                       <div class="modal-body">
-                        ...
+                        <?php 
+                            $parcelasTrash= $consulta->Query("select * from Parcelas where Estado='0' and idCementerio='{$idCementerio}'");
+                            $date=date('d/m/Y');
+                            if ($parcelasTrash!="-1") {
+         
+                                foreach ($parcelasTrash as $objetoTrash) {
+                                    echo "<form action=\"{$server}/cementerioActions\" method=\"POST\">
+                                    <p>{$date} - {$objetoTrash['Numero']} 
+                                    
+                                        <input type=\"hidden\" name=\"actionId\" value=\"4\">
+                                        <input type=\"hidden\" name=\"idCementerio\" value=\"{$objetoTrash['idCementerio']}\">
+                                        <button type=\"submit\" class=\"btn btn-outline-danger\" data-toggle=\"modal\" data-target=\"#modalEliminar\" style=\"height:30px;\"><i class=\"fas fa-redo-alt icon margin-right-5\"></i></button>
+                                    </form>
+                                    </p>";
+                                }
+                            }else{
+                                echo "<center>Papelera Vacia</center>";
+                            }
+
+                        ?>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-primary">Guardar</button>

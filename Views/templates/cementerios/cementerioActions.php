@@ -19,6 +19,7 @@ switch ($_POST['actionId']) {
 function CrearCementerio($nombre,$direccion,$tipo,$area,$legalidad,$panteonero){
     if (isset($nombre) && isset($direccion) && isset($tipo) && isset($area) && isset($legalidad) && isset($panteonero)) {
             $insert = new ConexionDB();
+
             $insert->Query("insert into Cementerios (Nombre,Direccion,Tipo,Area,Legalizado,Panteonero) values ('{$nombre}','{$direccion}','{$tipo}','{$area}','{$legalidad}','{$panteonero}');");
 
             $idNuevo=$insert->Query("select idCementerio from Cementerios order by idCementerio desc limit 1");

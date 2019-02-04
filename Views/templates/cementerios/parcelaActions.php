@@ -72,7 +72,7 @@ function UpdateParcela($idParcela,$poligono,$tipo,$coordenadaX,$coordenadaY,$idC
 function DeleteParcela($idParcela,$idCementerio){
     if (isset($idParcela)) {
             $insert = new ConexionDB();
-            $insert->Query("delete from Parcelas where idParcela='{$idParcela}'");
+            $insert->Query("update Parcelas set Estado='0' where idParcela='{$idParcela}'");
 
             header("location:".$server.'/parcelas/'.$idCementerio);
             exit();
@@ -82,16 +82,19 @@ function DeleteParcela($idParcela,$idCementerio){
 //return parcela
 function ReturnParcela($id){
 	$db = new ConexionDB();
-    $datos = $db->Query("select * from Parcelas where idParcela={$id}");
-    $datos2 = $db->Query("select t1.NumeroOrden from Nichos t1 where t1.idParcela={$id} and t1.Estado='1'");
-    $nichos=[];
-    foreach ($datos2 as $nicho) {
-    	array_push($nichos, $nicho['NumeroOrden']);
+    $datos = $db->Query("select * from Parcelas where idParcela={$id} and Estado='1'");
+    if($datos==-1){
+        echo "NO se puede mostrar";
+    }else{
+        $datos2 = $db->Query("select t1.NumeroOrden from Nichos t1 where t1.idParcela={$id} and t1.Estado='1'");
+        $nichos=[];
+        foreach ($datos2 as $nicho) {
+            array_push($nichos, $nicho['NumeroOrden']);
+        }
+        $datos[0]['Nichos']=$nichos;
+       echo json_encode($datos);    
     }
-    $datos[0]['Nichos']=$nichos;
-   //array_push($datos,array('Nichos'=>$nichos) );
-   echo json_encode($datos);
-    //return json_encode($datos);
+    
 }
 
 ?>

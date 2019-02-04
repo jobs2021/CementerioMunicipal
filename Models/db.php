@@ -2,7 +2,7 @@
 
 class ConexionDB{
     #private $Server = "localhost";
-    private  $Server="192.168.43.39";
+    private  $Server="192.168.1.39";
     private  $User="root_";
     #private  $User="root";
     private  $Password="cementerio123";
@@ -14,7 +14,7 @@ class ConexionDB{
         mysqli_select_db($conexion,$this->DataBaseName) or die("no se puede seleccionar la base");
         mysqli_query($conexion,"SET NAMES 'UTF8'");
       
-        @$result=mysqli_query($conexion,$query) or die("no se pueded ejecuatar la consulta");
+        @$result=mysqli_query($conexion,$query) or die("no se puede ejecutar la consulta");
         @$datos=array();
         
         while (@$dato=mysqli_fetch_assoc($result)){
