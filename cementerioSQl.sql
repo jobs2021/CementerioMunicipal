@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `cementerio`.`Cementerios` (
   `idCementerio` INT NOT NULL AUTO_INCREMENT,
   `Nombre` VARCHAR(45) NOT NULL,
   `Direccion` VARCHAR(200) NOT NULL,
-  `Area` DECIMAL(5,2) NOT NULL,
+  `Area` DECIMAL(15,2) NOT NULL,
   `Legalizado` INT(1) NOT NULL DEFAULT 0,
   `Panteonero` VARCHAR(150) NULL,
   `Tipo` VARCHAR(45) NOT NULL,

@@ -13,6 +13,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $server;?>/Views/static/css/bootstrap.min.css" />
     <link href="<?php echo $server;?>/Views/static/vendor/font-awesome/css/all.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="<?php echo $server;?>/Views/static/vendor/chalate-icon/icon-chalate.css">
+
     <!-- estilos css-->
     <style type="text/css">
 
@@ -267,7 +270,7 @@ end estilos personalizados*/
 </head>
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-principal">
-        <a class="navbar-brand" href="<?php echo $server;?>/">Municipalidad</a>
+        <a class="navbar-brand" href="<?php echo $server;?>/"><i class="icon-chalate" style="font-size: 2em!important;float: left;position: absolute;top: 10px;"></i> <span style="margin-left: 45px">Municipalidad</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

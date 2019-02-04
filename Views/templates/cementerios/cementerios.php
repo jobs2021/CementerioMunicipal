@@ -1,7 +1,7 @@
 <?php 
     $titulo='Cementerios';
     $consulta = new ConexionDB();
-    $variable= $consulta->Query("select * from Cementerios");
+    $variable= $consulta->Query("select * from Cementerios where Estado='1'");
     require_once('Views/default/header.php'); 
 ?>
 <div class="container-fluid">
@@ -100,7 +100,7 @@
                     <div class="form-row">
                         <div class="form-group col-6">
                             <label for="area">Area:</label>
-                            <input name="area" type="text" class="form-control" id="area">
+                            <input name="area" type="number" class="form-control" id="area" max="1000000000">
                         </div>
                         <div class="form-group col-6">
                             <label for="legalidad" :>Legalidad:</label>
@@ -122,6 +122,7 @@
         </div>
     </div>
 </div>
+
 
 <?php require_once('Views/default/footer.php'); ?>
                 <!-- trash code-->

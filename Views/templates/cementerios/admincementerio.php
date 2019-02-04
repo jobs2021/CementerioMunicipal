@@ -3,7 +3,7 @@
         $idCementerio=explode('/',$_GET['action'])[1];
 
         $conexion = new ConexionDB();
-        $values = $conexion->Query("select * from Cementerios where idCementerio='{$idCementerio}'");
+        $values = $conexion->Query("select * from Cementerios where idCementerio='{$idCementerio}' and Estado='1'");
 
         if ($values==-1) {
             header("location:{$server}/cementerios/");
@@ -37,7 +37,26 @@
                         </button>
                       </div>
                       <div class="modal-body">
-                        ...
+                         <?php 
+                            $parcelasTrash= $conexion->Query("select * from Parcelas where Estado='0' and idCementerio='{$idCementerio}'");
+                            $date=date('d/m/Y');
+                            if ($parcelasTrash!="-1") {
+         
+                                foreach ($parcelasTrash as $objetoTrash) {
+                                    echo "<form action=\"{$server}/cementerioActions\" method=\"POST\">
+                                    <p>{$date} - {$objetoTrash['Numero']} 
+                                    
+                                        <input type=\"hidden\" name=\"actionId\" value=\"4\">
+                                        <input type=\"hidden\" name=\"idCementerio\" value=\"{$objetoTrash['idCementerio']}\">
+                                        <button type=\"submit\" class=\"btn btn-outline-danger\" data-toggle=\"modal\" data-target=\"#modalEliminar\" style=\"height:30px;\"><i class=\"fas fa-redo-alt icon margin-right-5\"></i></button>
+                                    </form>
+                                    </p>";
+                                }
+                            }else{
+                                echo "<center>Papelera Vacia</center>";
+                            }
+
+                        ?>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-primary">Guardar</button>
