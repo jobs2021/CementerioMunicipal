@@ -264,6 +264,23 @@ end estilos personalizados*/
 .closebtn:hover {
     color: black;
 }
+
+.dropdown-menu{
+    background-color: #373737!important;
+    border: none!important;
+}
+.dropdown-menu > a{
+    color: rgba(255,2555,255,.5)!important;
+}
+.dropdown-menu > a:hover{
+    background-color: rgba(255,2555,255,.2)!important;
+}
+.dropdown-menu > a:visited{
+    background-color: #373737;
+}
+.dropdown-divider{
+    border-top: 1px solid rgba(255,2555,255,.5)!important;
+}
         
     </style>
      <link rel="stylesheet" href="<?php echo $server;?>/Views/static/css/table-style.css">
@@ -307,7 +324,10 @@ end estilos personalizados*/
             </ul>
             <ul class="navbar-nav padding-left-0 mr-sm-4">
             <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-users-cog margin-right-5"></i>Configurar</a>
+                    <a class="nav-link" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell margin-right-5"></i></a>
+            </li>
+            <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user margin-right-5"></i>UserName</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
                         <a class="dropdown-item" href="<?php echo $server;?>/configurar">Configuraciones</a>
                        
