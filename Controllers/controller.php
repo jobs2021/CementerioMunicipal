@@ -1,15 +1,18 @@
 <?php
 
 class MvcController{
-// HEAD
-    public $serverUrl='http://192.168.1.39';
+
+
+    #public $serverUrl='http://192.168.43.39';
+
+    #public $serverUrl='http://192.168.1.39';
     #public $serverUrl='http://192.168.1.4';
     #public $serverUrl='http://localhost/CementerioMunicipal';
     #public $serverUrl='http://192.168.0.90/CementerioMunicipal';
 //=======
     #public $serverUrl='http://192.168.1.19';
     #public $serverUrl='http://localhost';
-    #public $serverUrl='http://192.168.1.4';
+    #public $serverUrl='http://192.168.0.119';
 //    //public $serverUrl='http://cementerio.eshost.com.ar';
 
 

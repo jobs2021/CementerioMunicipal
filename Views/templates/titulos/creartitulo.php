@@ -26,7 +26,7 @@ require_once('Views/default/header.php');
 <div class="content-wrapper">
     <div class="container-fluid">
         <div class="row">
-            <div class="card card-register col-md-6 col-md-pull-9 mx-auto mt-4">
+            <div class="card card-register col-md-6 col-md-pull-9 mx-auto mt-0">
                 <div class="card-header">
                     <h4>Informacion del Titular</h4>
                 </div>
@@ -105,7 +105,7 @@ require_once('Views/default/header.php');
                             </div>
                         </div>
 
-                        
+
                         <div class="col-sm-12 col-md-12 col-lg-12 padding-0 mx-auto">
                             <div class="form-row">
                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -115,7 +115,7 @@ require_once('Views/default/header.php');
                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                     <label for="select">Tipo de titulo</label>
                                     <select class="custom-select" name="tipo" id="inputGroupSelect01">
-                                        <option selected>Seleccione el tipo de titulo</option>
+                                        <option selected>--- Seleccione el tipo de titulo ---</option>
                                         <?php
                                                     // listar cementerios
                                                     if ($variable!=-1) {
@@ -133,9 +133,9 @@ require_once('Views/default/header.php');
                                                                             } else{
                                                                             echo " 0"; } ?>">
                         </div>
-                    <button class="btn btn-primary mt-4 float-right" type="submit">Registrar</button>
+                        <button class="btn btn-primary mt-4 float-right" type="submit">Registrar</button>
+                        <a class="btn btn-dark mt-4 mx-2 float-right" href="<?php echo $server;?>/repotrastitulo">Cancelar</a>
                     </form>
-
                 </div>
             </div>
         </div>

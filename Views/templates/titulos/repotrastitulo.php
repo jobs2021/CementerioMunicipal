@@ -3,7 +3,7 @@
 $titulo='Titulos Vigentes';
 
 $consulta = new ConexionDB();
-$variable= $consulta->Query("SELECT t1.idTitulo, t1.Observaciones, t1.NumeroTitulo, t3.Tipo, t4.NombresCiudadano, t4.ApellidosCiudadano, t2.Numero, t5.Nombre, t1.Estado FROM titulos t1 INNER JOIN parcelas t2 ON t1.idParcela=t2.idParcela INNER JOIN tipotitulos t3 ON t1.idTipoTitulo=t3.idTipoTitulo INNER JOIN ciudadanos t4 ON t1.idCiudadanoTitular=t4.idCiudadano INNER JOIN cementerios t5 ON t2.idCementerio=t5.idCementerio WHERE t1.Estado=1");
+$variable= $consulta->Query("SELECT t1.idTitulo, t1.Observaciones, t1.NumeroTitulo, t3.Tipo, t4.NombresCiudadano, t4.ApellidosCiudadano, t2.Numero, t5.Nombre, t1.Estado FROM titulos t1 INNER JOIN parcelas t2 ON t1.idParcela=t2.idParcela INNER JOIN tipotitulos t3 ON t1.idTipoTitulo=t3.idTipoTitulo INNER JOIN ciudadanos t4 ON t1.idCiudadanoTitular=t4.idCiudadano INNER JOIN cementerios t5 ON t2.idCementerio=t5.idCementerio WHERE t1.Estado=1 AND t1.Proceso=1");
 
 require_once('Views/default/header.php'); 
 ?>
@@ -81,7 +81,7 @@ require_once('Views/default/header.php');
                         <td>
                         <div class=\"row-btn\">
                             <a style=\"color: FORESTGREEN\" title=\"Ver Titulo\" href=\"#\" class=\"fas fa-eye\"></a>   
-                            <a style=\"color: DODGERBLUE\" href=\"#\" title=\"Traspasar Titulo\" class=\"fas fa-edit\"></a>
+                            <a style=\"color: DODGERBLUE\" href=\"#\" title=\"Traspasar Titulo\" class=\"fas fa-exchange-alt\"></a>
                             <a data-toggle=\"modal\" data-target=\"#reponerMd\" style=\"color: #2F2F2F\" href=\"#\" title=\"Reponer Titulo\" class=\"fas fa-copy\" onClick=\"reponerTitulo({$value['idTitulo']});\"></a>
                             <a id=\"eliminar\" style=\"color: #FF4500\" href=\"#\" title=\"Cancelar Titulo\" class=\"fas fa-times-circle\" data-toggle=\"modal\" data-target=\"#eliminarMd\" onClick=\"selTitulo({$value['NumeroTitulo']},{$value['idTitulo']}, '{$value['Observaciones']}');\"></a>
                         </div>
