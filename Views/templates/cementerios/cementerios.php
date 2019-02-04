@@ -122,11 +122,8 @@
         </div>
     </div>
 </div>
-<<<<<<< HEAD
+
 <?php require_once('Views/default/footer.php'); ?>
-=======
-
-
                 <!-- trash code-->
 
                 <div class="fixed-action-btn" data-toggle="tooltip" title="Papelera" data-placement="left">
@@ -183,4 +180,4 @@
         });
     });
 </script>
->>>>>>> 7010f3f9b3dd7a1ff6182ba55636db2aa8ca936d
+

@@ -63,7 +63,7 @@ function CrearTitulo($tipo,$numero,$idCiudadano,$idParcela){
 function CancelarTitulo($idTitulo, $Observaciones){
     $insert = new ConexionDB();
     if (isset($Observaciones)){
-        $insert->Query("UPDATE titulos SET Observaciones = '{$Observaciones}', estado=0 WHERE idTitulo={$idTitulo}");
+        $insert->Query("UPDATE titulos SET Observaciones = '{$Observaciones}', Estado=0 WHERE idTitulo={$idTitulo}");
         
         header("location:".$server.'/repotrastitulo');
     }else{
@@ -82,6 +82,7 @@ function ReponerTitulo($numeroTitulo,$idTitulo){
         
         header("location:".$server.'/repotrastitulo');
     }else{
+        
     }
 }
 
@@ -101,4 +102,19 @@ function CrearArrendamiento($nombre,$apellido,$direccion,$fecha,$f1sam,$anios,$i
 
 
 
+
+//Traspasar Titulo
+function TraspasarTitulo(){
+    if ( isset($numeroTitulo) && isset($idTitulo) ){
+        $insert = new ConexionDB();
+        $value = $insert->Query("SELECT * FROM titulos where idTitulo={$idTitulo}");
+        $insert->Query("INSERT INTO titulos (idParcela,idTipoTitulo,NumeroTitulo,idCiudadanoTitular,FechaExpedido,NumeroRecibo,FechaRecibo,Imagen,Observaciones,Estado,Proceso) VALUES ({$value[0]['idParcela']}, 3 ,'{$numeroTitulo}',{$value[0]['idCiudadanoTitular']},'{$value[0]['FechaExpedido']}','{$value[0]['NumeroRecibo']}','{$value[0]['FechaRecibo']}','{$value[0]['Imagen']}','{$value[0]['Observaciones']}',{$value[0]['Estado']},0)") ;
+        
+        $insert->Query("UPDATE titulos SET Estado=0 where idTitulo={$idTitulo}");
+        
+        header("location:".$server.'/repotrastitulo');
+    }else{
+        
+    }
+}
 ?>
