@@ -4,7 +4,7 @@
 $titulo='Arrendamientos';
 
 $consulta = new ConexionDB();
-$variable= $consulta->Query("SELECT t1.Nombres, t1.Apellidos, t1.Direccion, t1.FechaPago, t1.F1ISAM, t1.Anios, t2.Numero FROM pagosarrendamientos t1 INNER JOIN parcelas t2 ON t1.idParcela=t2.idParcela");
+$variable= $consulta->Query("SELECT t1.Nombres, t1.Apellidos, t1.Direccion, t1.FechaPago, t1.F1ISAM, t1.Anios, t2.Numero FROM PagosArrendamientos t1 INNER JOIN Parcelas t2 ON t1.idParcela=t2.idParcela");
 
 require_once('Views/default/header.php'); 
 ?>

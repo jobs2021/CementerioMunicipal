@@ -2,8 +2,8 @@
 $titulo='Crear Titulo';
 
 $consulta = new ConexionDB();
-$variable= $consulta->Query("select idTipoTitulo, Tipo from tipotitulos");
-$parcelas = $consulta->Query("select * from parcelas");
+$variable= $consulta->Query("select idTipoTitulo, Tipo from TipoTitulos");
+
 
 require_once('Views/default/header.php'); 
 ?>
@@ -23,10 +23,9 @@ require_once('Views/default/header.php');
 
 <!-- aca ira todo el codigo html de la vista-->
 
-<div class="content-wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="card card-register col-md-6 col-md-pull-9 mx-auto mt-0">
+<div class="container-fluid">
+    <div class="row col-lg-12">
+            <div class="card card-register mx-auto mt-0">
                 <div class="card-header">
                     <h4>Informacion del Titular</h4>
                 </div>
@@ -39,8 +38,8 @@ require_once('Views/default/header.php');
                                     <?php
                                         if (isset(explode('/',$_GET['action'])[1])){
                                             $idta=explode('/',$_GET['action'])[1];
-                                            $tablaParcela = $consulta->Query("SELECT t1.Numero, t1.Poligono, t2.Descripcion, t3.Nombre FROM parcelas t1  INNER JOIN tipoparcela t2 ON t1.idTipoParcela = t2.idTipoParcela INNER JOIN cementerios t3 ON t1.idCementerio = t3.idCementerio where t1.idParcela={$idta}");
-                                            if ($tablaParcela!=-1){
+                                            $tablaParcela = $consulta->Query("SELECT t1.Numero, t1.Poligono, t2.Descripcion, t3.Nombre FROM Parcelas t1  INNER JOIN TipoParcela t2 ON t1.idTipoParcela = t2.idTipoParcela INNER JOIN Cementerios t3 ON t1.idCementerio = t3.idCementerio where t1.idParcela={$idta}");
+                                            if ($tablaParcela != -1){
                                                 foreach ($tablaParcela as $value) {
                                                     echo "
                                                     <div class=\"card text-center\">
@@ -51,7 +50,7 @@ require_once('Views/default/header.php');
                                                                 <p>Poligono: {$value['Poligono']}</p>
                                                             </div>
                                                         <div class=\"col-sm-4 col-md-2 col-lg-2 padding-top-10 mx-auto\" style=\"min-height: 65px;\">
-                                                            <button type=\"button\" class=\"btn btn-outline-dark w-100 h-100 btn-nuevo-cementerio\" data-toggle=\"modal\" data-target=\"#parcela\">
+                                                            <button type=\"button\" class=\"btn btn-outline-dark w-200 h-75 btn-nuevo-cementerio\" data-toggle=\"modal\" data-target=\"#parcela\">
                                                             <i class=\"fas fa-edit icon mx-0\"></i>
                 
                                                             </button>
@@ -101,7 +100,7 @@ require_once('Views/default/header.php');
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="Fecha_Nacimiento">Fecha de Nacimiento</label>
-                                <input name="fecha" class="form-control" id="Fecha_Nacimiento" type="text">
+                                <input name="fecha" class="form-control" id="Fecha_Nacimiento" type="date">
                             </div>
                         </div>
 
@@ -137,7 +136,7 @@ require_once('Views/default/header.php');
                         <a class="btn btn-dark mt-4 mx-2 float-right" href="<?php echo $server;?>/repotrastitulo">Cancelar</a>
                     </form>
                 </div>
-            </div>
+        
         </div>
     </div>
 </div>
@@ -155,83 +154,62 @@ require_once('Views/default/header.php');
                 </button>
             </div>
             <div class="modal-body">
-                <div class="col col-lg-12">
-                    <form class="form-inline">
-                        <input class="form-control col-lg-9 mr-sm-1 mx-4" type="search" placeholder="Numero de Parcela" aria-label="Search">
-                        <button class="btn btn-dark my-2 my-sm-0" type="submit">Buscar</button>
-                    </form>
+                <div class="col-lg-12">
+                    <label for="BuscarParcela">Buscara Parcela</label>
+                    <input class="form-control col-md-12 mx-auto" type="search" name="buscarParcela" placeholder="Numero de Parcela" aria-label="Search" id="buscarParcela" value="">
+                    
+                    <input type="hidden" id="Urlbuscar" value="<?php echo $server;?>/buscarParcela">
+                    
+        
                 </div>
-                <div class="col-lg-12 mx-auto">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <tr>
-                                    <th>Sel</th>
-                                    <th>Parcela</th>
-                                    <th>Tipo</th>
-                                    <th>Cementerio</th>
-                                    <th>Poligono</th>
-                                    <th>Coord X</th>
-                                    <th>Coord Y</th>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                        </div>
-                                    </td>
-                                    <td>129876</td>
-                                    <td>Perpetuidad</td>
-                                    <td>Sn. José</td>
-                                    <td>P04</td>
-                                    <td>14.0818567</td>
-                                    <td>-88.9014130</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                                        </div>
-                                    </td>
-                                    <td>129877</td>
-                                    <td>Arrendamiento</td>
-                                    <td>Central</td>
-                                    <td>P101</td>
-                                    <td>15.0818567</td>
-                                    <td>-86.9014130</td>
-                                </tr>
-                            </table>
-                        </div>
-                        <form method="post" action="<?php echo $server;?>/tituloActions">
-                            <input type="hidden" name="actionId" value="4">
-                            <select class="custom-select" name="idParcela" id="inputGroupSelect01">
-                                <option selected>Seleccione el tipo de titulo</option>
-                                <?php
-                    // listar parcelas
-                    if ($parcelas!=-1) {
-                        foreach ($parcelas as $value) {
-                            echo "
-                            <option value=\"{$value['idParcela']}\">{$value['Numero']}</option>" ;
-                            }
-                        }
-                    ?>
-                            </select>
-                            <button class="btn btn-default mt-2" type="submit">Agregar</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+                <form method="post" action="<?php echo $server;?>/tituloActions">
+                    <div id="datos" class="mx-auto">
 
+                        
+                    </div>
+
+                        <input type="hidden" name="actionId" value="4">
+                
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Guardar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
             </div>
-
+            </form>
         </div>
     </div>
 </div>
 
-
+<script>
+    var buscar = "<?php echo $server;?>/buscarParcela";
+</script>
 <!---hasta aca -->
 
 <?php require_once('Views/default/footer.php'); ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

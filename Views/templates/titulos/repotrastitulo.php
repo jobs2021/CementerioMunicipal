@@ -3,7 +3,7 @@
 $titulo='Titulos Vigentes';
 
 $consulta = new ConexionDB();
-$variable= $consulta->Query("SELECT t1.idTitulo, t1.Observaciones, t1.NumeroTitulo, t3.Tipo, t4.NombresCiudadano, t4.ApellidosCiudadano, t2.Numero, t5.Nombre, t1.Estado FROM titulos t1 INNER JOIN parcelas t2 ON t1.idParcela=t2.idParcela INNER JOIN tipotitulos t3 ON t1.idTipoTitulo=t3.idTipoTitulo INNER JOIN ciudadanos t4 ON t1.idCiudadanoTitular=t4.idCiudadano INNER JOIN cementerios t5 ON t2.idCementerio=t5.idCementerio WHERE t1.Estado=1 AND t1.Proceso=1");
+$variable= $consulta->Query("SELECT t1.idTitulo, t1.Observaciones, t1.NumeroTitulo, t3.Tipo, t4.NombresCiudadano, t4.ApellidosCiudadano, t2.Numero, t5.Nombre, t1.Estado FROM Titulos t1 INNER JOIN Parcelas t2 ON t1.idParcela=t2.idParcela INNER JOIN TipoTitulos t3 ON t1.idTipoTitulo=t3.idTipoTitulo INNER JOIN Ciudadanos t4 ON t1.idCiudadanoTitular=t4.idCiudadano INNER JOIN Cementerios t5 ON t2.idCementerio=t5.idCementerio WHERE t1.Estado=1 AND t1.Proceso=1");
 
 require_once('Views/default/header.php'); 
 ?>

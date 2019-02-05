@@ -2,7 +2,7 @@
 $titulo='Arrendamientos';
 
 $consulta = new ConexionDB();
-$parcelas = $consulta->Query("select * from parcelas");
+$parcelas = $consulta->Query("select * from Parcelas");
 
 require_once('Views/default/header.php'); 
 ?>
@@ -22,7 +22,7 @@ require_once('Views/default/header.php');
                                 <?php
                                         if (isset(explode('/',$_GET['action'])[1])){
                                             $idta=explode('/',$_GET['action'])[1];
-                                            $tablaParcela = $consulta->Query("SELECT t1.Numero, t1.Poligono, t3.Nombre FROM parcelas t1  INNER JOIN tipoparcela t2 ON t1.idTipoParcela = t2.idTipoParcela INNER JOIN cementerios t3 ON t1.idCementerio = t3.idCementerio where t1.idParcela={$idta}");
+                                            $tablaParcela = $consulta->Query("SELECT t1.Numero, t1.Poligono, t3.Nombre FROM Parcelas t1  INNER JOIN TipoParcela t2 ON t1.idTipoParcela = t2.idTipoParcela INNER JOIN Cementerios t3 ON t1.idCementerio = t3.idCementerio where t1.idParcela={$idta}");
                                             if ($tablaParcela!=-1){
                                                 foreach ($tablaParcela as $value) {
                                                     echo "

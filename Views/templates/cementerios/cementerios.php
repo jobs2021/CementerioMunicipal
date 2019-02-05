@@ -25,16 +25,6 @@
             <div class="row padding-bottom-15">
 
 
-
-
-
-
-
-
-
-
-
-
                 <?php
                     // listar cementerios
                 if ($variable!=-1) {
