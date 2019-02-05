@@ -2,14 +2,14 @@
 
 class ConexionDB{
 
-    private $Server = "localhost";
+    #private $Server = "localhost";
     #private  $Server="192.168.43.39";
     #private  $User="root_";
     #private  $User="root";
 
     #private $Server = "localhost";
-    #private  $Server="192.168.1.39";
-    #private  $User="root_";
+    private  $Server="192.168.1.39";
+    private  $User="root_";
     #private  $User="root";
 
     private  $Password="cementerio123";
