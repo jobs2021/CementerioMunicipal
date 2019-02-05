@@ -336,7 +336,7 @@ end estilos personalizados*/
             <li class="nav-item dropdown">
                     <a class="nav-link" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell margin-right-5 icon"></i><span class="badge badge-light" style="top: 0px;position: absolute;margin-left: -5px">0</span></a>
 
-                    <div class="dropdown-menu menu-noti" aria-labelledby="navbarDropdown1" style="padding: 0px!important; max-height: 50vh!important; overflow-y: scroll;">
+                    <div class="dropdown-menu menu-noti" aria-labelledby="navbarDropdown1" style="padding: 0px!important; max-height: 50vh!important; overflow-y: auto;">
                         <ul class="list-group">
                           <li class="list-group-item d-flex justify-content-between align-items-center">
                             Cras justo odio
@@ -346,18 +346,15 @@ end estilos personalizados*/
                             Dapibus ac facilisis in
                             <span class="badge badge-primary badge-pill">2</span>
                           </li>
-                          <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Morbi leo risus
-                            <span class="badge badge-primary badge-pill">1</span>
+                         <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Dapibus ac facilisis in
+                            <span class="badge badge-primary badge-pill">2</span>
                           </li>
                           <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Cras justo odio
-                            <span class="badge badge-primary badge-pill">14</span>
+                            Dapibus ac facilisis in
+                            <span class="badge badge-primary badge-pill">2</span>
                           </li>
-                          <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Cras justo odio
-                            <span class="badge badge-primary badge-pill">14</span>
-                          </li>
+                          
                           
                         </ul>
                     </div>

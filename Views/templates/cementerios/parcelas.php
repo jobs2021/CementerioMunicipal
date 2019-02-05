@@ -134,6 +134,7 @@
     </div>
 </div>
 <!---hasta aca -->
+
 <!-- The Modal -->
 <div class="modal fade" id="modalEditarParcela">
     <div class="modal-dialog modal-dialog-centered">
