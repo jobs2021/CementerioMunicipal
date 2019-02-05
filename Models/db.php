@@ -10,7 +10,7 @@ class ConexionDB{
     #private $Server = "localhost";
     #private  $Server="192.168.1.39";
     #private  $User="root_";
-    private  $User="root";
+    #private  $User="root";
 
     private  $Password="cementerio123";
     private  $DataBaseName="cementerio";
