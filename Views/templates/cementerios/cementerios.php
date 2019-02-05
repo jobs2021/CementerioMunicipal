@@ -22,8 +22,6 @@
                 </li>
             </ul>
 
-            <p class="margin-top-15">Seleccione un Cementerio para continuar...</p>
-
             <div class="row padding-bottom-15">
 
 

@@ -286,7 +286,7 @@
             <div class="modal-body">
 
                 <p>Parcel: 0003</p>
-                <p>Tutular: Jose Pedrito del Rancho</p>
+                <p>Titular: Jose Pedrito del Rancho</p>
                 <p>control estado: optimo</p>
                 <p>Fecha Contruccion: 08/02/1999</p>
                 <p>Estado: Disponible&emsp;<label class="bs-switch">.
