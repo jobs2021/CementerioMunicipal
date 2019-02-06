@@ -1,3 +1,12 @@
+<?php
+function ValidarSession(){
+$session_data = json_decode($_COOKIE['user_session'],true);
+return $session_data;
+}
+$user=ValidarSession()['user'];
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -282,15 +291,9 @@ end estilos personalizados*/
     border-top: 1px solid rgba(255,2555,255,.5)!important;
 }
 .menu-noti{
-    position: relative;
-    width: 300px;
+    width: 350px;
 }
-@media (min-width: 992px) { 
-    .menu-noti{
-        position: absolute;
-        left: -100px;
-    }
-}
+
         
     </style>
      <link rel="stylesheet" href="<?php echo $server;?>/Views/static/css/table-style.css">
@@ -336,7 +339,7 @@ end estilos personalizados*/
             <li class="nav-item dropdown">
                     <a class="nav-link" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell margin-right-5 icon"></i><span class="badge badge-light" style="top: 0px;position: absolute;margin-left: -5px">0</span></a>
 
-                    <div class="dropdown-menu menu-noti" aria-labelledby="navbarDropdown1" style="padding: 0px!important; max-height: 50vh!important; overflow-y: auto;">
+                    <div class="dropdown-menu menu-noti dropdown-menu-right" aria-labelledby="navbarDropdown1" style="padding: 0px!important; max-height: 50vh!important; overflow-y: auto;">
                         <ul class="list-group">
                           <li class="list-group-item d-flex justify-content-between align-items-center">
                             Cras justo odio
@@ -361,11 +364,11 @@ end estilos personalizados*/
 
             </li>
             <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user margin-right-5 icon"></i>UserName</a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user margin-right-5 icon"></i> <?php echo $user;?> </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown1">
                         <a class="dropdown-item" style="color:#FF4500" href="<?php echo $server;?>/configurar">Configuraciones</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" style="color:#FF4500" href="<?php echo $server;?>/desconectar">Desconectar</a>
+                        <a class="dropdown-item" style="color:#FF4500" href="<?php echo $server;?>/logout">Desconectar</a>
                     </div>
                 </li>
             </ul>
