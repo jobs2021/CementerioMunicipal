@@ -1,9 +1,14 @@
 <?php
-function ValidarSession(){
-$session_data = json_decode($_COOKIE['user_session'],true);
-return $session_data;
+
+if (isset($_COOKIE['user_session'])) {
+    $session_data = json_decode($_COOKIE['user_session'],true);
+    $user=$session_data['user'];
+}else{
+    if($titulo != "Login"){
+    header("location:{$server}/login/");
+    exit();
+    }
 }
-$user=ValidarSession()['user'];
 
 ?>
 
