@@ -11,7 +11,7 @@
     
     <form class="col col-sm-4" style="margin: auto;" action="<?php echo $server;?>/auth" method="POST">
 
-      <h1 class="h3 mb-3 font-weight-normal" style="margin-top: 15px;">Login</h1>
+      <h1 class="h3 mb-3 font-weight-normal" style="margin-top: 85px;">Login</h1>
 
       <div class="form-group">
         <label for="exampleInputEmail1">nombre de usuario</label>

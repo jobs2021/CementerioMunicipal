@@ -3,8 +3,10 @@
 if (isset($_COOKIE['user_session'])) {
     @$session_data = json_decode($_COOKIE['user_session'],true);
     @$user=$session_data['user'];
+    $noNav=false;
 }else{
     $user="";
+    $noNav=true;
     if($titulo != "Login"){
     header("location:{$server}/login/");
     exit();
@@ -305,7 +307,7 @@ end estilos personalizados*/
      <link rel="stylesheet" href="<?php echo $server;?>/Views/static/css/table-style.css">
 </head>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-principal" >
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-principal" style="display: <?php if($noNav){echo "none";}else{echo "flex";} ?>">
         <a class="navbar-brand" href="<?php echo $server;?>/"><i class="icon-chalate" style="font-size: 2em!important;float: left;position: absolute;top: 10px;"></i> <span style="margin-left: 45px">Municipalidad</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
