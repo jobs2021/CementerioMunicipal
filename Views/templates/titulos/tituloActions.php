@@ -23,8 +23,13 @@ switch (@$_POST['actionId']) {
         CrearArrendamiento($_POST['nombre'],$_POST['apellido'],$_POST['direccion'],$_POST['fecha'],$_POST['f1sam'],$_POST['anios'],$_POST['idParcela']);
         break;
     case '8': //reponer titulo
-        ReponerTitulo($_POST['numeroTitulo'],$_POST['idTitulo']);        
-        
+        ReponerTitulo($_POST['numeroTitulo'],$_POST['idTitulo']);  
+    case '9':
+        addBeneficiario($_POST['idTitulo'],$_POST['nombre'],$_POST['apellido'],$_POST['direccion'],$_POST['fecha'],$_POST['dui'],$_POST['profesion']);
+    case '10': //poner en estado cero al beneficiario
+        ocultarBeneficiario($_POST['idBeneficiario'],$_POST['idTitulo']);
+    
+
 }
 if ($_GET['action']){
     BuscarTitulo();
@@ -57,8 +62,9 @@ function CrearTitulo($tipo,$numero,$idCiudadano,$idParcela){
     if (isset($tipo) && isset($numero) && isset($idCiudadano) && isset($idParcela)) {
         $insert = new ConexionDB();
         $insert->Query("insert into Titulos (idParcela,idTipoTitulo,NumeroTitulo,idCiudadanoTitular) values ({$idParcela},{$tipo},'{$numero}',{$idCiudadano})");
-        
-        header("location:".$server.'/titulos');
+        $idTitulo=$insert->Query("select idTitulo from Titulos order by idTitulo desc limit 1");
+
+        header("location:".$server.'/beneficiarios/'.$idTitulo[0]['idTitulo']);
             exit();
     }
 }
@@ -119,6 +125,39 @@ function TraspasarTitulo(){
         
     }
 }
+#************* crear beneficiarios titulo********************
+
+function addBeneficiario($idTitulo, $nombre,$apellido,$direccion,$fecha,$dui,$profesion){
+    if (isset($idTitulo) && isset($nombre) && isset($apellido) && isset($direccion) && isset($fecha) && isset($dui) && isset($profesion)){
+        $insert = new ConexionDB();
+        $value = $insert->Query("INSERT INTO Ciudadanos(NombresCiudadano, ApellidosCiudadano, FechaNacimiento, Profesion,Domicilio, DUI) VALUES('{$nombre}', '{$apellido}', '{$fecha}', '{$profesion}','{$direccion}','{$dui}')");
+        var_dump($idTitulo);
+        $idCiudadano=$insert->Query("select idCiudadano from Ciudadanos order by idCiudadano desc limit 1");
+        var_dump($idCiudadano);
+        $insert->Query("INSERT INTO Beneficiarios (idTitulo, idCiudadano, Estado) VALUES({$idTitulo}, {$idCiudadano[0]['idCiudadano']}, 1)");
+        header("location:".$server.'/beneficiarios/'.$idTitulo);
+    }
+}
+
+
+function ocultarBeneficiario($idBeneficiario, $idTitulo){
+    if (isset($idBeneficiario) && isset($idTitulo)){
+        $insert = new ConexionDB();
+        $insert->Query("UPDATE Beneficiarios SET Estado=0 where idBeneficiario={$idBeneficiario}");
+        header("location:".$server.'/beneficiarios/'.$idTitulo);
+    }
+}
+
+function ocultarBeneficiario2($idBeneficiario, $idTitulo){
+    if (isset($idBeneficiario) && isset($idTitulo)){
+        $insert = new ConexionDB();
+        $insert->Query("UPDATE Beneficiarios SET Estado=0  where idBeneficiario={$idBeneficiario}");
+        header("location:".$server.'/beneficiarios/'.$idTitulo);
+    }
+}
+
+
+
 function BuscarTitulo(){
     $insert = new ConexionDB();
 
@@ -132,9 +171,9 @@ function BuscarTitulo(){
     $i=0;
     if($resultado != -1){
         $salida.="<div class='table-responsive'>
-                            <table class='table'>
+                            <table class='table table-hover'>
                             <thead>
-                                <tr>
+                                <tr >
                                     <th>N°</th>
                                     <th>Nombre</th>
                                     <th>Apellidos</th>
@@ -144,13 +183,13 @@ function BuscarTitulo(){
                                     <th>Parcela</th>
                                     <th>Estado</th>
                                     <th>Proceso</th>
-                                    <th></th>
+                                    <th>Accion</th>
                                 </tr>
                             </thead>
                         <tbody>";
        foreach ($resultado as $fila) {
            $i++;
-            $salida.="<tr>
+            $salida.="<tr class=\"row-hover\">
                         <td>{$i}</td>
                         <td>{$fila['NombresCiudadano']}</td>
                         <td>{$fila['ApellidosCiudadano']}</td>
@@ -172,8 +211,14 @@ function BuscarTitulo(){
                         } else {
                              $salida .= "<td style=\"color: orangered\">Desconocido</td>";
                         }
-                    $salida .="</tr>";
-                        
+                        $salida .= "
+                        <td>
+                        <div class=\"row-btn\">
+                            <a style=\"color: FORESTGREEN\" title=\"Ver Titulo\" href=\"#\" class=\"fas fa-eye\"></a>
+                        </div>
+                        </td>
+                    </tr>";
+                   
         }
         $salida.="</tbody></table>";
 
@@ -183,5 +228,6 @@ function BuscarTitulo(){
     }
 
     echo $salida;
-    }
+}
+    
 ?>
