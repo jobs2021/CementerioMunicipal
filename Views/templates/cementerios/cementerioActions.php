@@ -58,6 +58,9 @@ function RestoreCementerio($id){
 
             header("location:".$server.'/cementerios/');
             exit();
+    }else{
+        header("location:".$server.'/cementerios/');
+            exit();
     }
 }
 

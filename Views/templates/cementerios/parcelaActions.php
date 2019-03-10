@@ -111,9 +111,14 @@ function ReturnParcela($id){
 function RestoreParcela($id,$idCementerio){
         if (isset($id)) {
             $update = new ConexionDB();
-            $update->Query("update Parcelas set Estado='1' where idParcela='{$id}';");
+            foreach ($id as $key) {
+            $update->Query("update Parcelas set Estado='1' where idParcela='{$key}';");
+            }
 
             header("location:".$server.'/parcelas/'.$idCementerio);
+            exit();
+    }else{
+        header("location:".$server.'/parcelas/'.$idCementerio);
             exit();
     }
 }
