@@ -68,7 +68,7 @@ require_once('Views/default/header.php');
 require_once('Views/default/footer.php'); 
 
 //enviar notitificacion
-session_start();
+@session_start();
 if (isset($_SESSION['JsonNotification'])) {
     echo "
     <script type=\"text/javascript\">

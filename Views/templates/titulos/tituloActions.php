@@ -60,12 +60,14 @@ function ObtenerParcela($idParcela){
             exit();
     }
     
+/*
     if (isset($tipo) && isset($numero) && isset($idCiudadano) && isset($idParcela)) {
         $idTitulo=$insert->Query("select idTitulo from Titulos order by idTitulo desc limit 1");
         header("location:".$server.'/beneficiarios/'.$idTitulo[0]['idTitulo']);
             exit();
     }
-}
+}*/
+
 function CancelarTitulo($idTitulo, $Observaciones){
     $insert = new ConexionDB();
     if (isset($Observaciones)){
