@@ -130,34 +130,69 @@
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
-                      <div class="modal-body">
+                        <form action="<?php echo $server;?>/cementerioActions" method="POST">
+                      <div class="modal-body d-flex flex-row">
+                            <input type="hidden" name="actionId" value="4">
+                        
                         <?php 
                             $cementeriosTrash= $consulta->Query("select * from Cementerios where Estado='0'");
-                            $date=date('d/m/Y');
                             if ($cementeriosTrash!="-1") {
          
                                 foreach ($cementeriosTrash as $objetoTrash) {
-                                    echo "<form action=\"{$server}/cementerioActions\" method=\"POST\">
-                                    <p>{$date} - {$objetoTrash['Nombre']} 
-                                    
-                                        <input type=\"hidden\" name=\"actionId\" value=\"4\">
-                                        <input type=\"hidden\" name=\"idCementerio\" value=\"{$objetoTrash['idCementerio']}\">
-                                        <button type=\"submit\" class=\"btn btn-outline-danger\" data-toggle=\"modal\" data-target=\"#modalEliminar\" style=\"height:30px;\"><i class=\"fas fa-redo-alt icon margin-right-5\"></i></button>
-                                    </form>
-                                    </p>";
+                                    echo "
+
+                                    <div class=\"card card-trash\">
+                                      <div class=\"card-header text-center\">
+                                        <i class=\"fas fa-church icon\" style=\"font-size: 80px!important;margin-left: 0px\"></i>
+                                        <input type=\"checkbox\" class=\"float-right\" name=\"idCementerio[]\" value=\"{$objetoTrash['idCementerio']}\">
+                                    </div>
+                                      <div class=\"card-body\" style=\"padding: 5px !important;\">
+                                        <p class=\"card-text\">{$objetoTrash['Nombre']} </p>
+                                      </div>
+                                    </div> ";
                                 }
                             }else{
                                 echo "<center>Papelera Vacia</center>";
                             }
 
                         ?>
+                        
+                        <!--div class="card card-trash">
+                          <div class="card-header text-center">
+                            <i class="fas fa-church icon" style="font-size: 80px!important;margin-left: 0px"></i>
+                            <input type="checkbox" class="float-right" name="idCementerio[]" value="{id}">
+                        </div>
+                          <div class="card-body" style="padding: 5px !important;">
+                            <p class="card-text">Monte Piedad</p>
+                          </div>
+                        </div --> 
+
+
+
+
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Guardar</button>
+                        <button type="submit" class="btn btn-primary">Restaurar</button>
+                      </form>
                       </div>
                     </div>
                   </div>
                 </div>
+
+
+                <script type="text/javascript">
+                    $(".card-trash").click(function(){
+                        console.log($(this).find('input')[0].checked);
+                        if ($(this).find('input')[0].checked) {
+                            $(this).find('input').prop('checked',false);
+                            $(this).removeClass('card-trash-checked');
+                        }else{
+                            $(this).find('input').prop('checked',true);
+                            $(this).addClass('card-trash-checked');
+                        }
+                    })
+                </script>
+
                 <!-- end trash code-->
 
 

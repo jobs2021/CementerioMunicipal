@@ -118,12 +118,6 @@
                                 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKO_WwA9ZbX1C-arxe8_52eZmJJhXHraw&callback=initMap"
                                     async defer></script-->
 
-
-
-
-
-
-
                         </div>
                     </li>
                     <li class="list-group-item padding-l-r-0 margin-l-r-15">
@@ -553,9 +547,6 @@
         osm = L.tileLayer(osmUrl, {maxZoom: 22, attribution: osmAttrib});
 
         var map = L.map('map').setView([14.04141, -88.94374], 19).addLayer(osm);
-
-        //14.04141/-88.94374
-
 
         L.marker([14.04141, -88.94374]).addTo(map)
             .bindPopup("<strong>Parcela <?php echo $parcela['Numero']; ?></strong>, Poligono <?php echo $parcela['Poligono']; ?>")

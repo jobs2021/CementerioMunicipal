@@ -52,7 +52,9 @@ function DeleteCementerio($id){
 function RestoreCementerio($id){
     if (isset($id)) {
             $update = new ConexionDB();
-            $update->Query("update Cementerios set Estado='1' where idCementerio='{$id}';");
+            foreach ($id as $key) {
+            $update->Query("update Cementerios set Estado='1' where idCementerio='{$key}';");
+            }
 
             header("location:".$server.'/cementerios/');
             exit();

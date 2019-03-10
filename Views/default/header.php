@@ -29,7 +29,7 @@ if (isset($_COOKIE['user_session'])) {
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $server;?>/Views/static/css/bootstrap.min.css" />
-    <link href="<?php echo $server;?>/Views/static/vendor/font-awesome/css/all.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo $server;?>/Views/static/vendor/font-awesome/css/all1.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="<?php echo $server;?>/Views/static/vendor/chalate-icon/icon-chalate.css">
     <link rel="stylesheet" type="text/css" href="<?php echo $server;?>/Views/static/css/toastr.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $server;?>/Views/static/css/leaflet.css" />
@@ -322,6 +322,28 @@ end estilos personalizados*/
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+}
+.card-trash:hover{
+    border: 2px solid #007bff;
+}
+.card-trash{
+    border: 2px solid rgba(0, 0, 0, 0.0825);
+    margin-right: 10px!important;
+    width: 140px!important;
+    height: 140px!important;
+}
+.card-trash > .card-header{
+    padding: 5px !important;
+    padding-top: 20px!important;
+}
+.card-trash > .card-header > input{
+    position: absolute;right: 5px;top: 5px;height: 17px;width: 17px;
+}
+.card-trash > .card-body > .card-text{
+    text-overflow: ellipsis;white-space: nowrap;overflow: hidden;font-size: 14px
+}
+.card-trash-checked{
+    border: 2px solid #007bff!important;
 }
 
         
