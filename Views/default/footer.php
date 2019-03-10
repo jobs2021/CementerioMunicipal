@@ -9,6 +9,8 @@
 <script src="<?php echo $server;?>/Views/static/js/buscador.js"></script>
 <script src="<?php echo $server;?>/Views/static/js/popper.min.js"></script>
 <script src="<?php echo $server;?>/Views/static/js/bootstrap.min.js"></script>
+<script src="<?php echo $server;?>/Views/static/js/leaflet.js"></script>
+
 
 <!--- socketio -->
 

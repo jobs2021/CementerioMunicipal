@@ -46,12 +46,13 @@
                             if ($parcelasTrash!="-1") {
          
                                 foreach ($parcelasTrash as $objetoTrash) {
-                                    echo "<form action=\"{$server}/cementerioActions\" method=\"POST\">
+                                    echo "<form action=\"{$server}/parcelaActions\" method=\"POST\">
                                     <p>{$date} - {$objetoTrash['Numero']} 
                                     
                                         <input type=\"hidden\" name=\"actionId\" value=\"4\">
+                                        <input type=\"hidden\" name=\"idParcela\" value=\"{$objetoTrash['idParcela']}\">
                                         <input type=\"hidden\" name=\"idCementerio\" value=\"{$objetoTrash['idCementerio']}\">
-                                        <button type=\"submit\" class=\"btn btn-outline-danger\" data-toggle=\"modal\" data-target=\"#modalEliminar\" style=\"height:30px;\"><i class=\"fas fa-redo-alt icon margin-right-5\"></i></button>
+                                        <button type=\"submit\" class=\"btn btn-outline-danger\" style=\"height:30px;\"><i class=\"fas fa-redo-alt icon margin-right-5\"></i></button>
                                     </form>
                                     </p>";
                                 }
@@ -79,19 +80,19 @@
     <div class="row justify-content-center">
         <div class="col-12 padding-top-15 padding-bottom-15">
             <form class="form-inline justify-content-center" method="GET">
-                    <div class="col col-sm-4">
+                    <div class="col col-sm-5">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="busqueda" placeholder="Numero o Poligono">
                                 <div class="input-group-prepend rounded">
                                     <button type="submit" class="btn btn-dark rounded-right">Buscar</button>
+                                    
+                                    <button type="button" class="btn btn-outline-primary float-right rounded" data-toggle="modal" data-target="#modalEditar" style="margin-left: 15px !important;"><i class="fas fa-plus icon margin-right-5 margin-left-0"></i>Añadir</button>
                                 </div>
+
                             </div>
                         
                     </div>
-                    <div class="col col-sm-1">
-                <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#modalEditar"><i class="fas fa-plus icon margin-right-5 margin-left-0"></i>Añadir</button>
-                        
-                    </div>
+
                     
 
             </form>
@@ -461,9 +462,9 @@
                     $('#nichosNew').attr('value',nichosA);
                     $('#nichosDelete').attr('value',nichosD);
 
-                    alert(nichosR);
-                    alert(nichosD);
-                    alert(nichosA);
+                    //alert(nichosR);
+                    //alert(nichosD);
+                    //alert(nichosA);
         });
 
 

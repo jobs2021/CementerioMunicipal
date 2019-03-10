@@ -16,6 +16,10 @@ if (isset($_POST['actionId'])) {
 	   case '3': // delete
 	        DeleteParcela($_POST['idParcela'],$_POST['idCementerio']);
 	        break;
+
+        case '4': // restore
+        RestoreParcela($_POST['idParcela'],$_POST['idCementerio']);
+        break;  
 	} 
 }else{
 	   	@$idParcela=explode('/',$_GET['action'])[1];
@@ -102,6 +106,16 @@ function ReturnParcela($id){
        echo json_encode($datos);    
     }
     
+}
+
+function RestoreParcela($id,$idCementerio){
+        if (isset($id)) {
+            $update = new ConexionDB();
+            $update->Query("update Parcelas set Estado='1' where idParcela='{$id}';");
+
+            header("location:".$server.'/parcelas/'.$idCementerio);
+            exit();
+    }
 }
 
 ?>

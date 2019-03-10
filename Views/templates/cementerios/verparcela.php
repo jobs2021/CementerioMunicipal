@@ -95,7 +95,7 @@
                         <div id="map" class="bg-light" style="width: 100%;height: 300px;max-width: 500px;">
 
 
-                              <script>
+                              <!--script>
                                   function initMap() {
                                     var myLatLng = {lat: 14.041644, lng: -88.938102};
 
@@ -116,7 +116,9 @@
 
                                 </script>
                                 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKO_WwA9ZbX1C-arxe8_52eZmJJhXHraw&callback=initMap"
-                                    async defer></script>
+                                    async defer></script-->
+
+
 
 
 
@@ -491,18 +493,18 @@
 
 
                     //alert("nichos iniciales "+nichosR);
-                    alert("nichos Resultantes "+resultado);
+                    //alert("nichos Resultantes "+resultado);
 
                     if ($.isEmptyObject(resultado)) {
                        nichosD = nichosR;
-                       alert('entro en vacio');
+                       //alert('entro en vacio');
                     }else if($.isEmptyObject(nichosR)){
                         nichosA=resultado;
-                        alert('entro en todos new');
+                        //alert('entro en todos new');
 
                     }else{
 
-                        alert('entro en bilateral');
+                        //alert('entro en bilateral');
 
                     
                     resultado.forEach(function(elementNew){
@@ -525,9 +527,9 @@
                     $('#nichosNew').attr('value',nichosA);
                     $('#nichosDelete').attr('value',nichosD);
 
-                    alert("nichos incial "+nichosR);
-                    alert("nichos Eliminar "+nichosD);
-                    alert("nichos agregar "+nichosA);
+                    //alert("nichos incial "+nichosR);
+                    //alert("nichos Eliminar "+nichosD);
+                    //alert("nichos agregar "+nichosA);
         });
 
             
@@ -541,5 +543,22 @@
 
 
 
+
+</script>
+
+<script type="text/javascript">
+
+        var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        osmAttrib = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors', 
+        osm = L.tileLayer(osmUrl, {maxZoom: 22, attribution: osmAttrib});
+
+        var map = L.map('map').setView([14.04141, -88.94374], 19).addLayer(osm);
+
+        //14.04141/-88.94374
+
+
+        L.marker([14.04141, -88.94374]).addTo(map)
+            .bindPopup("<strong>Parcela <?php echo $parcela['Numero']; ?></strong>, Poligono <?php echo $parcela['Poligono']; ?>")
+            .openPopup();
 
 </script>

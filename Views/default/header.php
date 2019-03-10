@@ -32,6 +32,7 @@ if (isset($_COOKIE['user_session'])) {
     <link href="<?php echo $server;?>/Views/static/vendor/font-awesome/css/all.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="<?php echo $server;?>/Views/static/vendor/chalate-icon/icon-chalate.css">
     <link rel="stylesheet" type="text/css" href="<?php echo $server;?>/Views/static/css/toastr.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo $server;?>/Views/static/css/leaflet.css" />
 
     <!-- estilos css-->
     <style type="text/css">
@@ -235,6 +236,7 @@ if (isset($_COOKIE['user_session'])) {
     }
     .breadcrumb{
         background-color: rgba(210, 213, 216, .3)!important;
+        padding: 6px 16px !important;
     }
 
     /* estilos personalizados solamente de prueba para los nichos
@@ -386,6 +388,7 @@ end estilos personalizados*/
                             <!--span class="badge badge-success badge-pill"><i class="fas fa-check"></i></span-->
                             <small class="float-right">Hace 1 dia</small>                            
                           </li>
+
                           
                           
                           
