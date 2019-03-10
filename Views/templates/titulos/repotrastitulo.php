@@ -43,7 +43,7 @@ require_once('Views/default/header.php');
         </div>
        
         <div class="table-responsive">
-            <table class="table table table table-hover margin-top-15">
+            <table class="table table-hover margin-top-15">
                 <tr>
                     <th scope="col">N°</th>
                     <th scope="col">Nombre</th>
