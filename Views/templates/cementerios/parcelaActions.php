@@ -11,7 +11,7 @@ if (isset($_POST['actionId'])) {
 	       @$idParcela=explode('/',$_GET['action'])[1];
 	       $nichosNew=explode(',', $_POST['nichosNew']);
 	       $nichosDelete=explode(',', $_POST['nichosDelete']);
-	        UpdateParcela($idParcela,$_POST['poligono'],$_POST['tipo'],$_POST['coordenadaX'],$_POST['coordenadaY'],$_POST['idCementerio'],$_POST['numero'],$nichosNew,$nichosDelete);
+	        UpdateParcela($idParcela,$_POST['poligono'],$_POST['tipo'],$_POST['coordenadaX'],$_POST['coordenadaY'],$_POST['idCementerio'],$_POST['numero'],$nichosNew,$nichosDelete,$_POST['vista']);
 	        break;
 	   case '3': // delete
 	        DeleteParcela($_POST['idParcela'],$_POST['idCementerio']);
@@ -44,26 +44,33 @@ function CrearParcela($poligono,$tipo,$coordenadaX,$coordenadaY,$idCementerio,$n
     }
 }
 // update parcela
-function UpdateParcela($idParcela,$poligono,$tipo,$coordenadaX,$coordenadaY,$idCementerio,$numero,$nichosNew,$nichosDelete){
+function UpdateParcela($idParcela,$poligono,$tipo,$coordenadaX,$coordenadaY,$idCementerio,$numero,$nichosNew,$nichosDelete,$vista){
+
     if (isset($idParcela) && isset($idCementerio) && isset($poligono) && isset($tipo) && isset($coordenadaX) && isset($coordenadaY) && isset($numero)) {
             $db = new ConexionDB();
             $db->Query("update Parcelas set idTipoParcela='{$tipo}',Poligono='{$poligono}',CoordenadaX='{$coordenadaX}',CoordenadaY='{$coordenadaY}',Numero='{$numero}' where idParcela='{$idParcela}'");
 
             if (isset($nichosNew) && $nichosNew[0]!='') {
-            	$fecha=date('Y').'-'.date('m').'-'.date('d');
-            	foreach ($nichosNew as $nicho) {
-            		$db->Query("insert into Nichos (idParcela,idCtlestadosNicho,NumeroOrden,Fecha,Estado) values ('{$idParcela}','1','{$nicho}','{$fecha}','1')");
-            	}
+                $fecha=date('Y').'-'.date('m').'-'.date('d');
+                foreach ($nichosNew as $nicho) {
+                    $db->Query("insert into Nichos (idParcela,idCtlestadosNicho,NumeroOrden,Fecha,Estado) values ('{$idParcela}','1','{$nicho}','{$fecha}','1')");
+                }
             }
 
             if (isset($nichosDelete) && $nichosDelete[0]!='') {
-            	foreach ($nichosDelete as $numero) {
-            		$db->Query("update Nichos set Estado='0' where idParcela='{$idParcela}' and NumeroOrden='{$numero}'");
-            	}
+                foreach ($nichosDelete as $numero) {
+                    $db->Query("update Nichos set Estado='0' where idParcela='{$idParcela}' and NumeroOrden='{$numero}'");
+                }
             }
 
 
-           header("location:".$server.'/parcelas/'.$idCementerio);
+            if ($vista=='1') {
+                header("location:".$server.'/verparcela/'.$idParcela);
+            }else{
+                header("location:".$server.'/parcelas/'.$idCementerio);
+                
+            }
+
            exit();
     }
 }

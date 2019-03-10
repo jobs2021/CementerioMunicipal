@@ -1,6 +1,6 @@
 <!-- TITULOS VIGENTES-->
+<?php
 
-<?php 
 $titulo='Titulos Vigentes';
 
 $consulta = new ConexionDB();
@@ -64,7 +64,23 @@ require_once('Views/default/header.php');
 </div>
 </div>
 <!--END-->
-<?php require_once('Views/default/footer.php'); ?>
+<?php 
+require_once('Views/default/footer.php'); 
+
+//enviar notitificacion
+session_start();
+if (isset($_SESSION['JsonNotification'])) {
+    echo "
+    <script type=\"text/javascript\">
+    $.ajax({
+        url : '{$server}:8585/send_noti?sms={$_SESSION['JsonNotification']}'
+    });
+    </script> ";
+    session_destroy();
+}
+
+?>
+
 <script>
     function buscar_titulo(valor){
     $.ajax({

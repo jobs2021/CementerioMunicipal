@@ -9,7 +9,7 @@
     
     $consulta = new ConexionDB();
 
-    $parcela= $consulta->Query("select (select (count(t1.idParcela) - count(t3.idEnterramiento)) from Parcelas t1 inner join Nichos t2 on t1.idParcela=t2.idParcela left join Enterramientos t3 on t2.idNicho=t3.idNicho where t1.idParcela='{$idParcela}') as NichosDisponibles, t1.idParcela, idCementerio, Numero, Poligono, count(idNicho) as Nichos,(select idTitulo from Titulos where idParcela=t1.idParcela) as Titular,(select Descripcion from TipoParcela tp where tp.idTipoParcela=t1.idTipoParcela) as TipoParcela,CoordenadaX,CoordenadaY from Parcelas t1 left join Nichos t2 on t1.idParcela=t2.idParcela where t1.idParcela='{$idParcela}' group by idParcela,Numero,Poligono,Titular,idCementerio,TipoParcela,CoordenadaX,CoordenadaY")[0];
+    $parcela= $consulta->Query("select (select (count(t1.idParcela) - count(t3.idEnterramiento)) from Parcelas t1 inner join Nichos t2 on t1.idParcela=t2.idParcela left join Enterramientos t3 on t2.idNicho=t3.idNicho where t1.idParcela='{$idParcela}' and t2.Estado='1') as NichosDisponibles, t1.idParcela, idCementerio, Numero, Poligono, (select count(idNicho) from Parcelas t1 inner join Nichos t2 on t1.idParcela=t2.idParcela where t2.Estado='1' and t1.idParcela='{$idParcela}') as Nichos,(select idTitulo from Titulos where idParcela=t1.idParcela limit 1) as Titular,(select Descripcion from TipoParcela tp where tp.idTipoParcela=t1.idTipoParcela) as TipoParcela,CoordenadaX,CoordenadaY from Parcelas t1 left join Nichos t2 on t1.idParcela=t2.idParcela where t1.idParcela='{$idParcela}' group by idParcela,Numero,Poligono,Titular,idCementerio,TipoParcela,CoordenadaX,CoordenadaY")[0];
 
     $tipoParcela = $consulta->Query("select * from TipoParcela");
 
@@ -142,7 +142,7 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $query="select NumeroOrden,t1.idNicho,(select Descripcion from CtlEstadosNichos where idCtlEstadosNicho=t1.Estado) as Estado,(select FechaInicio from Enterramientos t2 where idNicho=t1.idNicho) as Fecha,(select concat(NombresFallecido,' ',ApellidosFallecido) from Enterramientos t2 where idNicho=t1.idNicho) as Difunto from Nichos t1 where t1.idParcela='{$idParcela}' order by NumeroOrden asc;";
+                                        $query="select NumeroOrden,t1.idNicho,(select Descripcion from CtlEstadosNichos where idCtlEstadosNicho=t1.idCtlEstadosNicho) as Estado,(select FechaInicio from Enterramientos t2 where idNicho=t1.idNicho) as Fecha,(select concat(NombresFallecido,' ',ApellidosFallecido) from Enterramientos t2 where idNicho=t1.idNicho) as Difunto from Nichos t1 where t1.idParcela='{$idParcela}' and t1.Estado='1' order by NumeroOrden asc;";
                                         $resultado=$consulta->Query($query);
                                         $nombres=[];
 
@@ -189,20 +189,20 @@
 
                             <svg version="1.1" id="nicho" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100%" height="300px" viewBox="0 0 300 300" enable-background="new 0 0 300 300" xml:space="preserve">
     <g class="nicho3"<?php echo (isset($nombres[3]))? " data-toggle=\"tooltip\" title=\"{$nombres[3]}\" data-placement=\"right\"":""; ?>>
-        <rect class="btn-hover3" x="100.666" y="124.698" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" stroke-width="1" stroke-miterlimit="10" width="99.776" height="32" />
-        <text class="text-hover3" transform="matrix(1 0 0 1 143.5537 145.0308)" fill="rgba(0,0,0,0)" font-family="'Arial'" font-size="15">3</text>
+        <rect class="btn-hoverS3" x="100.666" y="124.698" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" stroke-width="1" stroke-miterlimit="10" width="99.776" height="32" />
+        <text class="text-hoverS3" transform="matrix(1 0 0 1 143.5537 145.0308)" fill="rgba(0,0,0,0)" font-family="'Arial'" font-size="15">3</text>
     </g>
     <g class="nicho2"<?php echo (isset($nombres[2]))? " data-toggle=\"tooltip\" title=\"{$nombres[2]}\" data-placement=\"right\"":""; ?>>
-        <rect class="btn-hover2" x="100.666" y="163.838" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" stroke-width="1" stroke-miterlimit="10" width="99.776" height="32" />
-        <text class="text-hover2" transform="matrix(1 0 0 1 143.5537 183.0313)" fill="rgba(0,0,0,0)" font-family="'Arial'" font-size="15">2</text>
+        <rect class="btn-hoverS2" x="100.666" y="163.838" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" stroke-width="1" stroke-miterlimit="10" width="99.776" height="32" />
+        <text class="text-hoverS2" transform="matrix(1 0 0 1 143.5537 183.0313)" fill="rgba(0,0,0,0)" font-family="'Arial'" font-size="15">2</text>
     </g>
     <g class="nicho1"<?php echo (isset($nombres[1]))? " data-toggle=\"tooltip\" title=\"{$nombres[1]}\" data-placement=\"right\"":""; ?>>
-        <rect class="btn-hover1" x="100.666" y="202.15" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" stroke-width="1" stroke-miterlimit="10" width="99.776" height="32" />
-        <text class="text-hover1" transform="matrix(1 0 0 1 143.5537 221.6973)" fill="rgba(0,0,0,0)" font-family="'Arial'" font-size="15">1</text>
+        <rect class="btn-hoverS1" x="100.666" y="202.15" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" stroke-width="1" stroke-miterlimit="10" width="99.776" height="32" />
+        <text class="text-hoverS1" transform="matrix(1 0 0 1 143.5537 221.6973)" fill="rgba(0,0,0,0)" font-family="'Arial'" font-size="15">1</text>
     </g>
     <g class="nicho0"<?php echo (isset($nombres[0]))? " data-toggle=\"tooltip\" title=\"{$nombres[0]}\" data-placement=\"right\"":""; ?>>
-        <rect class="btn-hover0" x="100.666" y="259.414" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" stroke-width="1" stroke-miterlimit="10" width="99.776" height="32" />
-        <text class="text-hover0" transform="matrix(1 0 0 1 144.8867 280.0605)" fill="rgba(0,0,0,0)" font-family="'Arial'" font-size="15">0</text>
+        <rect class="btn-hoverS0" x="100.666" y="259.414" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" stroke-width="1" stroke-miterlimit="10" width="99.776" height="32" />
+        <text class="text-hoverS0" transform="matrix(1 0 0 1 144.8867 280.0605)" fill="rgba(0,0,0,0)" font-family="'Arial'" font-size="15">0</text>
     </g>
     <path fill="#494A47" d="M235.761,240.162V110.478c0.177-0.626,0.31-1.27,0.383-1.933h8.85c8.512,0,15.412-5.373,15.412-12v-6.435
                         c0-6.628-6.9-12-15.412-12h-21.735v-3.144c0-6.208-4.701-11.241-10.501-11.241h-11.769c-1.27-9.64-22.542-17.378-49.104-17.884
@@ -246,9 +246,10 @@
                         <div class="carousel-item active">
                             <div class="card">
                                 <div class="card-body">
-                                    <form id="formEditar" action="<?php echo $server;?>/parcelaActions" method="POST">
+                                    <form id="formEditar" action="<?php echo $server."/parcelaActions/{$idParcela}";?>" method="POST">
                                         <input type="hidden" name="actionId" value="2">
-                                        <input type="hidden" name="idCementerio" value="<?php echo $idCementerio; ?>">
+                                        <input type="hidden" name="vista" value="1">
+                                        <input type="hidden" name="idCementerio" value="<?php echo $parcela['idCementerio']; ?>">
                                         <input type="hidden" name="nichosNew" id="nichosNew">
                                         <input type="hidden" name="nichosDelete" id="nichosDelete">
                                         <div class="form-group">
@@ -277,7 +278,7 @@
                                             </div>
                                             <div class="form-group col-6">
                                                 <label for="coordenadaY">Coordenadas Y:</label>
-                                                <input type="text" class="form-control" id="coordenadaY" name="CoordenadaY" value="<?php echo $parcela['CoordenadaY']; ?> ok">
+                                                <input type="text" class="form-control" id="coordenadaY" name="coordenadaY" value="<?php echo $parcela['CoordenadaY']; ?>">
                                             </div>
                                         </div>
                                 </div>
@@ -378,6 +379,69 @@
 <?php require_once('Views/default/footer.php'); ?>
 
 <script type="text/javascript">
+        // editar nicho
+
+        class nichoBtn {
+            constructor(n) {
+                this.activo = false;
+                this.clase = '.nicho' + n;
+                this.posicion = n;
+                //this.toggleActivador();
+            }
+
+            nichoHover(n) {
+                $(".btn-hover" + n).css("fill", "#007bff");
+                $(".text-hover" + n).css("fill", "#fff");
+            }
+
+            nichoLeave(n) {
+                if (this.activo == false) {
+                    $(".btn-hover" + n).css("fill", "#fff");
+                    $(".text-hover" + n).css("fill", "#007bff");
+                }
+            }
+
+            toggleActivador() {
+                if (this.activo == false) {
+                    this.activo = true;
+                    this.nichoHover(this.posicion);
+                    document.getElementById("checkbox" + this.posicion).checked = true;
+                } else {
+                    this.activo = false;
+                    this.nichoLeave(this.posicion);
+                    document.getElementById("checkbox" + this.posicion).checked = false;
+                }
+            }
+        }
+
+        function crearEvent(obj) {
+            $(obj.clase).mouseover(function() { obj.nichoHover(obj.posicion); });
+            $(obj.clase).mouseleave(function() { obj.nichoLeave(obj.posicion); });
+            $(obj.clase).click(function() { obj.toggleActivador(); });
+        }
+
+
+            var nicho0 = new nichoBtn('0');
+            var nicho1 = new nichoBtn('1');
+            var nicho2 = new nichoBtn('2');
+            var nicho3 = new nichoBtn('3');
+
+            crearEvent(nicho0);
+            crearEvent(nicho1);
+            crearEvent(nicho2);
+            crearEvent(nicho3);
+
+            var nichosArray =[nicho0,nicho1,nicho2,nicho3];
+
+            var nichosR=[];
+
+            <?php
+                foreach ($resultado as $num) {
+                    echo "nicho".$num['NumeroOrden'].'.toggleActivador();';
+                    echo "nichosR.push('{$num['NumeroOrden']}');";
+                }
+            ?> 
+
     // nicho vector
    $(document).ready(function() {
         $(function () {
@@ -396,21 +460,86 @@
 
     for ($i = 0; $i < 4; $i++) {
        echo "
-        $('.btn-hover' + {$i}).css('fill', 'rgba(0,0,0,0)');
-        $('.text-hover' + {$i}).css('fill', 'rgba(0,0,0,0)');
+        $('.btn-hoverS' + {$i}).css('fill', 'rgba(0,0,0,0)');
+        $('.text-hoverS' + {$i}).css('fill', 'rgba(0,0,0,0)');
         ";
     }
     foreach ($resultado as $n) {
        echo "
-        $('.btn-hover' + {$n['NumeroOrden']}).css('fill', '#007bff');
-        $('.text-hover' + {$n['NumeroOrden']}).css('fill', '#fff');
+        $('.btn-hoverS' + {$n['NumeroOrden']}).css('fill', '#007bff');
+        $('.text-hoverS' + {$n['NumeroOrden']}).css('fill', '#fff');
         ";
     }
 
     ?> 
+
+
+
+    $('#btnSave').click(function(event) {
+                    var resultado=[];
+                    var nichosD=[];
+                    var nichosA=[];
+
+
+                     for (var i = 0; i <= 3; i++) {
+                        if (document.getElementById("checkbox" + i).checked == true) {
+                            resultado.push(document.getElementById("checkbox" + i).value);
+
+                        }
+                    }
+
+
+
+                    //alert("nichos iniciales "+nichosR);
+                    alert("nichos Resultantes "+resultado);
+
+                    if ($.isEmptyObject(resultado)) {
+                       nichosD = nichosR;
+                       alert('entro en vacio');
+                    }else if($.isEmptyObject(nichosR)){
+                        nichosA=resultado;
+                        alert('entro en todos new');
+
+                    }else{
+
+                        alert('entro en bilateral');
+
+                    
+                    resultado.forEach(function(elementNew){
+                        nichosR.forEach(function(elementOld){
+
+                            if(resultado.indexOf(elementOld)==-1 && nichosD.indexOf(elementOld)==-1){
+                                    nichosD.push(elementOld);
+
+                            }else{
+                                     if(nichosA.indexOf(elementNew)==-1 && nichosR.indexOf(elementNew)==-1){
+                                        nichosA.push(elementNew);
+                                    }   
+                                }
+
+                        })
+                    })
+
+                    }
+
+                    $('#nichosNew').attr('value',nichosA);
+                    $('#nichosDelete').attr('value',nichosD);
+
+                    alert("nichos incial "+nichosR);
+                    alert("nichos Eliminar "+nichosD);
+                    alert("nichos agregar "+nichosA);
+        });
+
             
    });
 
     // nocho vecto end
+
+
+
+    
+
+
+
 
 </script>

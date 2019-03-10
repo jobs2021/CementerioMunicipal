@@ -38,10 +38,15 @@ function CrearCiudadanoTitulo($nombre,$apellido,$direccion,$dui,$profesion,$fech
             
             $idCiudadano=$insert->Query("select idCiudadano from Ciudadanos order by idCiudadano desc limit 1");
 
-            $insert->Query("insert into Titulos (idParcela,idTipoTitulo,NumeroTitulo,idCiudadanoTitular) values ({$idParcela},{$tipo},'{$numero}',{$idCiudadano[0]['idCiudadano']})");
+            $insert->Query("insert into Titulos (idParcela,idTipoTitulo,NumeroTitulo,idCiudadanoTitular,Estado) values ({$idParcela},{$tipo},'{$numero}',{$idCiudadano[0]['idCiudadano']},1)");
+
+        //session para enviar notificacion
+        session_start();
+        $_SESSION['JsonNotification'] = '{ "msg":"Titulo '.$numero.' en Proceso...", "title":"Titulo Nuevo" }';
         
         header("location:".$server.'/titulos');
-            exit();
+        exit();
+
     } else {
         echo "error en datos";
     }
@@ -57,9 +62,14 @@ function CrearTitulo($tipo,$numero,$idCiudadano,$idParcela){
     if (isset($tipo) && isset($numero) && isset($idCiudadano) && isset($idParcela)) {
         $insert = new ConexionDB();
         $insert->Query("insert into Titulos (idParcela,idTipoTitulo,NumeroTitulo,idCiudadanoTitular) values ({$idParcela},{$tipo},'{$numero}',{$idCiudadano})");
+
+        //session para enviar notificacion
+        session_start();
+        $_SESSION['JsonNotification'] = '{ "msg":"Titulo 20381 en Proceso", "title":"Titulo Nuevo" }';
+
         
         header("location:".$server.'/titulos');
-            exit();
+        exit();
     }
 }
 function CancelarTitulo($idTitulo, $Observaciones){
