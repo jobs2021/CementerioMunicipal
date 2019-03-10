@@ -54,17 +54,13 @@ function CrearCiudadanoTitulo($nombre,$apellido,$direccion,$dui,$profesion,$fech
     } else {
         echo "error en datos";
     }
-
 }
 function ObtenerParcela($idParcela){
     header("location:".$server.'/creartitulo/'.$idParcela);
             exit();
     }
     
-function CrearTitulo($tipo,$numero,$idCiudadano,$idParcela){
     if (isset($tipo) && isset($numero) && isset($idCiudadano) && isset($idParcela)) {
-        $insert = new ConexionDB();
-        $insert->Query("insert into Titulos (idParcela,idTipoTitulo,NumeroTitulo,idCiudadanoTitular) values ({$idParcela},{$tipo},'{$numero}',{$idCiudadano})");
         $idTitulo=$insert->Query("select idTitulo from Titulos order by idTitulo desc limit 1");
         header("location:".$server.'/beneficiarios/'.$idTitulo[0]['idTitulo']);
             exit();
@@ -184,23 +180,6 @@ function CrearArrendamiento($nombre,$apellido,$direccion,$fecha,$f1sam,$anios,$i
 }
 
 
-
-
-#********************* Traspasar Titulo *********************
-/*function ReponerTitulo(){
-    if ( isset($numeroTitulo) && isset($idTitulo) ){
-        $insert = new ConexionDB();
-        $value = $insert->Query("SELECT * FROM Titulos where idTitulo={$idTitulo}");
-        $insert->Query("INSERT INTO Titulos (idParcela,idTipoTitulo,NumeroTitulo,idCiudadanoTitular,FechaExpedido,NumeroRecibo,FechaRecibo,Imagen,Observaciones,Estado,Proceso) VALUES ({$value[0]['idParcela']}, 3 ,'{$numeroTitulo}',{$value[0]['idCiudadanoTitular']},'{$value[0]['FechaExpedido']}','{$value[0]['NumeroRecibo']}','{$value[0]['FechaRecibo']}','{$value[0]['Imagen']}','{$value[0]['Observaciones']}',{$value[0]['Estado']},0)") ;
-        
-        $insert->Query("UPDATE Titulos SET Estado=0 where idTitulo={$idTitulo}");
-        
-        header("location:".$server.'/repotrastitulo');
-        exit();
-    }else{
-        
-    }
-}*/
 
 
 
