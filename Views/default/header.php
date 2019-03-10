@@ -16,7 +16,7 @@ if (isset($_COOKIE['user_session'])) {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="es-sv">
 
 <head>
     <meta charset="utf-8" />
@@ -30,13 +30,21 @@ if (isset($_COOKIE['user_session'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $server;?>/Views/static/css/bootstrap.min.css" />
     <link href="<?php echo $server;?>/Views/static/vendor/font-awesome/css/all.css" rel="stylesheet" type="text/css">
-
     <link rel="stylesheet" href="<?php echo $server;?>/Views/static/vendor/chalate-icon/icon-chalate.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo $server;?>/Views/static/css/toastr.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo $server;?>/Views/static/css/leaflet.css" />
 
     <!-- estilos css-->
     <style type="text/css">
 
-
+*{
+    margin:0;
+    padding:0;
+}
+body{
+    margin:0;
+    padding:0;
+}
 .fixed-action-btn {
     position: fixed;
     z-index: 998;
@@ -235,6 +243,7 @@ if (isset($_COOKIE['user_session'])) {
     }
     .breadcrumb{
         background-color: rgba(210, 213, 216, .3)!important;
+        padding: 6px 16px !important;
     }
 
     /* estilos personalizados solamente de prueba para los nichos
@@ -301,6 +310,19 @@ end estilos personalizados*/
 .menu-noti{
     width: 350px;
 }
+.table > thead > tr > th{
+    background-color: rgba(0,0,0,.7);!important;
+}
+.modal{
+    z-index: 1000000!important;
+}
+.notification-li{
+    padding: 4px 10px;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
 
         
     </style>
@@ -308,15 +330,15 @@ end estilos personalizados*/
 </head>
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-principal" style="display: <?php if($noNav){echo "none";}else{echo "flex";} ?>">
-        <a class="navbar-brand" href="<?php echo $server;?>/"><i class="icon-chalate" style="font-size: 2em!important;float: left;position: absolute;top: 10px;"></i> <span style="margin-left: 45px">Municipalidad</span></a>
+        <a class="navbar-brand" href="<?php echo $server;?>/"><i class="icon-chalate" style="font-size: 2em!important;float: left;position: absolute;top: 10px;"></i> <span style="margin-left: 45px">Cementerios</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <!--li class="nav-item active">
                     <a class="nav-link" href="<?php echo $server;?>/"><i class="fas fa-home icon margin-right-5"></i>Inicio <span class="sr-only">(current)</span></a>
-                </li>
+                </li-->
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo $server;?>/cementerios"><i class="fas fa-church icon margin-right-5"></i>Cementerios</a>
                 </li>
@@ -345,26 +367,36 @@ end estilos personalizados*/
             </ul>
             <ul class="navbar-nav padding-left-0 mr-sm-4">
             <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell margin-right-5 icon"></i><span class="badge badge-light" style="top: 0px;position: absolute;margin-left: -5px">0</span></a>
+                    <a class="nav-link" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell margin-right-5 icon"></i><span class="badge badge-light" style="top: 0px;position: absolute;margin-left: -5px">5</span></a>
 
-                    <div class="dropdown-menu menu-noti dropdown-menu-right" aria-labelledby="navbarDropdown1" style="padding: 0px!important; max-height: 50vh!important; overflow-y: auto;">
+                    <div class="dropdown-menu menu-noti dropdown-menu-right" aria-labelledby="navbarDropdown1" style="padding: 0px!important; max-height: 50vh!important; overflow-y: auto;border-bottom: solid rgba(0,0,0,.2) 1px!important;">
                         <ul class="list-group">
-                          <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Cras justo odio
-                            <span class="badge badge-primary badge-pill">14</span>
+                          <li class="list-group-item list-group-item-action justify-content-between align-items-center notification-li">
+                            <strong>Titulo 01 Procesado</strong></br>
+                            <span>El titulo 092392 esta siendo procesado00000000000000000000000</span> 
+                            <!--span class="badge badge-success badge-pill"><i class="fas fa-check"></i></span-->
+                            <small class="float-right">Hace 1 dia</small>                            
                           </li>
-                          <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Dapibus ac facilisis in
-                            <span class="badge badge-primary badge-pill">2</span>
+                          <li class="list-group-item list-group-item-action justify-content-between align-items-center notification-li">
+                            <strong>Titulo 02 Listo</strong></br>
+                            <span>El titulo 092392</span> 
+                            <!--span class="badge badge-success badge-pill"><i class="fas fa-check"></i></span-->
+                            <small class="float-right">Hace 1 dia</small>                            
                           </li>
-                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Dapibus ac facilisis in
-                            <span class="badge badge-primary badge-pill">2</span>
+                          <li class="list-group-item list-group-item-action justify-content-between align-items-center notification-li">
+                            <strong>Titulo 04 Procesado</strong></br>
+                            <span>El titulo 092392 esta siendo procesado000000</span> 
+                            <!--span class="badge badge-success badge-pill"><i class="fas fa-check"></i></span-->
+                            <small class="float-right">Hace 1 dia</small>                            
                           </li>
-                          <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Dapibus ac facilisis in
-                            <span class="badge badge-primary badge-pill">2</span>
+                          <li class="list-group-item list-group-item-action justify-content-between align-items-center notification-li">
+                            <strong>Titulo 05 Procesado</strong></br>
+                            <span>El titulo 092392 esta siendo procesad</span> 
+                            <!--span class="badge badge-success badge-pill"><i class="fas fa-check"></i></span-->
+                            <small class="float-right">Hace 1 dia</small>                            
                           </li>
+
+                          
                           
                           
                         </ul>

@@ -1,9 +1,36 @@
-<?php 
-$titulo='Crear Titulo';
-require_once('Views/default/header.php'); 
-?>
+<?php
+  $titulo='Crear Titulo';
+  require_once('Views/default/header.php');
 
+  $insert = new ConexionDB();
+  if (isset(explode('/',$_GET['action'])[1])){
+    $idta=explode('/',$_GET['action'])[1];
+    $query = $insert->Query("SELECT t1.NumeroTitulo, t1.FechaExpedido, t1.NumeroRecibo, t1.FechaRecibo, t1.Observaciones, 
+    t1.Estado, t1.Proceso, t2.Numero, t2.Poligono, t3.Tipo, t3.Descripcion, t4.NombresCiudadano, t4.ApellidosCiudadano,
+    t4.Domicilio, t4.DUI, t4.Profesion, t4.FechaNacimiento, t5.Nombre, t1.Estado FROM Titulos t1 INNER JOIN Parcelas t2 
+    ON t1.idParcela=t2.idParcela INNER JOIN TipoTitulos t3 ON t1.idTipoTitulo=t3.idTipoTitulo INNER JOIN Ciudadanos t4 
+    ON t1.idCiudadanoTitular=t4.idCiudadano INNER JOIN Cementerios t5 ON t2.idCementerio=t5.idCementerio 
+    WHERE t1.idTitulo = $idta");
 
+    $beneficiario=$insert->Query("SELECT t2.NombresCiudadano, t2.ApellidosCiudadano, 
+    t2.Domicilio, t2.DUI
+    FROM Beneficiarios t1 INNER JOIN Ciudadanos t2 ON t1.idCiudadano=t2.idCiudadano WHERE t1.idTitulo = $idta ");
+  }
+  else{
+    $query = -1;
+    $beneficiario = -1;
+  }
+
+  ?>
+
+<style>
+  .text-area {
+    padding: 15px;
+    border: 1px solid gray;
+    background: rgb(215, 215, 215);
+    border-radius: .5rem;
+  }
+</style>
 
 <!--BREADCUMB-->
 <nav aria-label="breadcrumb">
@@ -15,162 +42,223 @@ require_once('Views/default/header.php');
 </nav>
 
 <!-- aca ira todo el codigo html de la vista-->
+<div class="container-fluid">
+  <div class="row">
 
-<div class="content-wrapper">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="card card-register col-md-8 col-md-pull-9 mx-auto mt-4">
-        <div class="card-header"> <h4>Informacion del Titular</h4></div>
-        <div class="card-body">
-          <form>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="Nombres">Nombres</label>
-                <input type="text" class="form-control" id="inputEmail4" placeholder="Nombres">
-              </div>
-              <div class="form-group col-md-6">
-                <label for="Apellidos">Apellidos</label>
-                <input type="text" class="form-control" id="inputPassword4" placeholder="Apellidos">
-              </div>
 
-            </div>
-            <div class="form-group">
-              <label for="Direccion">Direccion</label>
-              <input type="text" class="form-control" id="inputAddress" placeholder="Direccion de domicilio">
-            </div>
-            <div class="form-group">
-              <label for="Dui">DUI</label>
-              <input type="text" class="form-control" id="inputAddress2" placeholder="Numero Unico de Identidad">
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="Profesion">Profesion</label>
-                <input type="text" class="form-control" id="Profesion" placeholder="Profesion u Ocupacion">
-              </div>
-              <div class="form-group col-md-6">
-                <label for="fecha">Fecha de Nacimiento</label>
-                <input class="form-control" id="datepicker" type="date">
-              </div >
-            </div>
-          </form>
+    <!-- ######## INFORMACION TITULAR ######### -->
+    <div class="col-12 col-sm-12 col-md-6">
+      <div class="card ">
+        <div class="card-header text-center">
+          <h4>Informacion del Titular</h4>
         </div>
-      </div>  
-
-
-
-      <div class="card card-register col-xs-4 mx-auto mt-4">
-        <div class="card-header"><h5 style="position: relative;">Beneficiarios</h5></div>
         <div class="card-body">
-          <div class="table-responsive">
-            <table class="table">
-              <tr>
-                <th>N°</th>
-                <th>Nombre</th>
-                <th>Apellidos</th>
-                <th>DUI</th>
+          <?php       
+            if ($query!="-1") {
+              foreach ($query as $value) {
+                echo "
+                <div class=\"row\">
+                  <div class=\"col-6 col-sm-6 col-md-4\">
+                    <p><strong>NOMBRES:</strong></p>
+                    <P>{$value['NombresCiudadano']}</P>
+                  </div>
+                  <div class=\"col-6 col-sm-6 col-md-4\">
+                    <p><strong>APELLIDOS:</strong></p>
+                    <p>{$value['ApellidosCiudadano']}</p>
+                  </div>
+                  <div class=\"col-6 col-sm-6 col-md-4\">
+                    <p><strong>DIRECCION:</strong></p>
+                    <p>{$value['Domicilio']}</p>
+                  </div>
                 
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Kevin</td>
-                <td>Rivas</td>
-                <td>05505416-9</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Samuel</td>
-                <td>Cartagena</td>
-                <td>05706516-9</td>
-                
-              </tr>
-            </table>
-          </div>
+                  <div class=\"col-6 col-sm-6 col-md-4\">
+                    <p><strong>DUI:</strong></p>
+                    <P>{$value['DUI']}</P>
+                  </div>
+                  <div class=\"col-6 col-sm-6 col-md-4\">
+                    <p><strong>PROFESION:</strong></p>
+                    <p>{$value['Profesion']}</p>
+                  </div>
+                  <div class=\"col-6 col-sm-6 col-md-4\">
+                    <p><strong>FECHA DE NAC:</strong></p>
+                    <p>{$value['FechaNacimiento']}</p>
+                  </div>
+                </div>
+              ";
+            }
+          }else{
+            echo "<center>No hay informacion Asociada</center>";
+          }
+  
+        ?>
         </div>
       </div>
     </div>
-    <div class="row">
-    <div class="container-fluid">   
-  <div class="col-12 col-sm-12 col-md-10 col-lg-10 padding-0">
-    <div class="table-responsive">
-      <table class="table table-hover margin-top-15 ">
-        <tr>
-          <th scope="col">N° Parcela</th>
-          <th scope="col">Cementerio</th>
-          <th scope="col">Tipo</th>
-          <th scope="col">Poligono</th>
-        </tr>
-        <tr class="row-hover">
-          <td scope="row">148723</td>
-          <td>Sn. José</td>
-          <td>Perpetuidad</td>
-          <td>P013</td>             
-        </tr>
-      </table>
-    </div>
-  </div>
+    <!-- ######## FIN INFORMACION TITULAR ######### -->
 
 
 
-  <div class="card card-register col-md-12 mx-auto mt-4">
-    <div class="card-header">
-      <div class="card-title">Informacion Titular</div>
-    </div>
-    <div class="card-body">
-      <div class="row">
-        <div class="form-group col-xs-4 col-md-pull-9 mt-4">
-          <h6>N° Titulo:</h6> <p>1567</p>
-        </div>
-        <div class="form-group col-xs-4 mx-auto mt-4">
-          <h6>Nombre Titular:</h6> <p>Kevin Rivas</p>
-        </div>
-        <div class="form-group col-xs-4 mx-auto mt-4">
-          <h6>Tipo de Titulo:</h6> <p style="color:#83FE2E">Perpetuidad Por Primera Vez</p>
-        </div>
-        <div class="form-group col-md-4 mx-auto mt-4">
-          <h6>Descripcion:</h6> <pre>Título expedido por la autoridad municipal por primera vez</pre>
-        </div>
-
-        <div class="form-group col-xs-4 mx-auto mt-4">
-          <h6>Fecha Expedido:</h6> <p>15/07/2018</p>
-        </div>
+    <!-- ######## INFORMACION BENEFICIARIO ######### -->
+    <div class="col-12 col-sm-12 col-md-6">
+      <div class="text-center">
+        <h4>Beneficiarios Asociados</h4>
+      </div>
+      <div class="table-responsive" style="max-height:210px; overflow-y:scroll">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>N°</th>
+              <th>Nombre</th>
+              <th>Apellidos</th>
+              <th>DUI</th>
+              <th>Domicilio</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+              if  ($beneficiario!="-1") {
+                $i = 0;
+                foreach ($beneficiario as $value) {
+                  $i++;
+                  echo "
+                    <tr>
+                    <td>$i</td>
+                    <td>{$value['NombresCiudadano']}</td>
+                    <td>{$value['ApellidosCiudadano']}</td>
+                    <td>{$value['DUI']}-9</td>
+                    <td>{$value['Domicilio']}</td>
+                    </tr>";
+                    }
+                  }
+                  else{
+                    echo"
+                    <tr>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                  </tr>";
+                  }
+              ?>
+          </tbody>
+        </table>
       </div>
     </div>
-  </div>
-  <div class="card card-register col-md-12 mx-auto mt-4">
-    <div class="card-header"> <h4>Datos de Facturación</h4></div>
-    <div class="card-body">
-      <form action="POST">
-        <div class="form-row">
-          <div class="form-group col-md-6 mx-auto">
-            <label for="Recibo">Numero de Recibo</label>
-            <input type="text" class="form-control" id="recibo" placeholder="N° Recibo">
-          </div>
-          <div class="form-group col-md-6 mx-auto">
-            <label for="">Fecha de Recibo</label>
-            <input class="form-control" type="date" name="Fecha" placeholder="DD/MM/AA">
-          </div>
 
-          <div class="form-group col-md-12">
-            <label for="">Observaciones</label>
-            <textarea class="form-control" type="" name=""></textarea> 
-          </div>
-          
-          <div class="col col-md-12 mt-4">
-            <a  class="btn btn-danger" href="<?php echo $server;?>/repotrastitulo">Regresar</a>
-            <!--a href="<?php echo $server;?>/repotrastitulo" class="btn btn-dark">Cancelar</a -->
+
+    <!-- ######## INFORMACION DE LA PARCELA ######### -->
+    <div class="col-12 col-sm-12 mt-2">
+      <div class="card card-register mx-auto mt-2">
+        <div class="card-header text-center">
+          <div class="card-title">
+            <h4>Informacion del Titulo y Parcela</h4>
           </div>
         </div>
-      </form>
-    </div>
-  </div>
-</div>
+        <div class="card-body">
+          <div class="row text-center">
+            <?php
+              if  ($query!="-1") {
+                foreach ($query as $value) {
+                  echo "
+                    <div class=\"col-6 col-sm-6 col-md-1\">
+                      <h6>N° Titulo:</h6>
+                      <p>{$value['NumeroTitulo']}</p>
+                    </div>
+                    <div class=\"col-6 col-sm-6 col-md-1\">
+                      <h6>Numero Parcela:</h6>
+                      <p>{$value['Numero']}</p>
+                    </div>
+                    <div class=\"col-6 col-sm-6 col-md-1\">
+                      <h6>Numero Poligono:</h6>
+                      <p>{$value['Poligono']}</p>
+                    </div>
+                    <div class=\"col-6 col-sm-6 col-md-2\">
+                      <h6>Cementerio:</h6>
+                      <p>{$value['Nombre']}</p>
+                    </div>
+                    <div class=\"col-6 col-sm-6 col-md-3\">
+                      <h6>Tipo de Titulo:</h6>
+                      <p>{$value['Tipo']}</p>
+                    </div>
+                    <div class=\"col-6 col-sm-6 col-md-2\">
+                      <h6>Fecha Expedido:</h6>
+                      <p>{$value['FechaExpedido']}</p>
+                    </div>
+                    <div class=\"col-6 col-sm-6 col-md-2\">
+                      <h6>Estado:</h6>
+                      "; if ($value['Estado'] == 1 && $value['Proceso'] == 1)  {
+                        echo "<p>Activo</p>";
+                      }else{
+                        echo "<p>Inactivo</p>";
+                      }
+                  echo "
+                    </div>
+    
+                    <div class=\"col-12 col-sm-12 col-md-12 \">
+                      <h6>Descripcion del Titulo:</h6>
+                      <pre>{$value['Descripcion']}</pre>
+                    </div>";
+                }
+              } else{
+                echo "
+                  <center>No hay informacion Asociada</center>
+                  ";
+              }
+            ?>
+          </div>
+        </div>
+      </div>
+<!-- ######## FIN INFORMACION TITULO ######### -->
+
+
+<!-- ######## INFORMACION FACTURA ######### -->
+      <div class="col-12 col-sm-12 mt-4"></div>
+        <div class="card">
+          <div class="card-header text-center">
+            <h4>Datos de Facturación</h4>
+          </div>
+          <div class="card-body">
+            <div class="row text-center">
+            <?php
+              if  ($query!="-1") {
+                foreach ($query as $value) {
+                  echo "
+                    <div class=\"col-12 col-sm-6 col-md-4 mx-auto\">
+                      <label for=\"Recibo\"><strong>Numero de Recibo</strong></label>
+                      <p>{$value['NumeroRecibo']}</p>
+                    </div>
+                    <div class=\"col-12 col-sm-6 col-md-4 mx-auto\">
+                      <label ><strong>Fecha de Recibo</strong></label>
+                      <p>{$value['FechaRecibo']}</p>
+                    </div>
+                    <div class=\"col-12 col-sm-12 col-md-4 mx-auto\">
+                      <label><strong>A favor de:</strong></label>
+                      <p>Alcaldia Mucicipal de Chalatenango</p>
+                    </div>
+                    <div class=\"form-group col-md-12 mx-auto\">
+                      <label><strong>Observaciones</strong></label>
+                      <p class=\"text-area\">{$value['Observaciones']}</p>
+                    </div>";
+                  }
+                } else{
+                  echo "
+                    <center>No hay informacion Asociada</center>
+                    ";
+                }
+              ?>
+              <div class="col col-md-12">
+                <a class="btn btn-danger float-right" href="<?php echo $server;?>/repotrastitulo ?>">Regresar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+<!-- ######## FIN FACTURA ######### -->
+
 
     </div>
   </div>
-</div>
 
+  <!---hasta aca -->
 
-    <!---hasta aca -->
-
-    <?php require_once('Views/default/footer.php'); ?>
+  <?php require_once('Views/default/footer.php'); ?>

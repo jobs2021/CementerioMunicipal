@@ -17,7 +17,7 @@
     <div class="row justify-content-center clear-fix">
         <div class="col-12 padding-top-15 padding-bottom-15">
             <form class="form-inline justify-content-center" method="GET">
-                <div class="input-group">
+                <div class="input-group col-sm-4">
                     <input type="text" class="form-control" name="busqueda" placeholder="Nombre del Fallecido">
                     <div class="input-group-prepend rounded">
                         <button type="submit" class="btn btn-dark rounded-right">Buscar</button>

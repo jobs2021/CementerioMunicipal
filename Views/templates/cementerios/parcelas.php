@@ -9,7 +9,9 @@
     $consulta = new ConexionDB();
     @$nombreCementerio=$consulta->Query("select Nombre from Cementerios where idCementerio={$idCementerio} and Estado='1'")[0];
 
-    $parcelas= $consulta->Query("select t1.idParcela, Numero, Poligono, count(idNicho) as Nichos,(select idTitulo from Titulos where idParcela=t1.idParcela) as Titular from Parcelas t1 left join Nichos t2 on t1.idParcela=t2.idParcela where t1.idCementerio='{$idCementerio}'  and t2.Estado='1' and t1.Estado='1' group by idParcela,Numero,Poligono,Titular");
+    $parcelas= $consulta->Query("select t1.idParcela, Numero, Poligono, (select count(idNicho) from Parcelas t1 left join Nichos t2 on t1.idParcela=t2.idParcela where t1.idCementerio='{$idCementerio}' and t1.Estado='1' and t2.Estado='1') as Nichos,(select concat(t4.NombresCiudadano,' ',t4.ApellidosCiudadano) from Titulos t3 inner join Ciudadanos t4 on t3.idCiudadanoTitular=t4.idCiudadano where t3.idParcela=t1.idParcela limit 1) as Titular from Parcelas t1 left join Nichos t2 on t1.idParcela=t2.idParcela where t1.idCementerio='{$idCementerio}' and t1.Estado='1' group by idParcela,Numero,Poligono,Titular");
+
+    //select t1.idParcela, Numero, Poligono, count(idNicho) as Nichos,(select idTitulo from Titulos where idParcela=t1.idParcela) as Titular from Parcelas t1 left join Nichos t2 on t1.idParcela=t2.idParcela where t1.idCementerio='{$idCementerio}'  and t2.Estado='1' and t1.Estado='1' group by idParcela,Numero,Poligono,Titular
 
     $tipoParcela = $consulta->Query("select * from TipoParcela");
 
@@ -44,12 +46,13 @@
                             if ($parcelasTrash!="-1") {
          
                                 foreach ($parcelasTrash as $objetoTrash) {
-                                    echo "<form action=\"{$server}/cementerioActions\" method=\"POST\">
+                                    echo "<form action=\"{$server}/parcelaActions\" method=\"POST\">
                                     <p>{$date} - {$objetoTrash['Numero']} 
                                     
                                         <input type=\"hidden\" name=\"actionId\" value=\"4\">
+                                        <input type=\"hidden\" name=\"idParcela\" value=\"{$objetoTrash['idParcela']}\">
                                         <input type=\"hidden\" name=\"idCementerio\" value=\"{$objetoTrash['idCementerio']}\">
-                                        <button type=\"submit\" class=\"btn btn-outline-danger\" data-toggle=\"modal\" data-target=\"#modalEliminar\" style=\"height:30px;\"><i class=\"fas fa-redo-alt icon margin-right-5\"></i></button>
+                                        <button type=\"submit\" class=\"btn btn-outline-danger\" style=\"height:30px;\"><i class=\"fas fa-redo-alt icon margin-right-5\"></i></button>
                                     </form>
                                     </p>";
                                 }
@@ -77,12 +80,21 @@
     <div class="row justify-content-center">
         <div class="col-12 padding-top-15 padding-bottom-15">
             <form class="form-inline justify-content-center" method="GET">
-                <div class="input-group">
-                    <input type="text" class="form-control" name="busqueda" placeholder="Numero o Poligono">
-                    <div class="input-group-prepend rounded">
-                        <button type="submit" class="btn btn-dark rounded-right">Buscar</button>
+                    <div class="col col-sm-5">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="busqueda" placeholder="Numero o Poligono">
+                                <div class="input-group-prepend rounded">
+                                    <button type="submit" class="btn btn-dark rounded-right">Buscar</button>
+                                    
+                                    <button type="button" class="btn btn-outline-primary float-right rounded" data-toggle="modal" data-target="#modalEditar" style="margin-left: 15px !important;"><i class="fas fa-plus icon margin-right-5 margin-left-0"></i>Añadir</button>
+                                </div>
+
+                            </div>
+                        
                     </div>
-                </div>
+
+                    
+
             </form>
         </div>
         
@@ -154,6 +166,7 @@
                                 <div class="card-body">
                                     <form id="formEditar" action="<?php echo $server;?>/parcelaActions" method="POST">
                                         <input type="hidden" name="actionId" value="2">
+                                         <input type="hidden" name="vista" value="0">
                                         <input type="hidden" name="idCementerio" value="<?php echo $idCementerio; ?>">
                                         <input type="hidden" name="nichosNew" id="nichosNew">
                                         <input type="hidden" name="nichosDelete" id="nichosDelete">
@@ -342,6 +355,7 @@
                         crearEvent(nicho1);
                         crearEvent(nicho2);
                         crearEvent(nicho3);
+
             var nichosArray =[nicho0,nicho1,nicho2,nicho3];
         
 
@@ -448,9 +462,9 @@
                     $('#nichosNew').attr('value',nichosA);
                     $('#nichosDelete').attr('value',nichosD);
 
-                    alert(nichosR);
-                    alert(nichosD);
-                    alert(nichosA);
+                    //alert(nichosR);
+                    //alert(nichosD);
+                    //alert(nichosA);
         });
 
 

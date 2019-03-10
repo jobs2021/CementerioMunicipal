@@ -1,7 +1,6 @@
 <?php
-
 switch (@$_POST['actionId']) {
-    case '1': // registra un nuevo ciudadano para luego ser titular
+    case '1': // registra un nuevo ciudadano para y luego CREA UN titulo
         CrearCiudadanoTitulo($_POST['nombre'],$_POST['apellido'],$_POST['direccion'],$_POST['dui'],$_POST['profesion'],$_POST['fecha'],$_POST['tipo'],$_POST['numero'],$_POST['idParcela']);
         break;
    case '2': // update
@@ -12,9 +11,6 @@ switch (@$_POST['actionId']) {
         break;
     case '4': // Selecciona la parcela en finalizartitulo
         ObtenerParcela($_POST['idParcela']);
-        break;
-    case '5': //registra un nuevo titulo
-        CrearTitulo($_POST['tipo'],$_POST['numero'],$_POST['idCiudadano'],$_POST['idParcela']);
         break;
     case '6': //obtiene la parcela y redirecciona a arrendamientocrear
         ObtenerParcelaArrandamiento($_POST['idParcela']);
@@ -28,42 +24,48 @@ switch (@$_POST['actionId']) {
         addBeneficiario($_POST['idTitulo'],$_POST['nombre'],$_POST['apellido'],$_POST['direccion'],$_POST['fecha'],$_POST['dui'],$_POST['profesion']);
     case '10': //poner en estado cero al beneficiario
         ocultarBeneficiario($_POST['idBeneficiario'],$_POST['idTitulo']);
+    case '11':
+        completarBeneficiario();//retorno titulos
+    case '12':
+        EyeTitulo($_POST['idTitulo']);
+    case '13':
+        TraspasarTitulo($_POST['idTitulo']);
+        break;
     
-
 }
 if ($_GET['action']){
     BuscarTitulo();
 }
 
 
+
+#*********************** TIUTLOS ACCION ****************************
 function CrearCiudadanoTitulo($nombre,$apellido,$direccion,$dui,$profesion,$fecha,$tipo,$numero,$idParcela){
     if (isset($nombre) && isset($apellido) && isset($direccion) && isset($dui) && isset($profesion) && isset($fecha) && isset($tipo) && isset($numero) && isset($idParcela)) {
             $insert = new ConexionDB();
             $insert->Query("insert into Ciudadanos (NombresCiudadano, ApellidosCiudadano, FechaNacimiento, Profesion, Domicilio, DUI) values ('{$nombre}','{$apellido}','{$fecha}','{$profesion}','{$direccion}','{$dui}');");
             
             $idCiudadano=$insert->Query("select idCiudadano from Ciudadanos order by idCiudadano desc limit 1");
-
             $insert->Query("insert into Titulos (idParcela,idTipoTitulo,NumeroTitulo,idCiudadanoTitular) values ({$idParcela},{$tipo},'{$numero}',{$idCiudadano[0]['idCiudadano']})");
-        
-        header("location:".$server.'/titulos');
+            $idTitulo=$insert->Query("select idTitulo from Titulos order by idTitulo desc limit 1");
+
+            header("location:".$server.'/beneficiarios/'.$idTitulo[0]['idTitulo']);
             exit();
     } else {
         echo "error en datos";
     }
+
 }
-
 function ObtenerParcela($idParcela){
-
     header("location:".$server.'/creartitulo/'.$idParcela);
             exit();
     }
-
+    
 function CrearTitulo($tipo,$numero,$idCiudadano,$idParcela){
     if (isset($tipo) && isset($numero) && isset($idCiudadano) && isset($idParcela)) {
         $insert = new ConexionDB();
         $insert->Query("insert into Titulos (idParcela,idTipoTitulo,NumeroTitulo,idCiudadanoTitular) values ({$idParcela},{$tipo},'{$numero}',{$idCiudadano})");
         $idTitulo=$insert->Query("select idTitulo from Titulos order by idTitulo desc limit 1");
-
         header("location:".$server.'/beneficiarios/'.$idTitulo[0]['idTitulo']);
             exit();
     }
@@ -78,8 +80,12 @@ function CancelarTitulo($idTitulo, $Observaciones){
         $insert->Query("UPDATE Titulos SET Estado=0 WHERE idTitulo={$idTitulo}");
         
         header("location:".$server.'/repotrastitulo');
+        exit();
     }
 }
+
+
+
 function ReponerTitulo($numeroTitulo,$idTitulo){
     if ( isset($numeroTitulo) && isset($idTitulo) ){
         $insert = new ConexionDB();
@@ -89,30 +95,99 @@ function ReponerTitulo($numeroTitulo,$idTitulo){
         $insert->Query("UPDATE Titulos SET Estado=0 where idTitulo={$idTitulo}");
         
         header("location:".$server.'/repotrastitulo');
+        exit();
     }else{
         
     }
 }
 
 
-function ObtenerParcelaArrandamiento($idParcela){    
-    header("location:".$server.'/arrendamientocrear/'.$idParcela);
-            exit();
-    }
-function CrearArrendamiento($nombre,$apellido,$direccion,$fecha,$f1sam,$anios,$idParcela){
-    if (isset($nombre) && isset($apellido) && isset($direccion) && isset($fecha) && isset($f1sam) && isset($anios) && isset($idParcela)){
+
+function TraspasarTitulo($idTitulo){
+    if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['direccion']) && 
+    isset($_POST['dui']) && isset($_POST['profesion']) && isset($_POST['fecha']) && isset($_POST['tipo']) && 
+    isset($_POST['numero']) && isset($_POST['idParcela'])) {
+
+        //llamo a la funcion que realizara el nuevo traspaso
+        TraspasarTituloReal($idTitulo,$_POST['nombre'], $_POST['apellido'], $_POST['direccion'], $_POST['dui'],
+        $_POST['profesion'], $_POST['fecha'], $_POST['tipo'], $_POST['numero'], $_POST['idParcela']);
+
+    }else{
+
+        //retorna el formulario con la parcela seleccionada
         $insert = new ConexionDB();
-        $insert->Query("INSERT INTO PagosArrendamientos (Nombres, Apellidos, Direccion, FechaPago, F1ISAM, Anios, idParcela) VALUES ('{$nombre}', '{$apellido}', '{$direccion}', '{$fecha}', '{$f1sam}', '{$anios}', {$idParcela})");
-        
-        header("location:".$server.'/arrendamientos');
+        $idParce = $insert->Query("SELECT idParcela FROM Titulos WHERE idTitulo=$idTitulo");
+        header("location:".$server.'/traspasartitulo/'.$idTitulo.'/traspaso/'.$idParce[0]['idParcela']);
+        exit();
+    }
+
+}
+
+function TraspasarTituloReal($idTitulo,$nombre,$apellido,$direccion,$dui,$profesion,$fecha,$tipo,$numero,$idParcela){
+    $insert = new ConexionDB();
+    //crea un ciudadano Existente
+    $insert->Query("insert into Ciudadanos (NombresCiudadano, ApellidosCiudadano, FechaNacimiento, Profesion, Domicilio, DUI) values ('{$nombre}','{$apellido}','{$fecha}','{$profesion}','{$direccion}','{$dui}');");
+    //id Ciudadano       
+    $idCiudadano=$insert->Query("select idCiudadano from Ciudadanos order by idCiudadano desc limit 1");
+    //Crea el nuevo Titulo
+    $insert->Query("insert into Titulos (idParcela,idTipoTitulo,NumeroTitulo,idCiudadanoTitular) values 
+    ({$idParcela},{$tipo},'{$numero}',{$idCiudadano[0]['idCiudadano']})");
+    
+    //Selecciona el id del Titulo
+    $idTitulo1=$insert->Query("select idTitulo from Titulos order by idTitulo desc limit 1");
+    //modifica el titulo anterior y lo pone en cero 
+    $insert->Query("UPDATE Titulos SET Estado=0 WHERE idTitulo={$idTitulo}");
+    
+    //obtinemos todos lo beneficiario
+    $insert->Query("SELECT * FROM Beneficiarios WHERE idTitulo={$idTitulo} AND Estado=1");
+
+    //recorremos a los beneficiarios poniendolos desactivados para dicho titulo
+    foreach ($insert as $beneficiario) {
+        $insert->Query("UPDATE Beneficiarios SET Estado=0 WHERE idBeneficiario={$beneficiario[0]['idBeneficiario']}");
+    }
+
+    
+
+    header("location:".$server.'/beneficiarios/'.$idTitulo1[0]['idTitulo']);
+    exit();
+}
+
+
+function EyeTitulo($idTitulo){
+    if (isset($idTitulo)) {
+        header("location:".$server.'/eyetitulo/'.$idTitulo);
+        exit();
     }
 }
 
 
 
 
-//Traspasar Titulo
-function TraspasarTitulo(){
+
+#********************** ARRENDAMIENTOS **********************
+function ObtenerParcelaArrandamiento($idParcela){    
+    header("location:".$server.'/arrendamientocrear/'.$idParcela);
+            exit();
+    }
+
+
+
+    
+function CrearArrendamiento($nombre,$apellido,$direccion,$fecha,$f1sam,$anios,$idParcela){
+    if (isset($nombre) && isset($apellido) && isset($direccion) && isset($fecha) && isset($f1sam) && isset($anios) && isset($idParcela)){
+        $insert = new ConexionDB();
+        $insert->Query("INSERT INTO PagosArrendamientos (Nombres, Apellidos, Direccion, FechaPago, F1ISAM, Anios, idParcela) VALUES ('{$nombre}', '{$apellido}', '{$direccion}', '{$fecha}', '{$f1sam}', '{$anios}', {$idParcela})");
+        
+        header("location:".$server.'/arrendamientos');
+        exit();
+    }
+}
+
+
+
+
+#********************* Traspasar Titulo *********************
+/*function ReponerTitulo(){
     if ( isset($numeroTitulo) && isset($idTitulo) ){
         $insert = new ConexionDB();
         $value = $insert->Query("SELECT * FROM Titulos where idTitulo={$idTitulo}");
@@ -121,12 +196,16 @@ function TraspasarTitulo(){
         $insert->Query("UPDATE Titulos SET Estado=0 where idTitulo={$idTitulo}");
         
         header("location:".$server.'/repotrastitulo');
+        exit();
     }else{
         
     }
-}
-#************* crear beneficiarios titulo********************
+}*/
 
+
+
+
+#************* crear beneficiarios titulo********************
 function addBeneficiario($idTitulo, $nombre,$apellido,$direccion,$fecha,$dui,$profesion){
     if (isset($idTitulo) && isset($nombre) && isset($apellido) && isset($direccion) && isset($fecha) && isset($dui) && isset($profesion)){
         $insert = new ConexionDB();
@@ -136,36 +215,50 @@ function addBeneficiario($idTitulo, $nombre,$apellido,$direccion,$fecha,$dui,$pr
         var_dump($idCiudadano);
         $insert->Query("INSERT INTO Beneficiarios (idTitulo, idCiudadano, Estado) VALUES({$idTitulo}, {$idCiudadano[0]['idCiudadano']}, 1)");
         header("location:".$server.'/beneficiarios/'.$idTitulo);
+        exit();
     }
 }
-
-
 function ocultarBeneficiario($idBeneficiario, $idTitulo){
     if (isset($idBeneficiario) && isset($idTitulo)){
         $insert = new ConexionDB();
         $insert->Query("UPDATE Beneficiarios SET Estado=0 where idBeneficiario={$idBeneficiario}");
         header("location:".$server.'/beneficiarios/'.$idTitulo);
+        exit();
     }
 }
+
 
 function ocultarBeneficiario2($idBeneficiario, $idTitulo){
     if (isset($idBeneficiario) && isset($idTitulo)){
         $insert = new ConexionDB();
         $insert->Query("UPDATE Beneficiarios SET Estado=0  where idBeneficiario={$idBeneficiario}");
         header("location:".$server.'/beneficiarios/'.$idTitulo);
+        exit();
     }
+}
+
+function completarBeneficiario(){
+    header("location:".$server.'/repotrastitulo');
+    exit();
 }
 
 
 
+
+
+#************************ BUSQUEDAS *********************************
 function BuscarTitulo(){
     $insert = new ConexionDB();
-
     $salida= "";
-
     if(isset($_POST['valor'])){
         $q = ($_POST['valor']);
-        $query = "SELECT t1.NumeroTitulo, t1.Proceso, t3.Tipo, t4.NombresCiudadano, t4.ApellidosCiudadano, t2.Numero, t5.Nombre, t1.Estado FROM Titulos t1 INNER JOIN Parcelas t2 ON t1.idParcela=t2.idParcela INNER JOIN TipoTitulos t3 ON t1.idTipoTitulo=t3.idTipoTitulo INNER JOIN Ciudadanos t4 ON t1.idCiudadanoTitular=t4.idCiudadano INNER JOIN Cementerios t5 ON t2.idCementerio=t5.idCementerio WHERE t1.NumeroTitulo LIKE '%{$q}%' OR t4.NombresCiudadano LIKE '%{$q}%' OR t4.ApellidosCiudadano LIKE '%{$q}%' OR t2.Numero LIKE '%{$q}%' OR t5.Nombre LIKE '%{$q}%' ORDER BY t1.idTitulo DESC ";
+        $query = "SELECT t1.idTitulo, t1.NumeroTitulo, t1.Proceso, t3.Tipo, t4.NombresCiudadano, 
+        t4.ApellidosCiudadano, t2.Numero, t5.Nombre, t1.Estado FROM Titulos t1 INNER JOIN Parcelas t2 
+        ON t1.idParcela=t2.idParcela INNER JOIN TipoTitulos t3 ON t1.idTipoTitulo=t3.idTipoTitulo INNER JOIN 
+        Ciudadanos t4 ON t1.idCiudadanoTitular=t4.idCiudadano INNER JOIN Cementerios t5 ON 
+        t2.idCementerio=t5.idCementerio WHERE t1.NumeroTitulo LIKE '%{$q}%' OR t4.NombresCiudadano LIKE '%{$q}%' OR 
+        t4.ApellidosCiudadano LIKE '%{$q}%' OR t2.Numero LIKE '%{$q}%' OR t5.Nombre LIKE '%{$q}%' 
+        ORDER BY t1.idTitulo DESC ";
     }
     @$resultado = $insert->query($query);
     $i=0;
@@ -214,20 +307,23 @@ function BuscarTitulo(){
                         $salida .= "
                         <td>
                         <div class=\"row-btn\">
-                            <a style=\"color: FORESTGREEN\" title=\"Ver Titulo\" href=\"#\" class=\"fas fa-eye\"></a>
+                            <form method=\"POST\" action=\"http://localhost/tituloActions/\">
+                                <input type=\"hidden\" name=\"actionId\" value=\"12\"/>
+                                <input type=\"hidden\" name=\"idTitulo\" value=\"{$fila['idTitulo']}\"/>
+                                <button style=\"color: FORESTGREEN; border:none; background:transparent; cursor:pointer;\" title=\"Ver Titulo\" type=\"submit\" class=\"fas fa-eye\"></button>
+                            </form>
                         </div>
                         </td>
                     </tr>";
                    
         }
         $salida.="</tbody></table>";
-
     } else {
         $salida.="No hay resultados";
-
     }
-
     echo $salida;
 }
     
+
+
 ?>

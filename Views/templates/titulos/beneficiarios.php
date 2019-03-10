@@ -11,21 +11,7 @@ require_once('Views/default/header.php');
 <div class="container-fluid">
     <div class="row">
         <div class="col">
-
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item padding-0">
-
-                    <form class="form-inline justify-content-center padding-top-15 padding-bottom-15" method="GET" action="<?php echo $server;?>/parcelas">
-                        <div class="input-group col-12 col-sm-8 col-md-6 col-lg-4">
-                            <input type="text" class="form-control" name="busqueda" placeholder="Buscar DUI o Nombre y Apellidos">
-                            <div class="input-group-prepend rounded">
-                                <button type="submit" class="btn btn-dark rounded-right">Buscar</button>
-                            </div>
-                        </div>
-                    </form>
-                </li>
-            </ul>
-
+        <h1 class="text-center mt-4">Agregar Beneficiarios al Titulo</h1>
             <div class="row padding-bottom-15">
             <?php
 
@@ -60,9 +46,7 @@ require_once('Views/default/header.php');
                             </div>    
                                     ";
                                 }
-                            }else{
-                                echo "<h1>No esxiste ningun Beneficiario</h1>";
-                            }  
+                            }
                 ?>
                 <div class="col-sm-6 col-md-4 col-lg-3 padding-top-15 " style="min-height: 125px;">
                     <!-- Button to Open the Modal -->
@@ -160,6 +144,9 @@ $beneficiariosTrash= $consulta->Query("SELECT t1.NombresCiudadano, t1.ApellidosC
             </div>
             <div class="modal-body">
                 <div class="row padding-bottom-15" >
+                <form action="<?php echo $server;?>/tituloActions" id="Guardar" method="POST">
+                    <input type="hidden" name="actionId" value="11">
+                </form>
                 <?php       
                     if ($beneficiariosTrash!="-1") {
                         $i = 0;
@@ -209,7 +196,7 @@ $beneficiariosTrash= $consulta->Query("SELECT t1.NombresCiudadano, t1.ApellidosC
 
 <!-- SAVE code-->
 <div class="fixed-action-btn " style="margin-right:75px" data-toggle="tooltip" title="Guardar" data-placement="left">
-     <a class="btn-floating btn-lg bg-primary" href="#">
+     <button class="btn-floating btn-lg bg-primary" type="submit" form="Guardar" >
             <i class="fas fa-save" style="color:#FFF;font-size: 25px;"></i>
     </a>
 </div>

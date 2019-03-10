@@ -7,6 +7,24 @@ $variable= $consulta->Query("SELECT t1.idTitulo, t1.Observaciones, t1.NumeroTitu
 
 require_once('Views/default/header.php'); 
 ?>
+<style> 
+    .ms{
+        width:100%;
+        overflow-x: hidden;
+    }
+    @media screen and (max-width:850px){
+        .ms{
+        width:100%;
+        overflow-x: scroll;
+    }
+    }
+    @media screen and (max-width:728px){
+        .ms{
+        width:100%;
+        overflow-x: scroll;
+    }
+    }
+</style>
 
 <!--BREADCUMB-->
 <nav aria-label="breadcrumb">
@@ -24,7 +42,7 @@ require_once('Views/default/header.php');
             <form class="form-inline" method="GET">
                 <div class="col-md-5 mx-auto">
                     <div class="form-group">
-                        <p align="center">
+                        <p aling="center">
                             Para realizar busquedas, ingrese un Nombre o Numero de Titulo
                         </p>
 
@@ -42,7 +60,7 @@ require_once('Views/default/header.php');
         <a id="crear" title="Crear" style="margin-right:10px" class="btn btn-secondary" href="<?php echo $server;?>/creartitulo">Crear Titulo</a>
         </div>
        
-        <div class="table-responsive">
+        <div class="table-responsive ms">
             <table class="table table-hover margin-top-15">
                 <tr>
                     <th scope="col">N°</th>
@@ -79,11 +97,19 @@ require_once('Views/default/header.php');
                         }
                         echo "
                         <td>
-                        <div class=\"row-btn\">
-                            <a style=\"color: FORESTGREEN\" title=\"Ver Titulo\" href=\"#\" class=\"fas fa-eye\"></a>   
-                            <a style=\"color: DODGERBLUE\" href=\"#\" title=\"Traspasar Titulo\" class=\"fas fa-exchange-alt\"></a>
-                            <a data-toggle=\"modal\" data-target=\"#reponerMd\" style=\"color: #2F2F2F\" href=\"#\" title=\"Reponer Titulo\" class=\"fas fa-copy\" onClick=\"reponerTitulo({$value['idTitulo']});\"></a>
-                            <a id=\"eliminar\" style=\"color: #FF4500\" href=\"#\" title=\"Cancelar Titulo\" class=\"fas fa-times-circle\" data-toggle=\"modal\" data-target=\"#eliminarMd\" onClick=\"selTitulo({$value['NumeroTitulo']},{$value['idTitulo']}, '{$value['Observaciones']}');\"></a>
+                        <div class=\"row-btn row text-center\">
+                        <form method=\"POST\" action=\"http://localhost/tituloActions/\">
+                            <input type=\"hidden\" name=\"actionId\" value=\"12\"/>
+                            <input type=\"hidden\" name=\"idTitulo\" value=\"{$value['idTitulo']}\"/>
+                            <button style=\"color: FORESTGREEN; border:none; background:transparent; cursor:pointer;\" title=\"Ver Titulo\" type=\"submit\" class=\"fas fa-eye\"></button>
+                        </form>
+                        <form method=\"POST\" action=\"http://localhost/tituloActions/\">
+                            <input type=\"hidden\" name=\"actionId\" value=\"13\"/>
+                            <input type=\"hidden\" name=\"idTitulo\" value=\"{$value['idTitulo']}\"/>
+                            <button style=\"color: DODGERBLUE; border:none; background:transparent; cursor:pointer;\" title=\"Traspasar Titulo\" class=\"fas fa-exchange-alt mx-1\" type=\"submit\"></button>
+                        </form>
+                            <a data-toggle=\"modal\" data-target=\"#reponerMd\" style=\"color: #2F2F2F\" href=\"#\" title=\"Reponer Titulo\" class=\"fas fa-copy mx-1\" onClick=\"reponerTitulo({$value['idTitulo']});\"></a>
+                            <a id=\"eliminar\" style=\"color: #FF4500\" href=\"#\" title=\"Cancelar Titulo\" class=\"fas fa-times-circle mx-1\" data-toggle=\"modal\" data-target=\"#eliminarMd\" onClick=\"selTitulo({$value['NumeroTitulo']},{$value['idTitulo']}, '{$value['Observaciones']}');\"></a>
                         </div>
                         </td>
                         </tr>
