@@ -156,19 +156,6 @@
                             }
 
                         ?>
-                        
-                        <!--div class="card card-trash">
-                          <div class="card-header text-center">
-                            <i class="fas fa-church icon" style="font-size: 80px!important;margin-left: 0px"></i>
-                            <input type="checkbox" class="float-right" name="idCementerio[]" value="{id}">
-                        </div>
-                          <div class="card-body" style="padding: 5px !important;">
-                            <p class="card-text">Monte Piedad</p>
-                          </div>
-                        </div --> 
-
-
-
 
                       </div>
                       <div class="modal-footer">
@@ -182,7 +169,6 @@
 
                 <script type="text/javascript">
                     $(".card-trash").click(function(){
-                        console.log($(this).find('input')[0].checked);
                         if ($(this).find('input')[0].checked) {
                             $(this).find('input').prop('checked',false);
                             $(this).removeClass('card-trash-checked');
