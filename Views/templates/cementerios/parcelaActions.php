@@ -4,7 +4,7 @@ if (isset($_POST['actionId'])) {
 	switch ($_POST['actionId']) {
 	    case '1': // add
 	    @$nichos=explode(',',$_POST['nichos']);
-	    CrearParcela($_POST['poligono'],$_POST['tipo'],$_POST['coordenadaX'],$_POST['coordenadaY'],$_POST['idCementerio'],$_POST['numero'],$nichos);
+	    CrearParcela($_POST['poligono'],$_POST['tipo'],$_POST['coordenadaX'],$_POST['coordenadaY'],$_POST['idCementerio'],$_POST['numero'],$nichos,$_POST['Came']);
 
 	        break;
 	   case '2': // update
@@ -30,7 +30,7 @@ if (isset($_POST['actionId'])) {
 
 
 //add parcela
-function CrearParcela($poligono,$tipo,$coordenadaX,$coordenadaY,$idCementerio,$numero,$nichos){
+function CrearParcela($poligono,$tipo,$coordenadaX,$coordenadaY,$idCementerio,$numero,$nichos,$came){
     if (isset($idCementerio) && isset($poligono) && isset($tipo) && isset($coordenadaX) && isset($coordenadaY) && isset($numero)) {
             $fecha=date('Y').'-'.date('m').'-'.date('d');
             $insert = new ConexionDB();
@@ -43,7 +43,7 @@ function CrearParcela($poligono,$tipo,$coordenadaX,$coordenadaY,$idCementerio,$n
             	}
             }
 
-            header("location:".$server.'/admincementerio/'.$idCementerio);
+            header("location:".$server.'/'.$came.'/'.$idCementerio);
             exit();
     }
 }
@@ -99,8 +99,12 @@ function ReturnParcela($id){
     }else{
         $datos2 = $db->Query("select t1.NumeroOrden from Nichos t1 where t1.idParcela={$id} and t1.Estado='1'");
         $nichos=[];
-        foreach ($datos2 as $nicho) {
-            array_push($nichos, $nicho['NumeroOrden']);
+        if ($datos2 != -1) {
+            foreach ($datos2 as $nicho) {
+                array_push($nichos, $nicho['NumeroOrden']);
+            }
+        }else{
+            array_push($nichos, -1);
         }
         $datos[0]['Nichos']=$nichos;
        echo json_encode($datos);    

@@ -328,7 +328,8 @@ end estilos personalizados*/
 }
 .card-trash{
     border: 2px solid rgba(0, 0, 0, 0.0825);
-    margin-right: 10px!important;
+    margin-left: 10px!important;
+    margin-bottom: 10px!important;
     width: 140px!important;
     height: 140px!important;
 }
@@ -341,6 +342,10 @@ end estilos personalizados*/
 }
 .card-trash > .card-body > .card-text{
     text-overflow: ellipsis;white-space: nowrap;overflow: hidden;font-size: 14px
+}
+.modal-trash {
+    max-height: 70vh!important;
+    overflow-y: auto!important;
 }
 .card-trash-checked{
     border: 2px solid #007bff!important;

@@ -37,7 +37,7 @@
                         </button>
                       </div>
                        <form action="<?php echo $server;?>/parcelaActions" method="POST">
-                      <div class="modal-body d-flex flex-row">
+                      <div class="modal-body d-flex flex-wrap">
                             <input type="hidden" name="actionId" value="4">
                             <input type="hidden" name="Came" value="<?php echo explode('/',$_GET['action'])[0]; ?>">
                             <input type="hidden" name="idCementerio" value="<?php echo $idCementerio; ?>">
@@ -198,6 +198,7 @@
                                 <div class="card-body">
                                     <form action="<?php echo $server;?>/parcelaActions" method="POST">
                                         <input type="hidden" name="actionId" value="1">
+                                        <input type="hidden" name="Came" value="<?php echo explode('/',$_GET['action'])[0]; ?>">
                                         <input type="hidden" name="idCementerio" value="<?php echo $idCementerio; ?>">
                                         <input type="hidden" name="nichos" id="nichosSend">
                                         <div class="form-group">
