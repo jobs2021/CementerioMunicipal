@@ -36,22 +36,31 @@
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
-                      <div class="modal-body">
+                       <form action="<?php echo $server;?>/parcelaActions" method="POST">
+                      <div class="modal-body d-flex flex-row">
+                            <input type="hidden" name="actionId" value="4">
+                            <input type="hidden" name="Came" value="<?php echo explode('/',$_GET['action'])[0]; ?>">
+                            <input type="hidden" name="idCementerio" value="<?php echo $idCementerio; ?>">
                          <?php 
                             $parcelasTrash= $conexion->Query("select * from Parcelas where Estado='0' and idCementerio='{$idCementerio}'");
-                            $date=date('d/m/Y');
                             if ($parcelasTrash!="-1") {
          
                                 foreach ($parcelasTrash as $objetoTrash) {
-                                    echo "<form action=\"{$server}/cementerioActions\" method=\"POST\">
-                                    <p>{$date} - {$objetoTrash['Numero']} 
+
+                                    echo "
                                     
-                                        <input type=\"hidden\" name=\"actionId\" value=\"4\">
-                                        <input type=\"hidden\" name=\"idCementerio\" value=\"{$objetoTrash['idCementerio']}\">
-                                        <button type=\"submit\" class=\"btn btn-outline-danger\" data-toggle=\"modal\" data-target=\"#modalEliminar\" style=\"height:30px;\"><i class=\"fas fa-redo-alt icon margin-right-5\"></i></button>
-                                    </form>
-                                    </p>";
+                                    <div class=\"card card-trash\">
+                                      <div class=\"card-header text-center\">
+                                        <i class=\"fas fa-dungeon icon\" style=\"font-size: 80px!important;margin-left: 0px\"></i>
+                                        <input type=\"checkbox\" class=\"float-right\" name=\"idParcela[]\" value=\"{$objetoTrash['idParcela']}\">
+                                    </div>
+                                      <div class=\"card-body\" style=\"padding: 5px !important;\">
+                                        <p class=\"card-text\">{$objetoTrash['Numero']} </p>
+                                      </div>
+                                    </div> ";
+
                                 }
+                                
                             }else{
                                 echo "<center>Papelera Vacia</center>";
                             }
@@ -59,7 +68,8 @@
                         ?>
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Guardar</button>
+                        <button type="submit" class="btn btn-primary">Restaurar</button>
+                        </form>
                       </div>
                     </div>
                   </div>
@@ -356,3 +366,14 @@
         //alert('working');
     });
     </script>
+    <script type="text/javascript">
+    $(".card-trash").click(function(){
+        if ($(this).find('input')[0].checked) {
+            $(this).find('input').prop('checked',false);
+            $(this).removeClass('card-trash-checked');
+        }else{
+            $(this).find('input').prop('checked',true);
+            $(this).addClass('card-trash-checked');
+        }
+    })
+</script>

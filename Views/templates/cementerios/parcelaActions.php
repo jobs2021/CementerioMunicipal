@@ -18,7 +18,7 @@ if (isset($_POST['actionId'])) {
 	        break;
 
         case '4': // restore
-        RestoreParcela($_POST['idParcela'],$_POST['idCementerio']);
+        RestoreParcela($_POST['idParcela'],$_POST['idCementerio'],$_POST['Came']);
         break;  
 	} 
 }else{
@@ -108,17 +108,17 @@ function ReturnParcela($id){
     
 }
 
-function RestoreParcela($id,$idCementerio){
+function RestoreParcela($id,$idCementerio,$came){
         if (isset($id)) {
             $update = new ConexionDB();
             foreach ($id as $key) {
             $update->Query("update Parcelas set Estado='1' where idParcela='{$key}';");
             }
 
-            header("location:".$server.'/parcelas/'.$idCementerio);
+            header("location:".$server.'/'.$came.'/'.$idCementerio);
             exit();
     }else{
-        header("location:".$server.'/parcelas/'.$idCementerio);
+        header("location:".$server.'/'.$came.'/'.$idCementerio);
             exit();
     }
 }

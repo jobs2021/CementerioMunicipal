@@ -42,6 +42,7 @@
                       <form action="<?php echo $server;?>/parcelaActions" method="POST">
                       <div class="modal-body d-flex flex-row">
                             <input type="hidden" name="actionId" value="4">
+                            <input type="hidden" name="Came" value="<?php echo explode('/',$_GET['action'])[0]; ?>">
                             <input type="hidden" name="idCementerio" value="<?php echo $idCementerio; ?>">
                         <?php 
                             $parcelasTrash= $consulta->Query("select * from Parcelas where Estado='0' and idCementerio='{$idCementerio}'");
@@ -492,16 +493,16 @@
 </script>
 
 
-                <script type="text/javascript">
-                    $(".card-trash").click(function(){
-                        if ($(this).find('input')[0].checked) {
-                            $(this).find('input').prop('checked',false);
-                            $(this).removeClass('card-trash-checked');
-                        }else{
-                            $(this).find('input').prop('checked',true);
-                            $(this).addClass('card-trash-checked');
-                        }
-                    })
-                </script>
+<script type="text/javascript">
+    $(".card-trash").click(function(){
+        if ($(this).find('input')[0].checked) {
+            $(this).find('input').prop('checked',false);
+            $(this).removeClass('card-trash-checked');
+        }else{
+            $(this).find('input').prop('checked',true);
+            $(this).addClass('card-trash-checked');
+        }
+    })
+</script>
 
    
