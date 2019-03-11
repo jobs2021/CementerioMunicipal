@@ -132,7 +132,7 @@
                         </button>
                       </div>
                         <form action="<?php echo $server;?>/cementerioActions" method="POST">
-                      <div class="modal-body d-flex flex-wrap">
+                      <div class="modal-body d-flex flex-wrap modal-trash">
                             <input type="hidden" name="actionId" value="4">
                         
                         <?php 

@@ -37,7 +37,7 @@
                         </button>
                       </div>
                        <form action="<?php echo $server;?>/parcelaActions" method="POST">
-                      <div class="modal-body d-flex flex-wrap">
+                      <div class="modal-body d-flex flex-wrap modal-trash">
                             <input type="hidden" name="actionId" value="4">
                             <input type="hidden" name="Came" value="<?php echo explode('/',$_GET['action'])[0]; ?>">
                             <input type="hidden" name="idCementerio" value="<?php echo $idCementerio; ?>">
