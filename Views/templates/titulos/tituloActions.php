@@ -46,8 +46,12 @@ function CrearCiudadanoTitulo($nombre,$apellido,$direccion,$dui,$profesion,$fech
             $insert->Query("insert into Ciudadanos (NombresCiudadano, ApellidosCiudadano, FechaNacimiento, Profesion, Domicilio, DUI) values ('{$nombre}','{$apellido}','{$fecha}','{$profesion}','{$direccion}','{$dui}');");
             
             $idCiudadano=$insert->Query("select idCiudadano from Ciudadanos order by idCiudadano desc limit 1");
-            $insert->Query("insert into Titulos (idParcela,idTipoTitulo,NumeroTitulo,idCiudadanoTitular) values ({$idParcela},{$tipo},'{$numero}',{$idCiudadano[0]['idCiudadano']})");
+            $insert->Query("insert into Titulos (idParcela,idTipoTitulo,NumeroTitulo,idCiudadanoTitular,Estado) values ({$idParcela},{$tipo},'{$numero}',{$idCiudadano[0]['idCiudadano']},1)");
             $idTitulo=$insert->Query("select idTitulo from Titulos order by idTitulo desc limit 1");
+
+             //session para enviar notificacion
+            session_start();
+            $_SESSION['JsonNotification'] = '{ "msg":"Titulo '.$numero.' en Proceso...", "title":"Titulo Nuevo" }';
 
             header("location:".$server.'/beneficiarios/'.$idTitulo[0]['idTitulo']);
             exit();
@@ -55,6 +59,7 @@ function CrearCiudadanoTitulo($nombre,$apellido,$direccion,$dui,$profesion,$fech
         echo "error en datos";
     }
 }
+
 function ObtenerParcela($idParcela){
     header("location:".$server.'/creartitulo/'.$idParcela);
             exit();
@@ -219,7 +224,7 @@ function ocultarBeneficiario2($idBeneficiario, $idTitulo){
 }
 
 function completarBeneficiario(){
-    header("location:".$server.'/repotrastitulo');
+    header("location:".$server.'/titulos');
     exit();
 }
 

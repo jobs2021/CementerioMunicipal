@@ -102,11 +102,12 @@
                     <li class="list-group-item">
                         <?php
                         @$numeroParcelas=$conexion->Query("select count(*) as numero from Parcelas where idCementerio={$idCementerio}  and Estado='1'")[0];
+                        @$nichosDisponibles=$conexion->Query("select (count(t1.idParcela) - count(t3.idEnterramiento)) as NichosDisponibles from Parcelas t1 inner join Nichos t2 on t1.idParcela=t2.idParcela left join Enterramientos t3 on t2.idNicho=t3.idNicho where t1.idCementerio='{$idCementerio}' and t2.Estado='1' and t1.Estado='1'")[0]['NichosDisponibles'];
                         echo '
                         <p>Tipo: '.$cementerio->Tipo.'</p>
                         <p>Area: '.$cementerio->Area.' m<sup>2</sup></p>
                         <p>Parcelas: '.$numeroParcelas['numero'].'</p>
-                        <p>Nichos Disponibles: 0</p>
+                        <p>Nichos Disponibles: '.$nichosDisponibles.'</p>
                         <p>Legalidad: '.(($cementerio->Legalidad==1) ? "Si" : "No").'</p>
                         <p>Panteonero: '.$cementerio->Panteonero.'</p>
                         <p>Direccion: '.$cementerio->Direccion.'</p>';
