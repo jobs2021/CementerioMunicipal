@@ -91,7 +91,7 @@
                     </li>
                     <li class="list-group-item">
                         <?php
-                        @$numeroParcelas=$conexion->Query("select count(*) as numero from Parcelas where idCementerio={$idCementerio}")[0];
+                        @$numeroParcelas=$conexion->Query("select count(*) as numero from Parcelas where idCementerio={$idCementerio}  and Estado='1'")[0];
                         echo '
                         <p>Tipo: '.$cementerio->Tipo.'</p>
                         <p>Area: '.$cementerio->Area.' m<sup>2</sup></p>
