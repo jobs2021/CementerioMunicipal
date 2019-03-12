@@ -103,6 +103,7 @@
 <?php require_once('Views/default/footer.php'); ?>
 <!-- modla -->
 <!-- Button to Open the Modal -->
+
 <!-- The Modal -->
 <div class="modal fade" id="myModal">
     <div class="modal-dialog">
@@ -135,10 +136,10 @@
                                     <label for="edad">Parentesco:</label>
                                     <input type="text" class="form-control" id="edad">
                                 </div>
-                                <div class="form-group col-6">
-                                    <label for="edad">Fecha:</label>
-                                    <input type="text" class="form-control" id="edad" value="<?php echo date('d/m/Y'); ?>">
-                                </div>
+                            <div class="form-group col-6">
+                                <label for="txt3">Fecha Inicio:</label>
+                                <input type="date" class="form-control" id="txt3" value="<?php echo date('Y-m-d'); ?>" name="Fecha">
+                            </div>
                             </div>
                             <div class="form-group">
                                 <label for="edad">Destino:</label>
@@ -163,6 +164,8 @@
         </div>
     </div>
 </div>
+
+<!--- end modal -->
 <!--- script -->
 <script type="text/javascript">
 $(document).ready(function() {

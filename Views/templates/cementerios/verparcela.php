@@ -9,7 +9,7 @@
     
     $consulta = new ConexionDB();
 
-    $parcela= $consulta->Query("select (select (count(t1.idParcela) - count(t3.idEnterramiento)) from Parcelas t1 inner join Nichos t2 on t1.idParcela=t2.idParcela left join Enterramientos t3 on t2.idNicho=t3.idNicho where t1.idParcela='{$idParcela}' and t2.Estado='1') as NichosDisponibles, t1.idParcela, idCementerio, Numero, Poligono, (select count(idNicho) from Parcelas t1 inner join Nichos t2 on t1.idParcela=t2.idParcela where t2.Estado='1' and t1.idParcela='{$idParcela}') as Nichos,(select idTitulo from Titulos where idParcela=t1.idParcela limit 1) as Titular,(select Descripcion from TipoParcela tp where tp.idTipoParcela=t1.idTipoParcela) as TipoParcela,CoordenadaX,CoordenadaY from Parcelas t1 left join Nichos t2 on t1.idParcela=t2.idParcela where t1.idParcela='{$idParcela}' group by idParcela,Numero,Poligono,Titular,idCementerio,TipoParcela,CoordenadaX,CoordenadaY")[0];
+    $parcela= $consulta->Query("select (select (count(t1.idParcela) - count(t3.idEnterramiento)) from Parcelas t1 inner join Nichos t2 on t1.idParcela=t2.idParcela left join Enterramientos t3 on t2.idNicho=t3.idNicho where t1.idParcela='{$idParcela}' and t2.Estado='1') as NichosDisponibles, t1.idParcela, idCementerio, Numero, Poligono, (select count(idNicho) from Parcelas t1 inner join Nichos t2 on t1.idParcela=t2.idParcela where t2.Estado='1' and t1.idParcela='{$idParcela}') as Nichos,(select concat(ty.NombresCiudadano,' ',ty.ApellidosCiudadano) from Titulos tx inner join Ciudadanos ty on tx.idCiudadanoTitular=ty.idCiudadano where idParcela=t1.idParcela limit 1) as Titular, (select Descripcion from TipoParcela tp where tp.idTipoParcela=t1.idTipoParcela) as TipoParcela,CoordenadaX,CoordenadaY from Parcelas t1 left join Nichos t2 on t1.idParcela=t2.idParcela where t1.idParcela='{$idParcela}' group by idParcela, Numero, Poligono, Titular, idCementerio, TipoParcela, CoordenadaX, CoordenadaY")[0];
 
     $tipoParcela = $consulta->Query("select * from TipoParcela");
 
@@ -543,13 +543,17 @@
 <script type="text/javascript">
 
         var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-        osmAttrib = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors', 
+        osmAttrib = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>', 
         osm = L.tileLayer(osmUrl, {maxZoom: 22, attribution: osmAttrib});
+
+        <?php
+        echo "var X = {$parcela['CoordenadaX']}; var Y = {$parcela['CoordenadaY']};";
+        ?>
 
         var map = L.map('map').setView([14.04141, -88.94374], 19).addLayer(osm);
 
-        L.marker([14.04141, -88.94374]).addTo(map)
-            .bindPopup("<strong>Parcela <?php echo $parcela['Numero']; ?></strong>, Poligono <?php echo $parcela['Poligono']; ?>")
+        L.marker([X, Y]).addTo(map)
+            .bindPopup("<?php echo $nombreCementerio['Nombre']; ?>, <strong>Parcela <?php echo $parcela['Numero']; ?></strong>, Poligono <?php echo $parcela['Poligono']; ?>")
             .openPopup();
 
 </script>

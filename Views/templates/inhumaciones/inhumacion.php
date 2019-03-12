@@ -25,7 +25,7 @@
                 </div>
             </form>
         </div>
-        <div class="col-12 col-sm-12 col-md-10 col-lg-10 padding-0">
+        <div class="col-12 col-sm-12 col-md-11 col-lg-11 padding-0">
             <div class="table-responsive">
                 <table class="table table-hover margin-top-15">
                     <thead>
@@ -41,19 +41,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="row-hover">
+                        <tr class="row-hover row-overflow">
                             <td scope="row">1</td>
-                            <td>001</td>
-                            <td>004</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td class="text-right">
+                            <td>xxxxxxx xxxxxxx xxxxxxx xxxxxxx </td>
+                            <td>xxxxxxx xxxxxxx xxxxxxx xxxxxxx </td>
+                            <td>xxxxxxx xxxxxxx </td>
+                            <td>xx/xx/xxxx</td>
+                            <td title="Ubicacion es xxxxxxxxx xxxxxxxxxxxxx "><i class="fas fa-comment-dots"></i> Mostrar</td>
+                            <td title="comentario xxxxxxx xxxxxxx xxxxxxx xxxx"><i class="fas fa-comment-dots"></i> Mostrar</td>
+                            <td class="text-right" style="width: 170px!important;">
                                 <div class="row-btn">
                                     <a href="<?php echo $server;?>/inhumacion"><i class="fas fa-eye icon" title="Ver Inhumacion"></i></a>
                                     <a href="#" data-toggle="modal" data-target="#modalAgregarParcela" data-slide-to="0"><i class="fa fa-edit icon" title="Editar"></i></a>
-                                    <a href="#" data-toggle="modal" data-target="#modalEliminar" class="text-danger"><i class="fas fa-minus-circle icon" title="Exhumar"></i></a>
+                                    <a href="<?php echo $server;?>/inhumacion"><i class="fas fa-exchange-alt icon" title="Trasladar"></i></a>
+                                    <a href="<?php echo $server;?>/inhumacion" class="text-danger"><i class="fas fa-external-link-alt icon" title="Exhumar"></i></a>
+                                    <a href="#" data-toggle="modal" data-target="#modalEliminar" class="text-danger"><i class="fas fa-trash icon" title="Eliminar"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -110,10 +112,6 @@
             <!-- Modal body -->
             <div class="modal-body">
 
-                
-
-
-
    
             <ul class="list-group list-group-flush">
                
@@ -122,39 +120,39 @@
                         <div class="form-row">
                             <div class="form-group col-12 col-md-6 col-lg-6">
                                 <label for="nombre">Nombres Fallecido:</label>
-                                <input type="text" class="form-control" id="nombre">
+                                <input type="text" class="form-control" id="nombre" name="NombresFallecido">
                             </div>
                             <div class="form-group col-12 col-md-6 col-lg-6">
-                                <label for="edad">Apellidos Fallecido:</label>
-                                <input type="text" class="form-control" id="edad">
+                                <label for="txt1">Apellidos Fallecido:</label>
+                                <input type="text" class="form-control" id="txt1" name="ApellidosFallecido">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-12 col-md-6 col-lg-6">
-                                <label for="sel2" :>Tipo Inhumación:</label>
-                                <select class="form-control" id="sel2">
-                                    <option>Tipo 1</option>
-                                    <option>Tipo 2</option>
+                                <label for="txt2" :>Tipo Inhumación:</label>
+                                <select class="form-control" id="txt2" name="TipoInhumacion">
+                                    <option value="0">Normal</option>
+                                    <option value="1">Permiso Abrir y Cerrar</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-6">
-                                <label for="edad">Fecha Inicio:</label>
-                                <input type="text" class="form-control" id="edad" value="<?php echo date('d/m/Y'); ?>">
+                                <label for="txt3">Fecha Inicio:</label>
+                                <input type="date" class="form-control" id="txt3" value="<?php echo date('Y-m-d'); ?>" name="FechaInicio">
                             </div>
                             <div class="form-group col-6">
-                                <label for="edad">Fecha Fin:</label>
-                                <input type="text" class="form-control" id="edad" value="<?php echo date('d/m/').(date('Y')+7); ?>">
+                                <label for="txt5">Fecha Fin:</label>
+                                <input type="date" class="form-control" id="txt5" value="<?php echo (date('Y')+7).date('-m-d'); ?>" name="FechaFin">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="edad">F1SAM:</label>
-                            <input type="text" class="form-control" id="edad">
+                            <label for="txt4">F1SAM:</label>
+                            <input type="text" class="form-control" id="txt4" name="F1SAM">
                         </div>
                         <div class="form-group">
-                            <label for="edad">Observaciones:</label>
-                            <textarea class="form-control" id="edad" rows="2"></textarea>
+                            <label for="txt4">Observaciones:</label>
+                            <textarea class="form-control" id="txt4" rows="2" name="Observaciones"></textarea>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-lg-3">
@@ -164,19 +162,13 @@
                     </form>
                 </li>
             </ul>
- 
-   
-
-
-
-
-
-
 
             </div>
         </div>
     </div>
 </div>
+
+<!-- End Modal -->
 
 
 <!---hasta aca -->

@@ -140,7 +140,7 @@
                                     <div class=\"row-btn\">
                                         <a href=\"{$server}/verparcela/{$parcela['idParcela']}\"><i class=\"fas fa-eye icon\" title=\"Ver Parcela\"></i></a>
                                         <a id=\"btnE{$parcela['idParcela']}\" class=\"btn-editar-parcela\" href=\"#\" data-toggle=\"modal\" data-target=\"#modalEditarParcela\" data-slide-to=\"0\"><i class=\"fa fa-edit icon\" title=\"Editar\"></i></a>
-                                        <a id=\"btnD{$parcela['idParcela']}\" class=\"btn-eliminar-parcela\" href=\"#\" data-toggle=\"modal\" data-target=\"#modalEliminar\" class=\"text-danger\"><i class=\"fas fa-trash icon\" title=\"Eliminar\"></i></a>
+                                        <a id=\"btnD{$parcela['idParcela']}\" class=\"btn-eliminar-parcela\" href=\"#\" data-toggle=\"modal\" data-target=\"#modalEliminar\" class=\"text-danger\" numero=\"{$parcela['Numero']}\"><i class=\"fas fa-trash icon\" title=\"Eliminar\"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -290,7 +290,7 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body">
-                Esta Seguro que quiere eliminar la parcela 005?
+                <p id="DelParce">Esta Seguro que quiere eliminar la parcela 005?</p>
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
@@ -350,11 +350,11 @@
                                         <div class="form-row">
                                             <div class="form-group col-6">
                                                 <label for="coordenadaX">Coordenadas X:</label>
-                                                <input type="text" class="form-control" id="coordenadaX_" name="coordenadaX">
+                                                <input type="text" class="form-control" id="coordenadaX_" name="coordenadaX" value="14.04141">
                                             </div>
                                             <div class="form-group col-6">
                                                 <label for="coordenadaY">Coordenadas Y:</label>
-                                                <input type="text" class="form-control" id="coordenadaY_" name="coordenadaY">
+                                                <input type="text" class="form-control" id="coordenadaY_" name="coordenadaY" value="-88.94374">
                                             </div>
                                         </div>
                                 </div>
@@ -567,6 +567,7 @@
         $('.btn-eliminar-parcela').click(function(event) {
            var id=this.id.substring(4);
            $('#parcelaDelete').attr('value',id);
+           $('#DelParce').text('Esta seguro que desea eliminar la parcela '+($(this).attr('numero'))+'?');
         });
 
         $('#btnSave').click(function(event) {

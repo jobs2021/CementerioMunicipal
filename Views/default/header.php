@@ -291,17 +291,17 @@ end estilos personalizados*/
     color: black;
 }
 
-.dropdown-menu{
+.dropdown-menu-n{
     background-color: #373737!important;
     border: none!important;
 }
-.dropdown-menu > a{
+.dropdown-menu-n > a{
     color: rgba(255,2555,255,.5)!important;
 }
-.dropdown-menu > a:hover{
+.dropdown-menu-n > a:hover{
     background-color: rgba(255,2555,255,.2)!important;
 }
-.dropdown-menu > a:visited{
+.dropdown-menu-n > a:visited{
     background-color: #373737;
 }
 .dropdown-divider{
@@ -350,6 +350,15 @@ end estilos personalizados*/
 .card-trash-checked{
     border: 2px solid #007bff!important;
 }
+.row-overflow > td{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+}
+#divFallecidos{
+    background-color: #fff!important;
+}
 
         
     </style>
@@ -371,7 +380,7 @@ end estilos personalizados*/
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-skull icon margin-right-5"></i>Inhumaciones</a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu dropdown-menu-n" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="<?php echo $server;?>/inhumacion">Inhumacion</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="<?php echo $server;?>/exhumacion">Exhumacion</a>
@@ -380,7 +389,7 @@ end estilos personalizados*/
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-file-alt icon margin-right-5"></i>Titulos & Arrendamientos</a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                    <div class="dropdown-menu dropdown-menu-n" aria-labelledby="navbarDropdown1">
                         <a class="dropdown-item" href="<?php echo $server;?>/titulos">Titulos</a>
                         <a class="dropdown-item" href="<?php echo $server;?>/repotrastitulo">Operaciones a Titulo</a>
                         <a class="dropdown-item" href="<?php echo $server;?>/arrendamientos">Arrendamientos</a>
@@ -396,7 +405,7 @@ end estilos personalizados*/
             <li class="nav-item dropdown">
                     <a class="nav-link" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell margin-right-5 icon"></i><span class="badge badge-light" style="top: 0px;position: absolute;margin-left: -5px">5</span></a>
 
-                    <div class="dropdown-menu menu-noti dropdown-menu-right" aria-labelledby="navbarDropdown1" style="padding: 0px!important; max-height: 50vh!important; overflow-y: auto;border-bottom: solid rgba(0,0,0,.2) 1px!important;">
+                    <div class="dropdown-menu dropdown-menu-n menu-noti dropdown-menu-right" aria-labelledby="navbarDropdown1" style="padding: 0px!important; max-height: 50vh!important; overflow-y: auto;border-bottom: solid rgba(0,0,0,.2) 1px!important;">
                         <ul class="list-group">
                           <li class="list-group-item list-group-item-action justify-content-between align-items-center notification-li">
                             <strong>Titulo 01 Procesado</strong></br>
@@ -432,7 +441,7 @@ end estilos personalizados*/
             </li>
             <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user margin-right-5 icon"></i> <?php echo $user;?> </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown1">
+                    <div class="dropdown-menu dropdown-menu-n dropdown-menu-right" aria-labelledby="navbarDropdown1">
                         <a class="dropdown-item" style="color:#FF4500" href="<?php echo $server;?>/configurar">Configuraciones</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" style="color:#FF4500" href="<?php echo $server;?>/logout">Desconectar</a>

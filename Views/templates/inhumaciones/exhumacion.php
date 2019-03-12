@@ -20,8 +20,8 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-6">
-                        <label for="edad">Fecha:</label>
-                        <input type="text" class="form-control" id="edad" value="<?php echo date('d/m/Y'); ?>">
+                        <label for="txt3">Fecha Inicio:</label>
+                        <input type="date" class="form-control" id="txt3" value="<?php echo date('Y-m-d'); ?>" name="Fecha">
                     </div>
                     <div class="form-group col-6">
                         <label for="sel2" :>Via Judicial:</label>

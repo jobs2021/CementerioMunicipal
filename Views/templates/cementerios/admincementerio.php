@@ -223,11 +223,11 @@
                                         <div class="form-row">
                                             <div class="form-group col-6">
                                                 <label for="coordenadaX">Coordenadas X:</label>
-                                                <input type="text" class="form-control" id="coordenadaX" name="coordenadaX">
+                                                <input type="text" class="form-control" id="coordenadaX" name="coordenadaX" value="14.04141">
                                             </div>
                                             <div class="form-group col-6">
                                                 <label for="coordenadaY">Coordenadas Y:</label>
-                                                <input type="text" class="form-control" id="coordenadaY" name="coordenadaY">
+                                                <input type="text" class="form-control" id="coordenadaY" name="coordenadaY" value="-88.94374">
                                             </div>
                                         </div>
                                 </div>
