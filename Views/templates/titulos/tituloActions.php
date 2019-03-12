@@ -1,4 +1,11 @@
 <?php
+
+// validar session
+if (!isset($_COOKIE['user_session'])) {
+    header("location:{$server}/login/");
+    exit();
+}
+
 switch (@$_POST['actionId']) {
     case '1': // registra un nuevo ciudadano para y luego CREA UN titulo
         CrearCiudadanoTitulo($_POST['nombre'],$_POST['apellido'],$_POST['direccion'],$_POST['dui'],$_POST['profesion'],$_POST['fecha'],$_POST['tipo'],$_POST['numero'],$_POST['idParcela']);

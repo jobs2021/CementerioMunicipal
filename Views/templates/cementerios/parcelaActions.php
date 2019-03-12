@@ -1,5 +1,11 @@
 <?php
 
+// validar session
+if (!isset($_COOKIE['user_session'])) {
+    header("location:{$server}/login/");
+    exit();
+}
+
 if (isset($_POST['actionId'])) {
 	switch ($_POST['actionId']) {
 	    case '1': // add

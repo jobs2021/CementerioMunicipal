@@ -1,5 +1,11 @@
 <?php
 
+// validar session
+if (!isset($_COOKIE['user_session'])) {
+    header("location:{$server}/login/");
+    exit();
+}
+
 switch ($_POST['actionId']) {
     case '1': // add
         CrearCementerio($_POST['nombre'],$_POST['direccion'],$_POST['tipo'],$_POST['area'],$_POST['legalidad'],$_POST['panteonero']);
