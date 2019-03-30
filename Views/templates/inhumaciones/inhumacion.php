@@ -116,7 +116,8 @@
             <ul class="list-group list-group-flush">
                
                 <li class="list-group-item">
-                    <form action="<?php echo $server;?>/admincementerio" method="POST">
+                    <form action="<?php echo $server;?>/inhumacionesAction" method="POST">
+                        <input type="hidden" name="actionId" value="1">
                         <div class="form-row">
                             <div class="form-group col-12 col-md-6 col-lg-6">
                                 <label for="nombre">Nombres Fallecido:</label>
