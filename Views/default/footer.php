@@ -10,6 +10,8 @@
 <script src="<?php echo $server;?>/Views/static/js/popper.min.js"></script>
 <script src="<?php echo $server;?>/Views/static/js/bootstrap.min.js"></script>
 <script src="<?php echo $server;?>/Views/static/js/leaflet.js"></script>
+<script src="<?php echo $server;?>/Views/static/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo $server;?>/Views/static/js/dataTables.bootstrap4.min.js"></script>
 
 
 <!--- socketio -->
@@ -35,6 +37,32 @@
 		});
 
 	})
+</script>
+
+<script type="text/javascript">
+        var table = $('.table').DataTable({
+            "language": {
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                "infoEmpty": "Mostrando de 0 a 0 de 0 registros",
+                "infoFiltered": "(filtrando de _MAX_ total registros)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Registros",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "No records encontrados",
+                "emptyTable": "No hay datos que mostrar",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior",
+                }
+            }
+        });
+
+   
 </script>
 
 

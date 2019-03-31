@@ -92,12 +92,12 @@
     </ul>
     <div class="row justify-content-center">
         <div class="col-12 padding-top-15 padding-bottom-15">
-            <form class="form-inline justify-content-center" method="GET">
+            <form class="form-inline justify-content-center">
                     <div class="col col-sm-5">
                             <div class="input-group">
-                                <input type="text" class="form-control" name="busqueda" placeholder="Numero o Poligono">
+                                <input id="searchParcela" type="text" class="form-control" placeholder="Numero o Poligono" style="text-align: center;" autocomplete="off">
                                 <div class="input-group-prepend rounded">
-                                    <button type="submit" class="btn btn-dark rounded-right">Buscar</button>
+                                    <a class="btn btn-dark rounded-right text-white"><i class="fas fa-search icon margin-right-5 margin-left-0"></i></a>
                                     
                                     <button type="button" class="btn btn-outline-primary float-right rounded" data-toggle="modal" data-target="#modalAgregarParcela" style="margin-left: 15px !important;"><i class="fas fa-plus icon margin-right-5 margin-left-0"></i>Añadir</button>
                                 </div>
@@ -708,6 +708,13 @@
             $(this).addClass('card-trash-checked');
         }
     })
+</script>
+
+<script type="text/javascript">
+
+$('#searchParcela').on( 'keyup', function () {
+    table.search( this.value ).draw();
+} );
 </script>
 
    

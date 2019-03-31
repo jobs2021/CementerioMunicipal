@@ -9,7 +9,7 @@
         <div class="col">
 
             <ul class="list-group list-group-flush">
-                <li class="list-group-item padding-0">
+                <!--li class="list-group-item padding-0">
 
                     <form class="form-inline justify-content-center padding-top-15 padding-bottom-15" method="GET" action="<?php echo $server;?>/parcelas">
                         <div class="input-group col-12 col-sm-8 col-md-6 col-lg-4">
@@ -19,6 +19,9 @@
                             </div>
                         </div>
                     </form>
+                </li-->
+                <li class="list-group-item" style="text-align: center;">
+                    <h2>Cementerios</h2>
                 </li>
             </ul>
 

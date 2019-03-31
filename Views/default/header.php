@@ -33,6 +33,8 @@ if (isset($_COOKIE['user_session'])) {
     <link rel="stylesheet" href="<?php echo $server;?>/Views/static/vendor/chalate-icon/icon-chalate.css">
     <link rel="stylesheet" type="text/css" href="<?php echo $server;?>/Views/static/css/toastr.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $server;?>/Views/static/css/leaflet.css" />
+    <!--link rel="stylesheet" type="text/css" href="<?php echo $server;?>/Views/static/css/jquery.dataTables.min.css" /-->
+    <link rel="stylesheet" type="text/css" href="<?php echo $server;?>/Views/static/css/dataTables.bootstrap4.min.css" />
 
     <!-- estilos css-->
     <style type="text/css">
@@ -358,6 +360,28 @@ end estilos personalizados*/
 }
 #divFallecidos{
     background-color: #fff!important;
+}
+.dataTables_wrapper{
+    margin-bottom: 30px;
+}
+.col-hidden{
+    display: none;
+}
+.full-info-down{
+    visibility: hidden;
+    padding: 5px;
+    background-color: transparent!important;
+
+}
+.table tr:hover > .details-control .full-info-down, .table tr:hover > .details-control{
+    visibility: visible;
+    background-color: rgba(0,0,0,0.2);
+}
+th{
+    border-bottom: 0px!important;
+}
+.dataTables_filter{
+    display: none;
 }
 
         
