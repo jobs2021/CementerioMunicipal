@@ -95,7 +95,7 @@
             <form class="form-inline justify-content-center">
                     <div class="col col-sm-5">
                             <div class="input-group">
-                                <input id="searchParcela" type="text" class="form-control" placeholder="Numero o Poligono" style="text-align: center;" autocomplete="off">
+                                <input id="searchParcela" type="text" class="form-control" placeholder="Buscar" style="text-align: center;" autocomplete="off">
                                 <div class="input-group-prepend rounded">
                                     <a class="btn btn-dark rounded-right text-white"><i class="fas fa-search icon margin-right-5 margin-left-0"></i></a>
                                     
@@ -711,6 +711,8 @@
 </script>
 
 <script type="text/javascript">
+
+var table = $('.table').DataTable(tableLanguage);
 
 $('#searchParcela').on( 'keyup', function () {
     table.search( this.value ).draw();

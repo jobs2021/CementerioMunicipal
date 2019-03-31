@@ -40,7 +40,7 @@
 </script>
 
 <script type="text/javascript">
-        var table = $('.table').DataTable({
+	var tableLanguage = {
             "language": {
                 "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
                 "infoEmpty": "Mostrando de 0 a 0 de 0 registros",
@@ -51,7 +51,7 @@
                 "loadingRecords": "Cargando...",
                 "processing": "Procesando...",
                 "search": "Buscar:",
-                "zeroRecords": "No records encontrados",
+                "zeroRecords": "No hay datos que mostrar",
                 "emptyTable": "No hay datos que mostrar",
                 "paginate": {
                     "first": "Primero",
@@ -60,9 +60,7 @@
                     "previous": "Anterior",
                 }
             }
-        });
-
-   
+        };
 </script>
 
 

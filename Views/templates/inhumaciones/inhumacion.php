@@ -282,28 +282,7 @@
 <script type="text/javascript">
     $(document).ready( function () {
 
-
-        /* Formatting function for row details - modify as you need */
-        /*
-            function format ( d ) {
-                // `d` is the original data object for the row
-                return '<div style="background-color: rgba(0,0,0,.075);margin: -12px!important;"><table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
-                    '<tr>'+
-                        '<td>Full name:</td>'+
-                        '<td>'+d.name+'</td>'+
-                    '</tr>'+
-                    '<tr>'+
-                        '<td>Extension number:</td>'+
-                        '<td>'+d.extn+'</td>'+
-                    '</tr>'+
-                    '<tr>'+
-                        '<td>Extra info:</td>'+
-                        '<td>And any further details here (images etc)...</td>'+
-                    '</tr>'+
-                '</table></div>';
-            }
-
-            */
+        var table = $('.table').DataTable(tableLanguage);
 
 
         /* Formatting function for row details - modify as you need */
