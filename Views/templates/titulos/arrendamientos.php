@@ -21,21 +21,22 @@ require_once('Views/default/header.php');
 
 
 <!-- Body -->
-<!-- Body -->
 <div class="content-wrapper">
 	<div class="container-fluid">
 		<div class="card-body">
-			<form class="form-inline" method="GET">
-				<div class="col-md-5 mx-auto" >
-					<div class="form-group">
-						<p align="center">
-							Para realizar busquedas, ingrese un Nombre o Numero de Arrendamiento
-						</p>
-						<input class="form-control col-lg-10 mr-sm-1" type="search" name="arrendamiento" placeholder="Nombre o Codigo de Arrendamineto" aria-label="Search">
-						<button class="btn btn-dark my-2 my-sm-0"  type="submit">Buscar</button>
-					</div>
-				</div>
-			</form>
+		<form method="GET">
+                <div class="form-group ">
+                    <div class="col-12  text-center">
+                        <h1 style="text-align:center">Arrendamientos <a id="crear" title="Crear" 
+                            class="btn btn-circle-plus" href="<?php echo $server; ?>/arrendamientocrear">
+                            <i>+</i>
+                        </a></h1>
+                        
+                    </div>
+                    <input class="form-control col-12 col-lg-8 mx-auto" type="search" name="titulo" placeholder="Nombre o Codigo del Arrendamiento" aria-label="Search" id="buscarTitulo">
+                </div>
+            </form>
+
 		</div>
 	</div>
 	<div class="col-12 col-sm-12 col-md-12 col-lg-12 padding-0 mx-auto">

@@ -2,7 +2,7 @@
 $titulo='Crear Titulo';
 
 $consulta = new ConexionDB();
-$variable= $consulta->Query("select idTipoTitulo, Tipo from TipoTitulos");
+$variable= $consulta->Query("SELECT idTipoTitulo, Tipo FROM TipoTitulos");
 
 
 require_once('Views/default/header.php'); 
@@ -38,7 +38,7 @@ require_once('Views/default/header.php');
                                     <?php
                                         if (isset(explode('/',$_GET['action'])[1])){
                                             $idta=explode('/',$_GET['action'])[1];
-                                            $tablaParcela = $consulta->Query("SELECT t1.Numero, t1.Poligono, t2.Descripcion, t3.Nombre FROM Parcelas t1  INNER JOIN TipoParcela t2 ON t1.idTipoParcela = t2.idTipoParcela INNER JOIN Cementerios t3 ON t1.idCementerio = t3.idCementerio where t1.idParcela={$idta}");
+                                            $tablaParcela = $consulta->Query("SELECT t1.Numero, t1.Poligono, t2.Descripcion, t3.Nombre FROM Parcelas t1  INNER JOIN TipoParcela t2 ON t1.idTipoParcela = t2.idTipoParcela INNER JOIN Cementerios t3 ON t1.idCementerio = t3.idCementerio where t1.idParcela={$idta} AND t1.Estado=1");
                                             if ($tablaParcela != -1){
                                                 foreach ($tablaParcela as $value) {
                                                     echo "
@@ -77,30 +77,30 @@ require_once('Views/default/header.php');
                         <div class="form-row mt-0">
                             <div class="form-group col-md-6">
                                 <label for="Nombres">Nombres</label>
-                                <input name="nombre" type="text" class="form-control" id="Nombres" placeholder="Nombres">
+                                <input required name="nombre" type="text" class="form-control" id="Nombres" placeholder="Nombres">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="Apellidos">Apellidos</label>
-                                <input name="apellido" type="text" class="form-control" id="Apellidos" placeholder="Apellidos">
+                                <input required name="apellido" type="text" class="form-control" id="Apellidos" placeholder="Apellidos">
                             </div>
 
                         </div>
                         <div class="form-group">
                             <label for="Direccion">Direccion</label>
-                            <input name="direccion" type="text" class="form-control" id="Direccion" placeholder="Direccion de domicilio">
+                            <input required name="direccion" type="text" class="form-control" id="Direccion" placeholder="Direccion de domicilio">
                         </div>
                         <div class="form-group">
                             <label for="Dui">DUI</label>
-                            <input name="dui" type="text" class="form-control" id="Dui" placeholder="Numero Unico de Identidad">
+                            <input required name="dui" type="text" class="form-control" id="Dui" placeholder="Numero Unico de Identidad">
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="Profesion">Profesion</label>
-                                <input name="profesion" type="text" class="form-control" id="Profesion" placeholder="Profesion u Ocupacion">
+                                <input required name="profesion" type="text" class="form-control" id="Profesion" placeholder="Profesion u Ocupacion">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="Fecha_Nacimiento">Fecha de Nacimiento</label>
-                                <input name="fecha" class="form-control" id="Fecha_Nacimiento" type="date">
+                                <input required name="fecha" class="form-control" id="Fecha_Nacimiento" type="date">
                             </div>
                         </div>
 
@@ -113,7 +113,7 @@ require_once('Views/default/header.php');
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                     <label for="select">Tipo de titulo</label>
-                                    <select class="custom-select" name="tipo" id="inputGroupSelect01">
+                                    <select required class="custom-select" name="tipo" id="inputGroupSelect01">
                                         <option selected>--- Seleccione el tipo de titulo ---</option>
                                         <?php
                                                     // listar cementerios
@@ -159,17 +159,11 @@ require_once('Views/default/header.php');
                     <input class="form-control col-md-12 mx-auto" type="search" name="buscarParcela" placeholder="Numero de Parcela" aria-label="Search" id="buscarParcela" value="">
                     
                     <input type="hidden" id="Urlbuscar" value="<?php echo $server;?>/buscarParcela">
-                    
-        
                 </div>
                 <form method="post" action="<?php echo $server;?>/tituloActions">
-                    <div id="datos" class="mx-auto">
-
-                        
+                    <div id="datos" class="mx-auto mt-4">
                     </div>
-
-                        <input type="hidden" name="actionId" value="4">
-                
+                        <input type="hidden" name="actionId" value="4">              
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

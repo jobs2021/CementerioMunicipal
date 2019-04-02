@@ -18,7 +18,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-
+        
 		const socket = io('<?php echo $server;?>:8585');
 		var audio = document.getElementById("NotificationSound");
 
