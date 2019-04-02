@@ -28,6 +28,7 @@
 		}
 
 		socket.on('message',function(msj){
+
 			var mmsj = JSON.parse(msj);
 			var data = JSON.parse(mmsj.msj);
 
@@ -35,6 +36,11 @@
 			audio.play();
 
 		});
+
+		socket.on('timeout', function(){
+		   console.log("se murio");
+		});
+		
 
 	})
 </script>
