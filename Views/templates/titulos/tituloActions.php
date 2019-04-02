@@ -1,5 +1,5 @@
 <?php
-require 'Views/static/firephp-core/lib/firePHPCore/fb.php';
+
 
 // validar session
 if (!isset($_COOKIE['user_session'])) {
