@@ -41,8 +41,7 @@ switch (@$_POST['actionId']) {
         break;
     
 }
-FB::log("VA A ENTRAR AL SWITCH");
-FB::log($_POST['actv']);
+
 
 switch ($_POST['actv']) {
     case 1: 
