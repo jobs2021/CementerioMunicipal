@@ -45,11 +45,11 @@ switch (@$_POST['actionId']) {
 
 switch ($_POST['actv']) {
     case 1: 
-        FB::log("Esta en el CASE 1");
+        
         BuscarTitulo("titulo");
         break;
    case 2:
-        FB::log("Esta en el CASE 2");
+        
         BuscarTitulo("repoTrasTitulo");
         break;
 }
