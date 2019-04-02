@@ -11,28 +11,29 @@ $busqueda = $_GET['search'];
 ?>
 
 <div class="container-fluid">
-	<div class="row">
-		<div class="col padding-0">
-			<ul class="list-group list-group-flush">
-                    <li class="list-group-item padding-0">
-           
-            			<form class="form-inline justify-content-center padding-top-15 padding-bottom-15" method="GET" action="<?php echo $server;?>">
-                			<div class="input-group col-12 col-sm-8 col-md-6 col-lg-4">
-                    			<input type="text" class="form-control" name="search" value="<?php echo $busqueda ?>">
-                    			<div class="input-group-prepend rounded">
-                        			<button type="submit" class="btn btn-dark rounded-right">Buscar</button>
-                    			</div>
-                			</div>
-            			</form>
-        			</li>
-        			 <li class="list-group-item padding-0">
+    <div class="row">
+        <div class="col padding-0">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item padding-0">
 
-        			 	<!-- contenido de search -->
-							<div class="container">
-							
-								<div class="list-group">
+                    <form class="form-inline justify-content-center padding-top-15 padding-bottom-15" method="GET"
+                        action="<?php echo $server;?>">
+                        <div class="input-group col-12 col-sm-8 col-md-6 col-lg-4">
+                            <input type="text" class="form-control" name="search" value="<?php echo $busqueda ?>">
+                            <div class="input-group-prepend rounded">
+                                <button type="submit" class="btn btn-dark rounded-right">Buscar</button>
+                            </div>
+                        </div>
+                    </form>
+                </li>
+                <li class="list-group-item padding-0">
 
-                  <?php
+                    <!-- contenido de search -->
+                    <div class="container">
+
+                        <div class="list-group">
+
+                            <?php
 
                   if ($resultado == -1) {
                     echo "<p class=\"text-center\" style=\"margin-top:15px\">No hay resultados que mostrar</p>";
@@ -56,12 +57,12 @@ $busqueda = $_GET['search'];
 
                   ?>
 
-          </div>
-							</div>
+                        </div>
+                    </div>
 
-        			 	<!-- fin -->
-        			 </li>
-    		</ul>
-		</div>
-	</div>
+                    <!-- fin -->
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>

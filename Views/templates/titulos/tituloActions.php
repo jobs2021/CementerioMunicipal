@@ -1,4 +1,5 @@
 <?php
+require 'Views/static/firephp-core/lib/firePHPCore/fb.php';
 
 // validar session
 if (!isset($_COOKIE['user_session'])) {
@@ -40,9 +41,20 @@ switch (@$_POST['actionId']) {
         break;
     
 }
-if ($_GET['action']){
-    BuscarTitulo();
+FB::log("VA A ENTRAR AL SWITCH");
+FB::log($_POST['actv']);
+
+switch ($_POST['actv']) {
+    case 1: 
+        FB::log("Esta en el CASE 1");
+        BuscarTitulo("titulo");
+        break;
+   case 2:
+        FB::log("Esta en el CASE 2");
+        BuscarTitulo("repoTrasTitulo");
+        break;
 }
+
 
 
 
@@ -50,12 +62,12 @@ if ($_GET['action']){
 function CrearCiudadanoTitulo($nombre,$apellido,$direccion,$dui,$profesion,$fecha,$tipo,$numero,$idParcela){
     if (isset($nombre) && isset($apellido) && isset($direccion) && isset($dui) && isset($profesion) && isset($fecha) && isset($tipo) && isset($numero) && isset($idParcela)) {
             $insert = new ConexionDB();
-            $insert->Query("insert into Ciudadanos (NombresCiudadano, ApellidosCiudadano, FechaNacimiento, Profesion, Domicilio, DUI) values ('{$nombre}','{$apellido}','{$fecha}','{$profesion}','{$direccion}','{$dui}');");
+            $insert->Query("INSERT INTO Ciudadanos (NombresCiudadano, ApellidosCiudadano, FechaNacimiento, Profesion, Domicilio, DUI) VALUES('{$nombre}','{$apellido}','{$fecha}','{$profesion}','{$direccion}','{$dui}');");
             
-            $idCiudadano=$insert->Query("select idCiudadano from Ciudadanos order by idCiudadano desc limit 1");
-            $insert->Query("insert into Titulos (idParcela,idTipoTitulo,NumeroTitulo,idCiudadanoTitular,Estado) values ({$idParcela},{$tipo},'{$numero}',{$idCiudadano[0]['idCiudadano']},1)");
-            $idTitulo=$insert->Query("select idTitulo from Titulos order by idTitulo desc limit 1");
-
+            $idCiudadano=$insert->Query("SELECT idCiudadano FROM Ciudadanos ORDER BY idCiudadano DESC LIMIT 1");
+            $insert->Query("INSERT INTO Titulos (idParcela,idTipoTitulo,NumeroTitulo,idCiudadanoTitular,Estado) VALUES ({$idParcela},{$tipo},'{$numero}',{$idCiudadano[0]['idCiudadano']},1)");
+            $idTitulo=$insert->Query("SELECT idTitulo FROM Titulos ORDER BY idTitulo DESC LIMIT 1");
+            $insert->Query("UPDATE Parcelas SET Estado=0 WHERE idParcela={$idParcela}");
              //session para enviar notificacion
             session_start();
             $_SESSION['JsonNotification'] = '{ "msg":"Titulo '.$numero.' en Proceso...", "title":"Titulo Nuevo" }';
@@ -71,14 +83,7 @@ function ObtenerParcela($idParcela){
     header("location:".$server.'/creartitulo/'.$idParcela);
             exit();
     }
-    
-/*
-    if (isset($tipo) && isset($numero) && isset($idCiudadano) && isset($idParcela)) {
-        $idTitulo=$insert->Query("select idTitulo from Titulos order by idTitulo desc limit 1");
-        header("location:".$server.'/beneficiarios/'.$idTitulo[0]['idTitulo']);
-            exit();
-    }
-}*/
+
 
 function CancelarTitulo($idTitulo, $Observaciones){
     $insert = new ConexionDB();
@@ -181,8 +186,6 @@ function ObtenerParcelaArrandamiento($idParcela){
     }
 
 
-
-    
 function CrearArrendamiento($nombre,$apellido,$direccion,$fecha,$f1sam,$anios,$idParcela){
     if (isset($nombre) && isset($apellido) && isset($direccion) && isset($fecha) && isset($f1sam) && isset($anios) && isset($idParcela)){
         $insert = new ConexionDB();
@@ -240,24 +243,45 @@ function completarBeneficiario(){
 
 
 #************************ BUSQUEDAS *********************************
-function BuscarTitulo(){
+function BuscarTitulo($act){
+    
     $insert = new ConexionDB();
     $salida= "";
     if(isset($_POST['valor'])){
-        $q = ($_POST['valor']);
-        $query = "SELECT t1.idTitulo, t1.NumeroTitulo, t1.Proceso, t3.Tipo, t4.NombresCiudadano, 
-        t4.ApellidosCiudadano, t2.Numero, t5.Nombre, t1.Estado FROM Titulos t1 INNER JOIN Parcelas t2 
-        ON t1.idParcela=t2.idParcela INNER JOIN TipoTitulos t3 ON t1.idTipoTitulo=t3.idTipoTitulo INNER JOIN 
-        Ciudadanos t4 ON t1.idCiudadanoTitular=t4.idCiudadano INNER JOIN Cementerios t5 ON 
-        t2.idCementerio=t5.idCementerio WHERE t1.NumeroTitulo LIKE '%{$q}%' OR t4.NombresCiudadano LIKE '%{$q}%' OR 
-        t4.ApellidosCiudadano LIKE '%{$q}%' OR t2.Numero LIKE '%{$q}%' OR t5.Nombre LIKE '%{$q}%' 
-        ORDER BY t1.idTitulo DESC ";
+        $q = ($_POST['valor']); 
+        if ($act === "titulo"){
+            if ($q == "*") {
+                $query = "SELECT t1.idTitulo, t1.NumeroTitulo, t1.Proceso, t3.Tipo, t4.NombresCiudadano, 
+                t4.ApellidosCiudadano, t2.Numero, t5.Nombre, t1.Estado FROM Titulos t1 INNER JOIN Parcelas t2 
+                ON t1.idParcela=t2.idParcela INNER JOIN TipoTitulos t3 ON t1.idTipoTitulo=t3.idTipoTitulo INNER JOIN 
+                Ciudadanos t4 ON t1.idCiudadanoTitular=t4.idCiudadano INNER JOIN Cementerios t5 ON 
+                t2.idCementerio=t5.idCementerio ORDER BY t1.idTitulo DESC ";
+            }else{
+                $query = "SELECT t1.idTitulo, t1.NumeroTitulo, t1.Proceso, t3.Tipo, t4.NombresCiudadano, 
+                t4.ApellidosCiudadano, t2.Numero, t5.Nombre, t1.Estado FROM Titulos t1 INNER JOIN Parcelas t2 
+                ON t1.idParcela=t2.idParcela INNER JOIN TipoTitulos t3 ON t1.idTipoTitulo=t3.idTipoTitulo INNER JOIN 
+                Ciudadanos t4 ON t1.idCiudadanoTitular=t4.idCiudadano INNER JOIN Cementerios t5 ON 
+                t2.idCementerio=t5.idCementerio WHERE t1.NumeroTitulo LIKE '%{$q}%' OR t4.NombresCiudadano LIKE '%{$q}%' OR 
+                t4.ApellidosCiudadano LIKE '%{$q}%' OR t2.Numero LIKE '%{$q}%' OR t5.Nombre LIKE '%{$q}%' 
+                ORDER BY t1.idTitulo DESC ";
+            }
+            
+        }
+        elseif ($act === "repoTrasTitulo"){
+            $query = "SELECT t1.idTitulo, t1.NumeroTitulo, t1.Proceso, t3.Tipo, t4.NombresCiudadano, 
+            t4.ApellidosCiudadano, t2.Numero, t5.Nombre, t1.Estado FROM Titulos t1 INNER JOIN Parcelas t2 
+            ON t1.idParcela=t2.idParcela INNER JOIN TipoTitulos t3 ON t1.idTipoTitulo=t3.idTipoTitulo INNER JOIN 
+            Ciudadanos t4 ON t1.idCiudadanoTitular=t4.idCiudadano INNER JOIN Cementerios t5 ON 
+            t2.idCementerio=t5.idCementerio WHERE (t1.NumeroTitulo LIKE '%{$q}%' OR t4.NombresCiudadano LIKE '%{$q}%' OR 
+            t4.ApellidosCiudadano LIKE '%{$q}%' OR t2.Numero LIKE '%{$q}%' OR t5.Nombre LIKE '%{$q}%') AND t1.Estado=1 
+            ORDER BY t1.idTitulo DESC ";
+        }    
     }
+    
     @$resultado = $insert->query($query);
     $i=0;
-    if($resultado != -1){
-        $salida.="<div class='table-responsive'>
-                            <table class='table table-hover'>
+    $table_header = "<div class='table-responsive'>
+                        <table id=\"table\" class='table table-hover'>
                             <thead>
                                 <tr >
                                     <th>N°</th>
@@ -273,6 +297,8 @@ function BuscarTitulo(){
                                 </tr>
                             </thead>
                         <tbody>";
+    if($resultado != -1){
+        $salida.=$table_header;
        foreach ($resultado as $fila) {
            $i++;
             $salida.="<tr class=\"row-hover\">
@@ -310,9 +336,14 @@ function BuscarTitulo(){
                     </tr>";
                    
         }
-        $salida.="</tbody></table>";
+        $salida.="</tbody></table> 
+        <script type=\"text/javascript\">
+        $(document).ready(function() {
+            var table = $('#table').DataTable(tableLanguage);
+        });
+    </script>";
     } else {
-        $salida.="No hay resultados";
+        $salida.='no se puede ejecutar la consulta';
     }
     echo $salida;
 }

@@ -44,18 +44,12 @@ if($resultado != -1){
        
     }
         
-       
-        
-
-    
-    
     $salida.="</tbody></table>";
     
 } else {
     $salida.="No hay resultados";
         
 }
-
 
 echo $salida;
 

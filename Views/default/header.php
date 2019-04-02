@@ -313,7 +313,7 @@ end estilos personalizados*/
     width: 350px;
 }
 .table > thead > tr > th{
-    background-color: rgba(0,0,0,.7);!important;
+    background-color: rgba(22,22,22,.9) !important;
 }
 .modal{
     z-index: 1000000!important;
@@ -384,7 +384,16 @@ th{
     display: none;
 }
 
-        
+.btn-circle-plus{
+    border-radius: 50%;
+    color: white;
+    background: rgb(22, 22, 22, .9)
+} 
+.btn-circle-plus:hover{
+    color: white;
+    background: rgb(22, 22, 22);
+    text-decoration: none;
+} 
     </style>
      <link rel="stylesheet" href="<?php echo $server;?>/Views/static/css/table-style.css">
 </head>
@@ -414,8 +423,8 @@ th{
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-file-alt icon margin-right-5"></i>Titulos & Arrendamientos</a>
                     <div class="dropdown-menu dropdown-menu-n" aria-labelledby="navbarDropdown1">
-                        <a class="dropdown-item" href="<?php echo $server;?>/titulos">Titulos</a>
-                        <a class="dropdown-item" href="<?php echo $server;?>/repotrastitulo">Operaciones a Titulo</a>
+                        <a class="dropdown-item" href="<?php echo $server;?>/repotrastitulo">Titulos</a>
+                        <a class="dropdown-item" href="<?php echo $server;?>/titulos">Historial Titulos</a>
                         <a class="dropdown-item" href="<?php echo $server;?>/arrendamientos">Arrendamientos</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="<?php echo $server;?>/creartitulo">Nuevo Titulo</a>
