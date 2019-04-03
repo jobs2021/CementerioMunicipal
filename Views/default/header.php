@@ -371,6 +371,7 @@ end estilos personalizados*/
     visibility: hidden;
     padding: 5px;
     background-color: transparent!important;
+    font-size: 1rem;
 
 }
 .table tr:hover > .details-control .full-info-down, .table tr:hover > .details-control{
@@ -383,6 +384,13 @@ th{
 .dataTables_filter{
     display: none;
 }
+.list-fallecidos-search{
+    white-space: normal;
+}
+.tooltip{
+  z-index: 21474836 !important;
+}
+        
 
 .btn-circle-plus{
     border-radius: 50%;
@@ -394,6 +402,7 @@ th{
     background: rgb(22, 22, 22);
     text-decoration: none;
 } 
+
     </style>
      <link rel="stylesheet" href="<?php echo $server;?>/Views/static/css/table-style.css">
 </head>

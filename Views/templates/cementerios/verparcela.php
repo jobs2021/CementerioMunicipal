@@ -133,7 +133,6 @@
                                             <th scope="col">Difunto</th>
                                             <th scope="col">Fecha</th>
                                             <th scope="col">Estado</th>
-                                            <th scope="col" style="width: 125px;"><a class="hidden">Acciones___</a></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -145,6 +144,7 @@
                                         if ($resultado!=-1) {
                                             foreach ($resultado as $row) {
                                             $difunto=($row['Difunto']!='')? $row['Difunto']:' - - -  - - -';
+                                            $estado=($row['Difunto']!='')? 'Ocupado':' Disponible';
                                             $fecha=($row['Fecha']!='')? $row['Fecha']:' - - -';
                                             //array_push($nombres, ($row['Difunto']!='')? $row['Difunto'] : 'Disponible');
                                             $nombres[$row['NumeroOrden']]=($row['Difunto']!='')? $row['Difunto'] : 'Disponible';
@@ -153,13 +153,7 @@
                                                 <td scope=\"row\">{$row['NumeroOrden']}</th>
                                                 <td>{$difunto}</td>
                                                 <td>{$fecha}</td>
-                                                <td class=\"text-primary\">{$row['Estado']}</td>
-                                                <td class=\"text-right\">
-                                                    <div class=\"row-btn\">
-                                                        <a href=\"#\" data-toggle=\"modal\" data-target=\"#modalInfoNicho\"><i class=\"fas fa-info-circle icon\" title=\"Ver Resumen\"></i></a>
-                                                        <a href=\"#\" data-toggle=\"modal\" data-target=\"#modalEliminar\" class=\"text-danger\"><i class=\"fas fa-trash icon\" title=\"Eliminar\"></i></a>
-                                                    </div>
-                                                </td>
+                                                <td>{$estado}</td>
                                             </tr>
                                             ";
                                             }
