@@ -70,9 +70,16 @@ require_once('Views/default/header.php');
     $.ajax({
         url : '{$server}:8585/send_noti?sms={$_SESSION['JsonNotification']}'
     });
+
     </script> ";
         session_destroy();
     }
+
+    //agregar notificacion a tabla
+    $consulta = new ConexionDB();
+    $fechaNow = date('Y-m-d');
+    $query = "INSERT into Notificaciones (Fecha,Data,RolAccess,Visto) values ('{$fechaNow}','{$_SESSION['JsonNotification']}','1','0')";
+    $consulta->Query($query);
 
     ?>
 
