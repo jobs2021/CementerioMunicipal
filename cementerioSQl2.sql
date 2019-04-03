@@ -1,4 +1,4 @@
--- MySQL Workbench Forward Engineering
+﻿-- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
@@ -52,6 +52,7 @@ CREATE TABLE IF NOT EXISTS `cementerio`.`Parcelas` (
   `CoordenadaY` VARCHAR(45) NULL,
   `Numero` VARCHAR(45) NOT NULL,
   `Estado` INT(1) NULL DEFAULT 1,
+  `Titulado` INT(1) NULL DEFAULT 0,	
   PRIMARY KEY (`idParcela`, `idTipoParcela`, `idCementerio`),
   INDEX `fk_Parcelas_Cementerios_idx` (`idCementerio` ASC),
   INDEX `fk_Parcelas_Tipo_Parcela1_idx` (`idTipoParcela` ASC))

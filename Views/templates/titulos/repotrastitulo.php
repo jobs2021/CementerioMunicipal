@@ -1,9 +1,8 @@
 <!-- TITULOS VIGENTES-->
-<?php 
+<?php
 $titulo = 'Titulos Vigentes';
 
 $consulta = new ConexionDB();
-$variable = $consulta->Query("SELECT t1.idTitulo, t1.Observaciones, t1.NumeroTitulo, t3.Tipo, t4.NombresCiudadano, t4.ApellidosCiudadano, t2.Numero, t5.Nombre, t1.Estado FROM Titulos t1 INNER JOIN Parcelas t2 ON t1.idParcela=t2.idParcela INNER JOIN TipoTitulos t3 ON t1.idTipoTitulo=t3.idTipoTitulo INNER JOIN Ciudadanos t4 ON t1.idCiudadanoTitular=t4.idCiudadano INNER JOIN Cementerios t5 ON t2.idCementerio=t5.idCementerio WHERE t1.Estado=1 AND t1.Proceso=1");
 
 
 
@@ -46,8 +45,8 @@ require_once('Views/default/header.php');
             <form method="GET">
                 <div class="form-group ">
                     <div class="col-12  text-center">
-                        <h1 style="text-align:center">Titulos Activos <a id="crear" title="Crear" class="btn btn-circle-plus" href="<?php echo $server; ?>/creartitulo">
-                                <i>+</i>
+                        <h1 style="text-align:center">Titulos Activos <a id="crear" title="Crear" class="btn btn-outline-primary" href="<?php echo $server; ?>/creartitulo">
+                                Nuevo
                             </a></h1>
 
                     </div>
@@ -75,6 +74,8 @@ require_once('Views/default/header.php');
                         </tr>
                     </thead>
                     <tbody>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -136,7 +137,7 @@ require_once('Views/default/header.php');
             </form>
         </div>
     </div>
-    
+
     <!--END-->
     <script>
         selTitulo = function(NumeroTitulo, idTitulo, Observaciones) {
@@ -144,14 +145,14 @@ require_once('Views/default/header.php');
             document.getElementById('numeroTitulo').innerHTML = NumeroTitulo;
             id = document.getElementById("idTitulo");
             id.value = idTitulo;
-        }
+        };
         reponerTitulo = function(idTitulo2) {
             id2 = document.getElementById("idTitulo2");
             id2.value = idTitulo2;
         }
     </script>
     <!--END-->
-    
+
 
     <?php require_once('Views/default/footer.php'); ?>
 
@@ -195,5 +196,4 @@ require_once('Views/default/header.php');
                 buscar_titulo(valor);
             }
         });
-    </script> 
-    
+    </script>

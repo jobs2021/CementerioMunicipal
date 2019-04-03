@@ -5,7 +5,7 @@ $salida= "";
 
 if(isset($_POST['consulta'])){
     $q = ($_POST['consulta']);
-    $query = "SELECT t1.idParcela, t1.Estado, t1.Numero, t1.Poligono, t2.Descripcion, t3.Nombre FROM Parcelas t1 INNER JOIN TipoParcela t2 ON t1.idTipoParcela = t2.idTipoParcela INNER JOIN Cementerios t3 ON t1.idCementerio = t3.idCementerio WHERE t1.Estado=1 AND (t1.Numero LIKE '%{$q}%' OR t3.Nombre LIKE '%{$q}%' OR t1.Poligono LIKE '%{$q}%')";
+    $query = "SELECT t1.idParcela, t1.Estado, t1.Numero, t1.Poligono, t2.Descripcion, t3.Nombre FROM Parcelas t1 INNER JOIN TipoParcela t2 ON t1.idTipoParcela = t2.idTipoParcela INNER JOIN Cementerios t3 ON t1.idCementerio = t3.idCementerio WHERE t1.Titulado=1 AND (t1.Numero LIKE '%{$q}%' OR t3.Nombre LIKE '%{$q}%' OR t1.Poligono LIKE '%{$q}%')";
 }
 @$resultado = $insert->query($query);
 

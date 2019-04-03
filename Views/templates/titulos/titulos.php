@@ -24,8 +24,8 @@ require_once('Views/default/header.php');
             <form method="GET">
                 <div class="form-group ">
                     <div class="col-12  text-center">
-                        <h1 style="text-align:center">Historial Titulos <a id="crear" title="Crear" class="btn btn-circle-plus" href="<?php echo $server; ?>/creartitulo">
-                                <i>+</i>
+                        <h1 style="text-align:center">Historial Titulos <a id="crear" title="Crear" class="btn btn-outline-primary" href="<?php echo $server; ?>/creartitulo">
+                                Nuevo
                             </a></h1>
 
                     </div>
