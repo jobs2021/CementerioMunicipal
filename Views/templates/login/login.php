@@ -1,6 +1,12 @@
 <?php 
   $titulo='Login';
+  
+  if (isset($_COOKIE['user_session'])) {
+    header("location:{$server}/inicio");
+    exit();
+}
   require_once('Views/default/header.php'); 
+
 
 ?>
 <!-- aca ira todo el codigo html de la vista-->
