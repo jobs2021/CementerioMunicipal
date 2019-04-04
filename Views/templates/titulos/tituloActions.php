@@ -66,7 +66,7 @@ function CrearCiudadanoTitulo($nombre,$apellido,$direccion,$dui,$profesion,$fech
             $idCiudadano=$insert->Query("SELECT idCiudadano FROM Ciudadanos ORDER BY idCiudadano DESC LIMIT 1");
             $insert->Query("INSERT INTO Titulos (idParcela,idTipoTitulo,NumeroTitulo,idCiudadanoTitular,Estado) VALUES ({$idParcela},{$tipo},'{$numero}',{$idCiudadano[0]['idCiudadano']},1)");
             $idTitulo=$insert->Query("SELECT idTitulo FROM Titulos ORDER BY idTitulo DESC LIMIT 1");
-            $insert->Query("UPDATE Parcelas SET Estado=0 WHERE idParcela={$idParcela}");
+            $insert->Query("UPDATE Parcelas SET Titulado=1 WHERE idParcela={$idParcela}");
              //session para enviar notificacion
             session_start();
             $_SESSION['JsonNotification'] = '{ "msg":"Titulo '.$numero.' en Proceso...", "title":"Titulo Nuevo" }';
@@ -267,13 +267,22 @@ function BuscarTitulo($act){
             
         }
         elseif ($act === "repoTrasTitulo"){
-            $query = "SELECT t1.idTitulo, t1.NumeroTitulo, t1.Proceso, t3.Tipo, t4.NombresCiudadano, 
-            t4.ApellidosCiudadano, t2.Numero, t5.Nombre, t1.Estado FROM Titulos t1 INNER JOIN Parcelas t2 
-            ON t1.idParcela=t2.idParcela INNER JOIN TipoTitulos t3 ON t1.idTipoTitulo=t3.idTipoTitulo INNER JOIN 
-            Ciudadanos t4 ON t1.idCiudadanoTitular=t4.idCiudadano INNER JOIN Cementerios t5 ON 
-            t2.idCementerio=t5.idCementerio WHERE (t1.NumeroTitulo LIKE '%{$q}%' OR t4.NombresCiudadano LIKE '%{$q}%' OR 
-            t4.ApellidosCiudadano LIKE '%{$q}%' OR t2.Numero LIKE '%{$q}%' OR t5.Nombre LIKE '%{$q}%') AND t1.Estado=1 
-            ORDER BY t1.idTitulo DESC ";
+            if ($q == "*") {
+                $query = "SELECT t1.idTitulo, t1.NumeroTitulo, t1.Proceso, t3.Tipo, t4.NombresCiudadano, 
+                t4.ApellidosCiudadano, t2.Numero, t5.Nombre, t1.Estado FROM Titulos t1 INNER JOIN Parcelas t2 
+                ON t1.idParcela=t2.idParcela INNER JOIN TipoTitulos t3 ON t1.idTipoTitulo=t3.idTipoTitulo INNER JOIN 
+                Ciudadanos t4 ON t1.idCiudadanoTitular=t4.idCiudadano INNER JOIN Cementerios t5 ON 
+                t2.idCementerio=t5.idCementerio WHERE t1.Estado=1 
+                ORDER BY t1.idTitulo DESC ";
+            } else{
+                $query = "SELECT t1.idTitulo, t1.NumeroTitulo, t1.Proceso, t3.Tipo, t4.NombresCiudadano, 
+                t4.ApellidosCiudadano, t2.Numero, t5.Nombre, t1.Estado FROM Titulos t1 INNER JOIN Parcelas t2 
+                ON t1.idParcela=t2.idParcela INNER JOIN TipoTitulos t3 ON t1.idTipoTitulo=t3.idTipoTitulo INNER JOIN 
+                Ciudadanos t4 ON t1.idCiudadanoTitular=t4.idCiudadano INNER JOIN Cementerios t5 ON 
+                t2.idCementerio=t5.idCementerio WHERE (t1.NumeroTitulo LIKE '%{$q}%' OR t4.NombresCiudadano LIKE '%{$q}%' OR 
+                t4.ApellidosCiudadano LIKE '%{$q}%' OR t2.Numero LIKE '%{$q}%' OR t5.Nombre LIKE '%{$q}%') AND t1.Estado=1 
+                ORDER BY t1.idTitulo DESC ";
+            }
         }    
     }
     

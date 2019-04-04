@@ -74,7 +74,12 @@ require_once('Views/default/header.php');
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="Dui">DUI</label>
+                            <input required name="dui" type="text" class="form-control" id="Dui" placeholder="Numero Unico de Identidad">
+                        </div>
                         <div class="form-row mt-0">
+
                             <div class="form-group col-md-6">
                                 <label for="Nombres">Nombres</label>
                                 <input required name="nombre" type="text" class="form-control" id="Nombres" placeholder="Nombres">
@@ -88,10 +93,6 @@ require_once('Views/default/header.php');
                         <div class="form-group">
                             <label for="Direccion">Direccion</label>
                             <input required name="direccion" type="text" class="form-control" id="Direccion" placeholder="Direccion de domicilio">
-                        </div>
-                        <div class="form-group">
-                            <label for="Dui">DUI</label>
-                            <input required name="dui" type="text" class="form-control" id="Dui" placeholder="Numero Unico de Identidad">
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
