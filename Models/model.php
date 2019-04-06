@@ -7,7 +7,7 @@ class enlacesPaginas{
     'cementerioActions','parcelaActions'),array('titulos','creartitulo','repotrastitulo', 'finalizartitulo', 
     'eyetitulo', 'arrendamientos', 'repotitulo','tituloActions', 'arrendamientocrear', 'buscarParcela', 'beneficiarios',
     'regresarBeneficiario', 'traspasartitulo'),array('inhumacion','exhumacion','traslado','inhumacionesActions'), array('configurar'),array('login','auth',
-    'logout','hack'),'desconectar');
+    'logout','hack'),'desconectar','tesoreria');
 
     public function enlacesPaginasModel($enlacesModel){
 
