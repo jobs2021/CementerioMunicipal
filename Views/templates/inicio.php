@@ -8,6 +8,7 @@
       require_once('Views/templates/inicio/search.php');
     }else{
       require_once('Views/templates/inicio/inicio.php');
+      require_once('Views/default/footer.php');
     }
 
 
@@ -18,5 +19,5 @@
 
 <!---hasta aca -->
 
-<?php require_once('Views/default/footer.php'); ?>
+
 

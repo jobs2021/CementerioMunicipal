@@ -52,6 +52,7 @@ CREATE TABLE IF NOT EXISTS `cementerio`.`Parcelas` (
   `CoordenadaY` VARCHAR(45) NULL,
   `Numero` VARCHAR(45) NOT NULL,
   `Estado` INT(1) NULL DEFAULT 1,
+  `Titulado` INT(1) NULL DEFAULT 0,
   PRIMARY KEY (`idParcela`, `idTipoParcela`, `idCementerio`),
   INDEX `fk_Parcelas_Cementerios_idx` (`idCementerio` ASC),
   INDEX `fk_Parcelas_Tipo_Parcela1_idx` (`idTipoParcela` ASC),
@@ -380,18 +381,6 @@ CREATE TABLE IF NOT EXISTS `cementerio`.`Notificaciones` (
   PRIMARY KEY (`idNotificacion`))
 ENGINE = InnoDB;
 
-USE `cementerio`;
-
-DELIMITER $$
-USE `cementerio`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `cementerio`.`Parcelas_AFTER_INSERT` AFTER INSERT ON `Parcelas` FOR EACH ROW
-BEGIN
-
-END
-$$
-
-
-DELIMITER ;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
@@ -443,3 +432,15 @@ INSERT INTO `cementerio`.`TipoEnterramiento` (`idTipoEnterramiento`, `Tipo`, `De
 
 COMMIT;
 
+USE `cementerio`;
+
+DELIMITER $$
+USE `cementerio`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `cementerio`.`Parcelas_AFTER_INSERT` AFTER INSERT ON `Parcelas` FOR EACH ROW
+BEGIN
+
+END
+$$
+
+
+DELIMITER ;
