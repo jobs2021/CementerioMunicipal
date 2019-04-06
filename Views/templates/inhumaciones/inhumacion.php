@@ -62,8 +62,8 @@
                             <td class=\"text-right\" style=\"width: 170px!important;\">
                                 <div class=\"row-btn\">
                                     <a href=\"#\" data-toggle=\"modal\" data-target=\"#modalAgregarParcela\" data-slide-to=\"0\"><i class=\"fa fa-edit icon\" title=\"Editar\"></i></a>
-                                    <a href=\"{$server}/trasladar\"><i class=\"fas fa-exchange-alt icon\" title=\"Trasladar\"></i></a>
-                                    <a href=\"{$server}/exhumacion\" class=\"text-danger\"><i class=\"fas fa-external-link-alt icon\" title=\"Exhumar\"></i></a>
+                                    <!--a href=\"{$server}/trasladar\"><i class=\"fas fa-exchange-alt icon\" title=\"Trasladar\"></i></a>
+                                    <a href=\"{$server}/exhumacion\" class=\"text-danger\"><i class=\"fas fa-external-link-alt icon\" title=\"Exhumar\"></i></a-->
                                     <a idInhumacion=\"{$key['idEnterramiento']}\" numero=\"{$i}\" href=\"#\" data-toggle=\"modal\" data-target=\"#modalEliminar\" class=\"text-danger btn-eliminar-inhumacion\"><i class=\"fas fa-trash icon\" title=\"Eliminar\"></i></a>
                                 </div>
                             </td>

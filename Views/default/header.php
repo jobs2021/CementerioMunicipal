@@ -4,6 +4,9 @@ if (isset($_COOKIE['user_session'])) {
     @$session_data = json_decode($_COOKIE['user_session'],true);
     @$user=$session_data['user'];
     $noNav=false;
+    @$NotiData = ListarNotificaciones();
+    @$Notificaciones = $NotiData[0];
+    @$TotalNotificaciones = $NotiData[1][0]['Total'];
 }else{
     $user="";
     $noNav=true;
@@ -13,7 +16,17 @@ if (isset($_COOKIE['user_session'])) {
     }
 }
 
+function ListarNotificaciones(){
+    $db = new ConexionDB();
+    @$notifiaciones=$db->Query("select * from Notificaciones where Visto='0' and RolAccess='{$session_data['rol']}' order by idNotificacion desc");
+    @$total=$db->Query("select count(*) as Total from Notificaciones where Visto='0' and RolAccess='{$session_data['rol']}'");
+    return [$notifiaciones,$total];
+
+}
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="es-sv">
@@ -445,36 +458,36 @@ th{
             </ul>
             <ul class="navbar-nav padding-left-0 mr-sm-4">
             <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell margin-right-5 icon"></i><span class="badge badge-light" style="top: 0px;position: absolute;margin-left: -5px">5</span></a>
+                    <a class="nav-link" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell margin-right-5 icon"></i><span class="badge badge-light" style="top: 0px;position: absolute;margin-left: -5px">   <?php echo $TotalNotificaciones; ?>   </span></a>
 
                     <div class="dropdown-menu dropdown-menu-n menu-noti dropdown-menu-right" aria-labelledby="navbarDropdown1" style="padding: 0px!important; max-height: 50vh!important; overflow-y: auto;border-bottom: solid rgba(0,0,0,.2) 1px!important;">
                         <ul class="list-group">
-                          <li class="list-group-item list-group-item-action justify-content-between align-items-center notification-li">
-                            <strong>Titulo 01 Procesado</strong></br>
-                            <span>El titulo 092392 esta siendo procesado00000000000000000000000</span> 
-                            <!--span class="badge badge-success badge-pill"><i class="fas fa-check"></i></span-->
-                            <small class="float-right">Hace 1 dia</small>                            
-                          </li>
-                          <li class="list-group-item list-group-item-action justify-content-between align-items-center notification-li">
-                            <strong>Titulo 02 Listo</strong></br>
-                            <span>El titulo 092392</span> 
-                            <!--span class="badge badge-success badge-pill"><i class="fas fa-check"></i></span-->
-                            <small class="float-right">Hace 1 dia</small>                            
-                          </li>
-                          <li class="list-group-item list-group-item-action justify-content-between align-items-center notification-li">
-                            <strong>Titulo 04 Procesado</strong></br>
-                            <span>El titulo 092392 esta siendo procesado000000</span> 
-                            <!--span class="badge badge-success badge-pill"><i class="fas fa-check"></i></span-->
-                            <small class="float-right">Hace 1 dia</small>                            
-                          </li>
-                          <li class="list-group-item list-group-item-action justify-content-between align-items-center notification-li">
-                            <strong>Titulo 05 Procesado</strong></br>
-                            <span>El titulo 092392 esta siendo procesad</span> 
-                            <!--span class="badge badge-success badge-pill"><i class="fas fa-check"></i></span-->
-                            <small class="float-right">Hace 1 dia</small>                            
-                          </li>
+
+                        <?php
+
+                            if ($Notificaciones!='' && $Notificaciones!=-1) {
+                                foreach ($Notificaciones as $key) {
+                                    $js = json_decode($key['Data']);
+                                    $Fecha = date_format(date_create($key['Fecha']),'d/m/Y');
+
+                                    echo "<script type=\"text/javascript\">
+                                            console.log('{$js->msg}');
+                                        </script>";
+
+                                    echo "<li class=\"list-group-item list-group-item-action justify-content-between align-items-center notification-li\">
+                                            <strong>{$js->title}</strong></br>
+                                            <span>{$js->msg}</span> 
+                                            <!--span class=\"badge badge-success badge-pill\"><i class=\"fas fa-check\"></i></span-->
+                                            <small class=\"float-right\">{$Fecha}</small>                            
+                                          </li>";
+                                }
+                            }
+
 
                           
+                          
+
+                          ?>
                           
                           
                         </ul>
