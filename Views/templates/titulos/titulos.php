@@ -76,10 +76,10 @@ require_once('Views/default/header.php');
     }
 
     //agregar notificacion a tabla
-    $consulta = new ConexionDB();
-    $fechaNow = date('Y-m-d');
-    $query = "INSERT into Notificaciones (Fecha,Data,RolAccess,Visto) values ('{$fechaNow}','{$_SESSION['JsonNotification']}','1','0')";
-    $consulta->Query($query);
+    //$consulta = new ConexionDB();
+    //$fechaNow = date('Y-m-d');
+    //$query = "INSERT into Notificaciones (Fecha,Data,RolAccess,Visto) values ('{$fechaNow}','{$_SESSION['JsonNotification']}','1','0')";
+    //$consulta->Query($query);
 
     ?>
 

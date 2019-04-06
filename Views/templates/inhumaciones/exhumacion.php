@@ -239,7 +239,7 @@ $(document).ready(function() {
         var listado = '';
         data.forEach(function(element){
             listado +=formatSearching(element);
-        })
+        });
 
         return listado+'<script type="text/javascript">$(".dropdown-item").click(function(event) { var id = $(this).attr("dataId"); $("#searchFallecido").val($(this).attr("dataFallecido")); $("#idFallecidoSend").val(id)});<\/script>' 
     }

@@ -1,47 +1,45 @@
-<?php 
-$titulo='Crear Titulo';
+<?php
+$titulo = 'Crear Titulo';
 
 $consulta = new ConexionDB();
-$variable= $consulta->Query("SELECT idTipoTitulo, Tipo FROM TipoTitulos");
+$variable = $consulta->Query("SELECT idTipoTitulo, Tipo FROM TipoTitulos");
 
 
-require_once('Views/default/header.php'); 
+require_once('Views/default/header.php');
 ?>
-
 
 
 <!--BREADCUMB-->
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="<?php echo $server;?>/inicio">Inicio</a></li>
-        <li class="breadcrumb-item"><a href="<?php echo $server;?>/titulos">Titulos</a></li>
+        <li class="breadcrumb-item"><a href="<?php echo $server; ?>/inicio">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="<?php echo $server; ?>/titulos">Titulos</a></li>
         <li class="breadcrumb-item active" aria-current="page">Crear Titulo</li>
     </ol>
 </nav>
-
 
 
 <!-- aca ira todo el codigo html de la vista-->
 
 <div class="container-fluid">
     <div class="row col-lg-12">
-            <div class="card card-register mx-auto mt-0">
-                <div class="card-header">
-                    <h4>Informacion del Titular</h4>
-                </div>
-                <div class="card-body">
-                    <form action="<?php echo $server;?>/tituloActions" method="POST">
-                        <input type="hidden" name="actionId" value="1">
-                        <div class=" col-sm-12 col-md-12 col-lg-12 padding-0">
-                            <div class="row padding-bottom-15">
-                                <div class="col-sm-12 col-md-9 col-lg-9 padding-top-15 mx-auto">
-                                    <?php
-                                        if (isset(explode('/',$_GET['action'])[1])){
-                                            $idta=explode('/',$_GET['action'])[1];
-                                            $tablaParcela = $consulta->Query("SELECT t1.Numero, t1.Poligono, t2.Descripcion, t3.Nombre FROM Parcelas t1  INNER JOIN TipoParcela t2 ON t1.idTipoParcela = t2.idTipoParcela INNER JOIN Cementerios t3 ON t1.idCementerio = t3.idCementerio where t1.idParcela={$idta} AND t1.Estado=1");
-                                            if ($tablaParcela != -1){
-                                                foreach ($tablaParcela as $value) {
-                                                    echo "
+        <div class="card card-register mx-auto mt-0">
+            <div class="card-header">
+                <h4>Informacion del Titular</h4>
+            </div>
+            <div class="card-body">
+                <form action="<?php echo $server; ?>/tituloActions" method="POST">
+                    <input type="hidden" name="actionId" value="1">
+                    <div class=" col-sm-12 col-md-12 col-lg-12 padding-0">
+                        <div class="row padding-bottom-15">
+                            <div class="col-sm-12 col-md-9 col-lg-9 padding-top-15 mx-auto">
+                                <?php
+                                if (isset(explode('/', $_GET['action'])[1])) {
+                                    $idta = explode('/', $_GET['action'])[1];
+                                    $tablaParcela = $consulta->Query("SELECT t1.Numero, t1.Poligono, t2.Descripcion, t3.Nombre FROM Parcelas t1  INNER JOIN TipoParcela t2 ON t1.idTipoParcela = t2.idTipoParcela INNER JOIN Cementerios t3 ON t1.idCementerio = t3.idCementerio where t1.idParcela={$idta} AND t1.Estado=1");
+                                    if ($tablaParcela != -1) {
+                                        foreach ($tablaParcela as $value) {
+                                            echo "
                                                     <div class=\"card text-center\">
                                                         <div class=\"card-header bg-principal text-light\">Cementerio: <strong>{$value['Nombre']}</strong></div>
                                                             <div class=\"card-body\">
@@ -57,95 +55,106 @@ require_once('Views/default/header.php');
                                                         </div>
                                                     </div>
                                         
-                                                ";}
-                                                
-                                            }
-                                            } else {
-                                                    echo "
+                                                ";
+                                        }
+
+                                    }
+                                } else {
+                                    echo "
                                                     <div class=\"col-sm-4 col-md-6 col-lg-6 mx-auto padding-top-15\" style=\"min-height: 80px;\">
                                                         <button type=\"button\" class=\"btn btn-outline-dark w-100 h-100 btn-nuevo-cementerio\" data-toggle=\"modal\" data-target=\"#parcela\">
                                                         <i class=\"fas fa-plus icon mx-0\"></i>
                                                         <span class=\"mx-4\">Agregar Parcela</span></button>
                                                     </div>";
-                                                }
-                    
-                                                ?>
+                                }
 
-                                </div>
+                                ?>
+
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="Dui">DUI</label>
-                            <input required name="dui" type="text" class="form-control" id="Dui" placeholder="Numero Unico de Identidad">
-                        </div>
-                        <div class="form-row mt-0">
+                    </div>
+                    <div class="form-group">
+                        <label for="Dui">DUI</label>
+                        <input required name="dui" type="text" class="form-control dropdown-toggle" id="searchCiudadano"
+                               autocomplete="off" placeholder="Numero Unico de Identidad" data-toggle="dropdown">
+                        <div id="div-ciudadano" class="dropdown-menu w-100"></div>
+                    </div>
+                    <div class="form-row mt-0">
 
-                            <div class="form-group col-md-6">
-                                <label for="Nombres">Nombres</label>
-                                <input required name="nombre" type="text" class="form-control" id="Nombres" placeholder="Nombres">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="Apellidos">Apellidos</label>
-                                <input required name="apellido" type="text" class="form-control" id="Apellidos" placeholder="Apellidos">
-                            </div>
+                        <div class="form-group col-md-6">
+                            <label for="Nombres">Nombres</label>
+                            <input required name="nombre" type="text" class="form-control" id="Nombres"
+                                   placeholder="Nombres">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="Apellidos">Apellidos</label>
+                            <input required name="apellido" type="text" class="form-control" id="Apellidos"
+                                   placeholder="Apellidos">
+                        </div>
 
+                    </div>
+                    <div class="form-group">
+                        <label for="Direccion">Direccion</label>
+                        <input required name="direccion" type="text" class="form-control" id="Direccion"
+                               placeholder="Direccion de domicilio">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="Profesion">Profesion</label>
+                            <input required name="profesion" type="text" class="form-control" id="Profesion"
+                                   placeholder="Profesion u Ocupacion">
                         </div>
-                        <div class="form-group">
-                            <label for="Direccion">Direccion</label>
-                            <input required name="direccion" type="text" class="form-control" id="Direccion" placeholder="Direccion de domicilio">
+                        <div class="form-group col-md-6">
+                            <label for="Fecha_Nacimiento">Fecha de Nacimiento</label>
+                            <input required name="fecha" class="form-control" id="Fecha_Nacimiento" type="date">
                         </div>
+                    </div>
+
+
+                    <div class="col-sm-12 col-md-12 col-lg-12 padding-0 mx-auto">
                         <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="Profesion">Profesion</label>
-                                <input required name="profesion" type="text" class="form-control" id="Profesion" placeholder="Profesion u Ocupacion">
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <label for="Numero_Titulo">Numero de Titulo</label>
+                                <input class="form-control" type="text" name="numero" id="Numero_Titulo"
+                                       placeholder="Numero del titulo (opcional)">
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="Fecha_Nacimiento">Fecha de Nacimiento</label>
-                                <input required name="fecha" class="form-control" id="Fecha_Nacimiento" type="date">
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <label for="select">Tipo de titulo</label>
+                                <select required class="custom-select" name="tipo" id="inputGroupSelect01">
+                                    <option selected>--- Seleccione el tipo de titulo ---</option>
+                                    <?php
+                                    // listar cementerios
+                                    if ($variable != -1) {
+                                        foreach ($variable as $value) {
+                                            echo "
+                                                            <option value=\"{$value['idTipoTitulo']}\">{$value['Tipo']}</option>";
+                                        }
+                                    }
+                                    ?>
+                                </select>
                             </div>
                         </div>
+                        <input hidden type="number" name="idParcela"
+                               value="<?php if (isset(explode('/', $_GET['action'])[1])) {
+                                   echo explode('/', $_GET['action'])[1];
+                               } else {
+                                   echo " 0";
+                               } ?>">
+                    </div>
+                    <button class="btn btn-primary mt-4 float-right" type="submit">Registrar</button>
+                    <a class="btn btn-dark mt-4 mx-2 float-right"
+                       href="<?php echo $server; ?>/repotrastitulo">Cancelar</a>
+                </form>
+            </div>
 
-
-                        <div class="col-sm-12 col-md-12 col-lg-12 padding-0 mx-auto">
-                            <div class="form-row">
-                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                    <label for="Numero_Titulo">Numero de Titulo</label>
-                                    <input class="form-control" type="text" name="numero" id="Numero_Titulo" placeholder="Numero del titulo (opcional)">
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                    <label for="select">Tipo de titulo</label>
-                                    <select required class="custom-select" name="tipo" id="inputGroupSelect01">
-                                        <option selected>--- Seleccione el tipo de titulo ---</option>
-                                        <?php
-                                                    // listar cementerios
-                                                    if ($variable!=-1) {
-                                                        foreach ($variable as $value) {
-                                                            echo "
-                                                            <option value=\"{$value['idTipoTitulo']}\">{$value['Tipo']}</option>" ;
-                                                        }
-                                                    }
-                                                ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <input hidden type="number" name="idParcela" value="<?php if (isset(explode('/',$_GET['action'])[1])){
-                                                                            echo explode('/',$_GET['action'])[1];
-                                                                            } else{
-                                                                            echo " 0"; } ?>">
-                        </div>
-                        <button class="btn btn-primary mt-4 float-right" type="submit">Registrar</button>
-                        <a class="btn btn-dark mt-4 mx-2 float-right" href="<?php echo $server;?>/repotrastitulo">Cancelar</a>
-                    </form>
-                </div>
-        
         </div>
     </div>
 </div>
 
 
-
 <!-- Modal Parcela-->
-<div class="modal fade bd-example-modal-lg" id="parcela" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" id="parcela" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -157,14 +166,15 @@ require_once('Views/default/header.php');
             <div class="modal-body">
                 <div class="col-lg-12">
                     <label for="BuscarParcela">Buscara Parcela</label>
-                    <input class="form-control col-md-12 mx-auto" type="search" name="buscarParcela" placeholder="Numero de Parcela" aria-label="Search" id="buscarParcela" value="">
-                    
-                    <input type="hidden" id="Urlbuscar" value="<?php echo $server;?>/buscarParcela">
+                    <input class="form-control col-md-12 mx-auto" type="search" name="buscarParcela"
+                           placeholder="Numero de Parcela" aria-label="Search" id="buscarParcela" value="">
+
+                    <input type="hidden" id="Urlbuscar" value="<?php echo $server; ?>/buscarParcela">
                 </div>
-                <form method="post" action="<?php echo $server;?>/tituloActions">
+                <form method="post" action="<?php echo $server; ?>/tituloActions">
                     <div id="datos" class="mx-auto mt-4">
                     </div>
-                        <input type="hidden" name="actionId" value="4">              
+                    <input type="hidden" name="actionId" value="4">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -175,12 +185,106 @@ require_once('Views/default/header.php');
     </div>
 </div>
 
+<div id="myModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h4>¿Desea confirmar la persona siguiente?</h4>
+                <div id="Person" class="text-center"></div>
+                <form action="<?php echo $server; ?>/tituloActions" method="POST" id="TituloForm">
+                    <input type="hidden" value="15" name="actionId">
+
+                    <div class="form-row">
+                        <select required class="custom-select col-12 col-lg-8 mt-2" name="tipo" id="inputGroupSelect01">
+                            <option selected>--- Seleccione el tipo de titulo ---</option>
+                            <?php
+                            // listar tipos
+                            if ($variable != -1) {
+                                foreach ($variable as $value) {
+                                    echo "<option value=\"{$value['idTipoTitulo']}\">{$value['Tipo']}</option>";
+                                }
+                            }
+                            ?>
+                        </select>
+                        <input type="text" class="form-control col-12 col-lg-3 mt-2 mx-auto" name="numero" placeholder="Numero Titulo">
+                    </div>
+                    <div class="text-right mt-2">
+                        <button type="button" class="btn btn-outline-dark " data-dismiss="modal">Cancelar</button>
+                        <button  type="submit" class="btn btn-primary">Confirmar</button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
 <script>
     var buscar = "<?php echo $server;?>/buscarParcela";
+
+
 </script>
 <!---hasta aca -->
 
 <?php require_once('Views/default/footer.php'); ?>
+
+<script>
+    $(document).ready(function () {
+
+        function formatSearching(data) {
+            return ('<a class="dropdown-item" idPer="' + data.idCiudadano + '" dataId="' + data.DUI + '" dataNombre="' + data.NombresCiudadano +
+                '" dataApellido="' + data.ApellidosCiudadano + '"><div><b>' + data.DUI + '</b><br>' +
+                data.NombresCiudadano + ' ' + data.ApellidosCiudadano + '</div></a>')
+
+        }
+
+
+        function listaSearch(data) {
+            var listado = '';
+            data.forEach(function (element) {
+                listado += formatSearching(element);
+            });
+
+            return listado + '<script type="text/javascript">$(".dropdown-item").click(' +
+                'function(event) { var x;\n' +
+                'try {\n' +
+                'x = location.pathname;\n' +
+                'x = x.match(/(\\d+)/g);\n' +
+                'console.log(x[0]);\n' +
+                '} catch (e) {\n' +
+                'x = \'None\';\n' +
+                'console.log(x);\n' +
+                '}$(\'#myModal\').modal(\'show\');' +
+                '$(\'#Person\').html("<p>DUI: "+$(this).attr("dataId")+"</p><p>Persona: "+$(this).attr("dataNombre")+' +
+                '" "+$(this).attr("dataApellido")+"</p>");' +
+                '$(\"#TituloForm\").append("<input type=\\"hidden\\" value="+ $(this).attr("idPer") +" name=\\"idPersona\\">"+"<input type=\\"hidden\\" value="+ x[0] +" name=\\"idParcela\\">")' +
+                '});<\/script>'
+        }
+
+        $('#searchCiudadano').keyup(function (event) {
+
+            var dataSend = {actionId: "14", searchCiudadano: $('#searchCiudadano').val()};
+
+            $.ajax({
+                url: '<?php echo $server;?>/tituloActions/',
+                data: dataSend,
+                type: 'post',
+                success: function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                    console.log(response);
+                    if (response == 'Ningun registro previo' || response == '' || response == '-1') {
+                        $('#div-ciudadano').html('<a class="dropdown-item">Sin Resultados</a>');
+
+                    } else if (response != "") {
+                        var resultado = JSON.parse(response);
+                        $('#div-ciudadano').html(listaSearch(resultado.data));
+
+                    }
+                }
+            });
+        });
+    });
+</script>
 
 
 
