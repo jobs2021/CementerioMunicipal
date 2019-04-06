@@ -9,6 +9,9 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body">
+
+
+
                 <div id="carruselAgregarNicho" class="carousel slide" data-pause="true">
                     <!-- The slideshow -->
                     <div class="carousel-inner w-100 h-100">
@@ -24,6 +27,8 @@
 
                     </div>
                 </div>
+
+                
             </div>
         </div>
     </div>
