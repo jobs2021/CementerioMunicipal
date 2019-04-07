@@ -327,9 +327,13 @@ function ocultarBeneficiario2($idBeneficiario, $idTitulo)
 
 function completarBeneficiario()
 {
-    //session para enviar notificacion
+    /*session para enviar notificacion
     session_start();
     $_SESSION['JsonNotification'] = '{ "msg":"Titulo ' . $numero . ' en Proceso...", "title":"Titulo Nuevo" }';
+    */
+    //session para enviar notificacion
+    session_start();
+    @$session_data = json_decode($_COOKIE['user_session'],true);
     @$rol=$session_data['rol'];
     $_SESSION['JsonNotification'] = '{ "msg":"Titulo ' . $numero . ' en Proceso...", "title":"Titulo Nuevo", "rol" : 1 }';
 
