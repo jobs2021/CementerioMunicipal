@@ -1,5 +1,7 @@
 <!-- TITULOS VIGENTES-->
 <?php
+//session para enviar notificacion
+session_start();
 $titulo = 'Titulos Vigentes';
 
 $consulta = new ConexionDB();

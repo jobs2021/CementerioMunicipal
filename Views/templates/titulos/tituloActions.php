@@ -55,6 +55,9 @@ switch (@$_POST['actionId']) {
     case '16':
         addBeneficiarios($insert = new ConexionDB(), $_POST['idCiudadano'], $_POST['idTitulo']);
         break;
+    case '17':
+        tesoreriaRecepcion($_POST['operacion']);
+        break;
 
 }
 
@@ -69,6 +72,46 @@ switch (@$_POST['actv']) {
         BuscarTitulo("repoTrasTitulo");
         break;
 }
+
+#********************************TESORERIA******************************
+
+function tesoreriaRecepcion($operacion){
+    if (isset($operacion)){
+        $consulta = new ConexionDB();
+        if ($operacion == 1){
+            $query = "SELECT t1.idTitulo, t1.NumeroTitulo, t1.Proceso, t3.Tipo, t4.NombresCiudadano, 
+                t4.ApellidosCiudadano, t2.Numero FROM Titulos t1 INNER JOIN Parcelas t2 
+                ON t1.idParcela=t2.idParcela INNER JOIN TipoTitulos t3 ON t1.idTipoTitulo=t3.idTipoTitulo INNER JOIN 
+                Ciudadanos t4 ON t1.idCiudadanoTitular=t4.idCiudadano INNER JOIN Cementerios t5 ON 
+                t2.idCementerio=t5.idCementerio WHERE t1.Estado=1  AND t1.Proceso=0
+                ORDER BY t1.idTitulo DESC ";
+            @$TitulosCount = $consulta->Query("SELECT COUNT(*) FROM Titulos WHERE Proceso=0");
+        } elseif ($operacion == 2){
+            $query = "SELECT t1.idTitulo, t1.NumeroTitulo, t1.Proceso, t1.Observaciones, t3.Tipo, t4.NombresCiudadano, 
+                t4.ApellidosCiudadano, t2.Numero, t5.Nombre, t1.Estado FROM Titulos t1 INNER JOIN Parcelas t2 
+                ON t1.idParcela=t2.idParcela INNER JOIN TipoTitulos t3 ON t1.idTipoTitulo=t3.idTipoTitulo INNER JOIN 
+                Ciudadanos t4 ON t1.idCiudadanoTitular=t4.idCiudadano INNER JOIN Cementerios t5 ON 
+                t2.idCementerio=t5.idCementerio WHERE t1.Estado=1 AND t1.Proceso=1
+                ORDER BY t1.idTitulo DESC ";
+        }
+
+        @$Titulos = $consulta->Query($query);
+
+
+
+        if ($Titulos != -1) {
+            echo '{ "data" : ' . json_encode($Titulos) . ', "spop" : ' . json_encode($TitulosCount) .'}';
+
+        } else {
+            echo "Ningun registro previo";
+        }
+
+
+
+        exit();
+    }
+}
+
 
 
 #*********************** TIUTLOS ACCION ****************************
@@ -114,9 +157,6 @@ function CrearTitulo($tipo, $numero, $idParcela, $idCiudadano, $estado)
         $idTitulo = $insert->Query("SELECT idTitulo FROM Titulos ORDER BY idTitulo DESC LIMIT 1");
         $insert->Query("UPDATE Parcelas SET Titulado=1 WHERE idParcela={$idParcela}");
 
-        //session para enviar notificacion
-        session_start();
-        $_SESSION['JsonNotification'] = '{ "msg":"Titulo ' . $numero . ' en Proceso...", "title":"Titulo Nuevo" }';
 
         header("location:" . $server . '/beneficiarios/' . $idTitulo[0]['idTitulo']);
         exit();
@@ -259,6 +299,7 @@ function addCiudadanoBeneficiario($idTitulo, $nombre, $apellido, $direccion, $fe
 
 function addBeneficiarios($insert, $idCiudadano, $idTitulo){
     $insert->Query("INSERT INTO Beneficiarios (idTitulo, idCiudadano, Estado) VALUES({$idTitulo}, {$idCiudadano[0]['idCiudadano']}, 1)");
+
     header("location:" . $server . '/beneficiarios/' . $idTitulo);
     exit();
 }
@@ -286,6 +327,10 @@ function ocultarBeneficiario2($idBeneficiario, $idTitulo)
 
 function completarBeneficiario()
 {
+    //session para enviar notificacion
+    session_start();
+    $_SESSION['JsonNotification'] = '{ "msg":"Titulo ' . $numero . ' en Proceso...", "title":"Titulo Nuevo" }';
+
     header("location:" . $server . '/titulos');
     exit();
 }

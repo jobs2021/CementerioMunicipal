@@ -1,4 +1,7 @@
 <?php
+//session para enviar notificacion
+session_start();
+
 $titulo = 'Crear Titulo';
 
 $consulta = new ConexionDB();

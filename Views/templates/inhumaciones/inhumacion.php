@@ -688,7 +688,7 @@ $(document).on('changeNichos',function (objectEvent, data){
         var listado = '';
         data.forEach(function(element){
             listado +=formatSearching(element);
-        })
+        });
 
         return listado+'<script type="text/javascript">$(".dropdown-item").click(function(event) { var datos = JSON.parse(atob($(this).attr("data"))); var htmlData = \' <p class="my-1"><b class="mt-1">\'+datos.Ciudadano+\'</b>,Titulo: \'+datos.NumeroTitulo+\', \'+datos.Cementerio+\', Parcela: \'+datos.Parcela+\'</p> \'; $("#searchFallecido").val(datos.NumeroTitulo);  $("#TituloInhumacion").html(htmlData);     $(document).trigger("changeNichos", datos.idParcela );     /*loadNichos(datos.idParcela);*/ });<\/script>' 
     }
@@ -733,7 +733,7 @@ $('.form-add').on('submit',function(e){
        
     }
     
-})
+});
 
 
 $('.alert').alert();
