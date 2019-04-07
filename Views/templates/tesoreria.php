@@ -183,6 +183,11 @@ require_once('Views/default/header.php');
 
 
 <?php require_once('Views/default/footer.php'); ?>
+
+<script>
+
+</script>
+
 <script type="text/javascript">
     $(document).ready(function () {
         var table = $('table').DataTable(tableLanguage);
