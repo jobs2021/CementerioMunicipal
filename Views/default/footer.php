@@ -27,6 +27,7 @@
 		const socket = io('<?php echo $server;?>:8585');
 		var audio = document.getElementById("NotificationSound");
 
+
 		function mi(){
 			window.location.replace("<?php echo $server;?>/eyetitulo");
 		}
