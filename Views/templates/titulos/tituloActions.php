@@ -113,6 +113,7 @@ function CrearTitulo($tipo, $numero, $idParcela, $idCiudadano, $estado)
         $insert->Query("INSERT INTO Titulos (idParcela,idTipoTitulo,NumeroTitulo,idCiudadanoTitular,Estado,Proceso) VALUES ({$idParcela},{$tipo},'{$numero}',{$idCiudadano[0]["idCiudadano"]},$estado,0)");
         $idTitulo = $insert->Query("SELECT idTitulo FROM Titulos ORDER BY idTitulo DESC LIMIT 1");
         $insert->Query("UPDATE Parcelas SET Titulado=1 WHERE idParcela={$idParcela}");
+
         //session para enviar notificacion
         session_start();
         $_SESSION['JsonNotification'] = '{ "msg":"Titulo ' . $numero . ' en Proceso...", "title":"Titulo Nuevo" }';

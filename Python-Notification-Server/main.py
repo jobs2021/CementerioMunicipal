@@ -3,7 +3,8 @@ from flask_socketio import SocketIO, send
 import json
 
 #setup
-host='192.168.1.3'
+#host='192.168.1.3'
+host='localhost'
 port='8585'
 #
 
