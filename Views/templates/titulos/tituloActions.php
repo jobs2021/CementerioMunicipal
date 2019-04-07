@@ -115,7 +115,9 @@ function CrearTitulo($tipo, $numero, $idParcela, $idCiudadano, $estado)
         $insert->Query("UPDATE Parcelas SET Titulado=1 WHERE idParcela={$idParcela}");
         //session para enviar notificacion
         session_start();
-        $_SESSION['JsonNotification'] = '{ "msg":"Titulo ' . $numero . ' en Proceso...", "title":"Titulo Nuevo" }';
+        @$session_data = json_decode($_COOKIE['user_session'],true);
+        @$rol=$session_data['rol'];
+        $_SESSION['JsonNotification'] = '{ "msg":"Titulo ' . $numero . ' en Proceso...", "title":"Titulo Nuevo", "rol" : 1 }';
 
         header("location:" . $server . '/beneficiarios/' . $idTitulo[0]['idTitulo']);
         exit();
