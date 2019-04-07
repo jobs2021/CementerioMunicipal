@@ -330,6 +330,9 @@ function completarBeneficiario()
     //session para enviar notificacion
     session_start();
     $_SESSION['JsonNotification'] = '{ "msg":"Titulo ' . $numero . ' en Proceso...", "title":"Titulo Nuevo" }';
+    @$rol=$session_data['rol'];
+    $_SESSION['JsonNotification'] = '{ "msg":"Titulo ' . $numero . ' en Proceso...", "title":"Titulo Nuevo", "rol" : 1 }';
+
 
     header("location:" . $server . '/titulos');
     exit();

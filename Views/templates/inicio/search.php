@@ -3,7 +3,7 @@
 $busqueda = $_GET['search'];
 
  $consulta = new ConexionDB();
- $searchTitulos=$consulta->Query("select concat(t4.NombresCiudadano,' ',t4.ApellidosCiudadano) as Titular from Titulos t3 inner join Ciudadanos t4 on t3.idCiudadanoTitular=t4.idCiudadano where concat(t4.NombresCiudadano,' ',t4.ApellidosCiudadano) like '%{$busqueda}%'");
+ $searchTitulos=$consulta->Query("SELECT idTitulo,FechaExpedido as Fecha, (select GROUP_CONCAT(' ',concat_ws(' ',t2.NombresCiudadano,t2.ApellidosCiudadano)) from Beneficiarios t1 inner join Ciudadanos t2 on t1.idCiudadano=t2.idCiudadano where t1.idTitulo=t3.idTitulo) as Beneficiarios ,concat(t4.NombresCiudadano,' ',t4.ApellidosCiudadano) as Titular from Titulos t3 inner join Ciudadanos t4 on t3.idCiudadanoTitular=t4.idCiudadano where concat(t4.NombresCiudadano,' ',t4.ApellidosCiudadano) like '%{$busqueda}%' or (select GROUP_CONCAT(' ',concat_ws(' ',t2.NombresCiudadano,t2.ApellidosCiudadano)) from Beneficiarios t1 inner join Ciudadanos t2 on t1.idCiudadano=t2.idCiudadano where t1.idTitulo=t3.idTitulo) like '%{$busqueda}%'");
 
 
 
@@ -84,6 +84,7 @@ $busqueda = $_GET['search'];
                                 //echo "<p class=\"text-center\" style=\"margin-top:15px\">No hay resultados que mostrar</p>";
                               }else{
                                 foreach ($searchTitulos as $key) {
+                                  $Fecha = date_format(date_create($key['Fecha']),'d/m/Y');
 
                                     echo "
                           <tr>
@@ -91,9 +92,9 @@ $busqueda = $_GET['search'];
                               <a href=\"#\" class=\" list-group-item-action flex-column align-items-start\">
                                 <div class=\"d-flex w-100 justify-content-between\">
                                   <h5 class=\"mb-1\">{$key['Titular']}</h5>
-                                  <small>15/08/2018</small>
+                                  <small>{$Fecha}</small>
                                 </div>
-                                <p class=\"mb-1\">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                <p class=\"mb-1\"><strong>Beneficiarios: </strong> {$key['Beneficiarios']}.</p>
                                 <small>Titulares</small>
                               </a>
                             </td>

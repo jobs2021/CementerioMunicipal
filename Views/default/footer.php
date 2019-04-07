@@ -12,12 +12,17 @@
 <script src="<?php echo $server;?>/Views/static/js/leaflet.js"></script>
 <script src="<?php echo $server;?>/Views/static/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo $server;?>/Views/static/js/dataTables.bootstrap4.min.js"></script>
+<script src="<?php echo $server;?>/Views/static/js/js.cookie.js"></script>
 
 
 <!--- socketio -->
 
 <script type="text/javascript">
 	$(document).ready(function(){
+
+		var userData = Cookies.get('user_session');
+		userData = userData.replace(/[+]/g,"");
+		userData = JSON.parse(userData);
         
 		const socket = io('<?php echo $server;?>:8585');
 		var audio = document.getElementById("NotificationSound");
@@ -25,7 +30,6 @@
 
 		function mi(){
 			window.location.replace("<?php echo $server;?>/eyetitulo");
-			//alert("click");
 		}
 
 		socket.on('message',function(msj){
@@ -33,9 +37,12 @@
 			var mmsj = JSON.parse(msj);
 			var data = JSON.parse(mmsj.msj);
 
+			if (userData['rol']==data['rol']) {
+				
 			toastr.success(data['msg'],data['title'],{"onclick" :mi ,"positionClass": "toast-top-right","closeButton": true,"newestOnTop": true,"timeOut": "0","extendedTimeOut": "0"});
 			audio.play();
 
+			}
 		});
 
 		socket.on('timeout', function(){

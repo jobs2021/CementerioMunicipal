@@ -1,9 +1,9 @@
 from flask import Flask,request,render_template
 from flask_socketio import SocketIO, send
 import json
+from flask_cors import CORS
 
 #setup
-#host='192.168.1.3'
 host='localhost'
 port='8585'
 #
@@ -11,6 +11,7 @@ port='8585'
 app = Flask(__name__)
 app.config['SECRET_KEY']="abcde12345"
 socketio = SocketIO(app)
+CORS(app)
 
 @app.route("/")
 def index():
