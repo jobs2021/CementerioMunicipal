@@ -123,7 +123,7 @@ require_once('Views/default/header.php');
 
 <?php require_once('Views/default/footer.php'); ?>
 
-<script type="text/javascript">
+<!--script type="text/javascript">
     $(document).ready(function () {
 
         const socket = io('<?php echo $server;?>:8585');
@@ -158,7 +158,7 @@ require_once('Views/default/header.php');
 
 
     })
-</script>
+</script-->
 
 <script type="text/javascript">
     $(document).ready(function () {
